@@ -38,6 +38,8 @@ int get_next_line(int fd, char **line)
 	//static t_list	*buf[OPEN_MAX];
 	//t_list			*cur;
 	char			buffer[BUFFER_SIZE + 1];
+    void            *newline;
+    char            *cur;
 
 	count = 0;
 	//handle fd error, inexistent line, check array exist
@@ -46,14 +48,20 @@ int get_next_line(int fd, char **line)
 		ft_putstr_fd("ERROR: The file doesn't exist or is not readable for some reason\n", 2);
 		return (-1);
 	}
-	count = read(fd, ft_memset(buffer, '\0', BUFFER_SIZE + 1), BUFFER_SIZE);	
-	if (!(*line = malloc(sizeof(**line) * (ft_strlen_split(buffer, '\0') + 1))))
-		return (-1);
-	ft_strlcpy(*line, buffer, BUFFER_SIZE + 1);
-	if (count == BUFFER_SIZE)
-	{
-		return (1);
-	}
+    while (newline == NULL)
+    {
+        count = read(fd, ft_memset(buffer, '\0', BUFFER_SIZE + 1), BUFFER_SIZE);
+        newline = ft_memccpy(cur, buffer, '\n', count);
+        cur = ft_strjoin(cur, cur + count);
+        cur = cur + count;
+    }
+    //if (!(*line = malloc(sizeof(**line) * (ft_strlen_split(cur, '\n') + 1))))
+    //    return (-1);
+    *line = ft_strdup_split(cur, '\0');
+    if (count == BUFFER_SIZE)
+    {
+        return (1);
+    }
 	//allocate memory for this file in the buf array
 	/*if (!(cur = buf[fd]))
 	{

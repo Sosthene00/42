@@ -45,4 +45,12 @@ void	ft_putnbr_fd(int n, int fd);
 
 void	*ft_memset(void *b, int c, size_t len);
 
+void	*ft_memccpy(void *dst, const void *src, int c, size_t n);
+
+void	*ft_memcpy(void *dst, const void *src, size_t n);
+
+char	*ft_strdup_split(char const *str, char c);
+
+char	*ft_strjoin(char const *s1, char const *s2);
+
 #endif
