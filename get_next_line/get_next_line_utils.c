@@ -6,7 +6,7 @@
 /*   By: agaubert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 18:26:48 by agaubert          #+#    #+#             */
-/*   Updated: 2019/12/04 18:29:46 by agaubert         ###   ########.fr       */
+/*   Updated: 2019/12/11 20:08:07 by agaubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlen_split(char const *str, char c)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return (i);
 	while (str[i] && str[i] != c)
 		i++;	
 	return (i);
@@ -116,24 +118,36 @@ void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 	if (p != NULL)
 	{
 		len = p - src + 1;
-		dst = ft_memcpy(dst, src, len);
+		dst = ft_memmove(dst, src, len);
 		return (dst + len);
 	}
-	ft_memcpy(dst, src, n);
+	ft_memmove(dst, src, n);
 	return (NULL);
 }
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	char				*ptr;
-	const		char	*s;
+	char		*d;
+	const char	*s;
+	char		*lasts;
+	char		*lastd;
 
-	ptr = dst;
-	s = src;
-	if (n != 0 && dst == 0 && src == 0)
+	if (dst == NULL && src == NULL)
 		return (NULL);
-	while (n-- > 0)
-		*ptr++ = *s++;
+	d = dst;
+	s = src;
+	if (d < s)
+	{
+		while (len--)
+			*d++ = *s++;
+	}
+	else
+	{
+		lasts = (char *)s + (len - 1);
+		lastd = d + (len - 1);
+		while (len--)
+			*lastd-- = *lasts--;
+	}
 	return (dst);
 }
 
@@ -156,7 +170,7 @@ char	*ft_strdup_split(char const *str, char c)
 	return (dest);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char const *s2)
 {
 	size_t	len;
 	size_t	i;
@@ -164,6 +178,12 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	len = ft_strlen_split(s1, '\0') + ft_strlen_split(s2, '\0');
 	i = 0;
+	if (s1 == NULL)
+	{
+		if (!(s1 = malloc(sizeof(*s1))))
+			return (NULL);
+		*s1 = '\0';
+	}
 	if (!(str = malloc(sizeof(*str) + (len + 1))))
 		return (NULL);
 	while (*s1)
@@ -180,4 +200,22 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	str[i] = 0;
 	return (str);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	char	d;
+
+	d = c;
+	if (s == NULL)
+		return (NULL);
+	while (*s)
+	{
+		if (*s == d)
+			return ((char *)s);
+		s++;
+	}
+	if (*s == d)
+		return ((char *)s);
+	return (NULL);
 }
