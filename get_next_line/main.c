@@ -6,7 +6,7 @@
 /*   By: agaubert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 11:37:05 by agaubert          #+#    #+#             */
-/*   Updated: 2019/12/11 19:47:04 by agaubert         ###   ########.fr       */
+/*   Updated: 2019/12/13 19:04:58 by agaubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@ int	main(int ac, char **av)
 	{
 		ret = get_next_line(fd, &line);
 		i++;
-		ft_putstr_fd("GNL output: ", 1);
+		printf("%d output is %d ; %s\n", i, ret, line);
+		/*ft_putstr_fd("GNL output: ", 1);
 		ft_putstr_fd(line, 1);
-        ft_putstr_fd("\n", 1);
+        ft_putstr_fd("\n", 1);*/
         free(line);
 	}
 	if (close(fd) < 0)
@@ -46,5 +47,6 @@ int	main(int ac, char **av)
 		ft_putstr_fd("File didn't close properly", 2);
 		return (1);
 	}
+	system("leaks a.out");
 	return (0);
 }

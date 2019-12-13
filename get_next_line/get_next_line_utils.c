@@ -6,7 +6,7 @@
 /*   By: agaubert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 18:26:48 by agaubert          #+#    #+#             */
-/*   Updated: 2019/12/11 20:08:07 by agaubert         ###   ########.fr       */
+/*   Updated: 2019/12/13 17:54:30 by agaubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,15 +109,6 @@ void	*ft_memset(void *b, int c, size_t len)
 	return (b);
 }
 
-int     ft_strccpy_gnl(char *dst, char *src, char c)
-{
-    int i;
-
-	dst = ft_strdup_split(src, c);
-    i = ft_strlen_split(src, '\0') - (ft_strchr(src, (int)c) - src);
-	return (i);
-}
-
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
 	char		*d;
@@ -213,26 +204,30 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*ft_substr_mal(char *s, unsigned int start)
+char	*ft_substr_mal(char *s, char c)
 {
-	char	*temp;
+	char	*bgn;
 	char	*res;
     int     i;
 
-    i = 0;
-	if (!s || (unsigned int)ft_strlen_split(s, '\0') <= start)
+    i = -1;
+	if (!s)
 		return (NULL);
-	if (!(temp = malloc(sizeof(*temp) * (ft_strlen_split(s, '\n') + 1))))
+	bgn = s;
+	if (*s == c)
+		s++;
+	else
+	{
+		while (*s && *s != c)
+			s++;
+		if (*s == c)
+			s++;
+	}
+	if (!(res = malloc(sizeof(*res) * (ft_strlen_split(s, '\0') + 1))))
 		return (NULL);
-    while (s[i+start])
-    {
-        temp[i] = s[i+start];
-        i++;
-    }
-    temp[i] = '\0';
-    free(s);
-	if (!(res = malloc(sizeof(*res) * (ft_strlen_split(temp, '\0') + 1))))
-		return (NULL);
-	res = ft_strdup_split(temp, '\0');
+    while (s[++i])
+        res[i] = s[i];
+    res[i] = '\0';
+    free(bgn);
 	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: agaubert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 15:12:08 by agaubert          #+#    #+#             */
-/*   Updated: 2019/12/04 18:29:49 by agaubert         ###   ########.fr       */
+/*   Updated: 2019/12/13 15:50:49 by agaubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ void	ft_putnbr_fd(int n, int fd);
 
 void	*ft_memset(void *b, int c, size_t len);
 
-int     ft_strccpy_gnl(char *dst, char *src, char c);
-
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 
 char	*ft_strdup_split(char const *str, char c);
@@ -57,6 +55,6 @@ char	*ft_strchr(const char *s, int c);
 
 void	*ft_memmove(void *dst, const void *src, size_t len);
 
-char	*ft_substr_mal(char *s, unsigned int start);
+char	*ft_substr_mal(char *s, char c);
 
 #endif
