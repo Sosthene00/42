@@ -36,7 +36,10 @@ int	main(int ac, char **av)
 	{
 		ret = get_next_line(fd, &line);
 		i++;
-		printf("%d GNL output: %d ; %s\n", i, ret, line);
+		ft_putstr_fd("GNL output: ", 1);
+		ft_putstr_fd(line, 1);
+        ft_putstr_fd("\n", 1);
+        free(line);
 	}
 	if (close(fd) < 0)
 	{

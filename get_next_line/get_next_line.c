@@ -15,32 +15,37 @@
 int get_next_line(int fd, char **line)
 {
 	ssize_t			count;
-	//static t_list	*buf[OPEN_MAX];
-	//t_list		*cur;
+    int             i;
 	char			buffer[BUFFER_SIZE + 1];
     static char		*cur;
 
-	//printf("enter gnl\n");
-	count = BUFFER_SIZE;
-	//handle fd error, inexistent line, check array exist
+	count = 0;
 	if ((read(fd, buffer, 0) < 0) || line == NULL)
-	{
-		ft_putstr_fd("ERROR: Can't read the file/no line to write to\n", 2);
 		return (-1);
-	}
-    while (ft_strchr(cur, '\n') == NULL && (count = read(fd, ft_memset(buffer, '\0', BUFFER_SIZE + 1), BUFFER_SIZE)) > 0)
+    while ((count = read(fd, buffer, BUFFER_SIZE)) > 0)
     {
-		//printf("cur is %s\n", cur);
-        cur = ft_strjoin(cur, buffer);
+        buffer[count] = '\0';
+        if (!(cur = ft_strjoin(cur, buffer)))
+            return (-1);
+        if (ft_strchr(buffer, '\n'))
+            break;
     }
-    *line = ft_strdup_split(cur, '\n');
-	cur = cur + ft_strlen_split(*line, '\0') + 1;
-	if (*cur == '\0' && **line == '\0')
+    if (count < BUFFER_SIZE && *cur == '\0')
     {
-		//printf("exit GNL\n");
+        free(cur);
         return (0);
     }
-	//if no new line found before 
-	//printf("exit GNL\n");
-	return (1);
+    if (count == 0 && *cur != '\0')
+    {
+        if (!(*line = ft_strdup_split(cur, '\n')))
+            return (-1);
+        free(cur);
+        return (0);
+    }
+    i = ft_strccpy_gnl(*line, cur, '\n');
+    if (*line == NULL)
+        return (-1);
+    if (!(cur = ft_substr_mal(cur, i)))
+        return (-1);
+    return (1);
 }
