@@ -1,23 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agaubert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/11 17:23:38 by agaubert          #+#    #+#             */
-/*   Updated: 2020/01/13 19:55:36 by agaubert         ###   ########.fr       */
+/*   Created: 2020/01/13 19:46:45 by agaubert          #+#    #+#             */
+/*   Updated: 2020/01/13 19:49:04 by agaubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
-static int	count_digit(int n)
+void	free_params(t_param **ptr)
+{
+	if (ptr && *ptr)
+	{
+		(*ptr)->type = 0;
+		(*ptr)->padding = 0;
+		(*ptr)->zero = 0;
+		(*ptr)->precision = 0;
+		(*ptr)->width = 0;
+		(*ptr)->len = 0;
+		(*ptr)->sign = 0;
+		(*ptr)->alt = 0;
+		free(*ptr);
+		*ptr = NULL;
+	}
+}
+
+int		count_digit(int n)
 {
 	int		i;
 	size_t	nb;
 
 	i = 0;
+	if (n == 0)
+		return (i = 1);
 	if (n < 0)
 	{
 		i++;
@@ -31,31 +50,4 @@ static int	count_digit(int n)
 		i++;
 	}
 	return (i);
-}
-
-int			ft_putnbr_fd(int n, int fd)
-{
-	size_t	nb;
-	int		i;
-
-	if (n == -2147483648)
-		write(fd, "-2147483648", 11);
-	else
-	{
-		if (n < 0)
-		{
-			write(fd, "-", 1);
-			nb = n * -1;
-		}
-		else
-			nb = n;
-		if (nb <= 9)
-			ft_putchar_fd(nb + '0', fd);
-		else
-		{
-			ft_putnbr_fd(nb / 10, fd);
-			ft_putnbr_fd(nb % 10, fd);
-		}
-	}
-	return (i = count_digit(n));
 }

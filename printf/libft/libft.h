@@ -6,7 +6,7 @@
 /*   By: agaubert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 22:27:41 by agaubert          #+#    #+#             */
-/*   Updated: 2019/12/30 17:06:27 by agaubert         ###   ########.fr       */
+/*   Updated: 2020/01/02 18:21:50 by agaubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ size_t				ft_putstr_fd(char *s, int fd);
 
 char				**ft_split(char const *s, char c);
 
-char				*ft_strchr(const char *s, int c);
+char				ft_strchr(const char *s, int c);
 
 char				*ft_strdup(const char *s1);
 

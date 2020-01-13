@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   handle_case.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agaubert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/04 12:51:57 by agaubert          #+#    #+#             */
-/*   Updated: 2020/01/03 12:02:16 by agaubert         ###   ########.fr       */
+/*   Created: 2020/01/13 18:25:04 by agaubert          #+#    #+#             */
+/*   Updated: 2020/01/13 18:28:11 by agaubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
-size_t	ft_strlen(const char *s)
+char	handle_case(char c)
 {
-	size_t	i;
-
-	i = 0;
-	if (!s)
-		return (i);
-	while (s[i])
-		i++;
-	return (i);
+	if (c != 'X')
+		return (ft_tolower(c));
+	else
+		return (c);
 }
