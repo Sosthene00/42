@@ -1,34 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_nbr.c                                        :+:      :+:    :+:   */
+/*   print_nbr2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agaubert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/13 20:05:33 by agaubert          #+#    #+#             */
-/*   Updated: 2020/01/31 17:43:43 by agaubert         ###   ########.fr       */
+/*   Created: 2020/01/30 19:12:52 by agaubert          #+#    #+#             */
+/*   Updated: 2020/01/31 17:44:47 by agaubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	print_sign(long long x, int sign)
-{
-	if (x < 0)
-	{
-		ft_putchar_fd('-', 1);
-		return (1);
-	}
-	else if (sign == 1)
-	{
-		ft_putchar_fd('+', 1);
-		return (1);
-	}
-	else
-		return (0);
-}
-
-int	print_int(int spaces, char *zero_prec, t_param *params, int x)
+int	print_longlong(int spaces, char *zero_prec, t_param *params, long long x)
 {
 	int i;
 
@@ -41,7 +25,7 @@ int	print_int(int spaces, char *zero_prec, t_param *params, int x)
 		if (params->precision == 0 && x == 0)
 			;
 		else
-			i += ft_putunbr_fd(convert_neg(x), 1);
+			i += ft_putulonglong_fd(convert_llneg(x), 1);
 	}
 	if (params->padding == 1)
 	{
@@ -50,13 +34,13 @@ int	print_int(int spaces, char *zero_prec, t_param *params, int x)
 		if (params->precision == 0 && x == 0)
 			;
 		else
-			i += ft_putunbr_fd(convert_neg(x), 1);
+			i += ft_putulonglong_fd(convert_llneg(x), 1);
 		i += fill_spaces(spaces);
 	}
 	return (i);
 }
 
-int	print_long(int spaces, char *zero_prec, t_param *params, long x)
+int	print_ulong(int spaces, char *zero_prec, t_param *params, unsigned long x)
 {
 	int i;
 
@@ -69,7 +53,7 @@ int	print_long(int spaces, char *zero_prec, t_param *params, long x)
 		if (params->precision == 0 && x == 0)
 			;
 		else
-			i += ft_putulong_fd(convert_lneg(x), 1);
+			i += ft_putulong_fd(x, 1);
 	}
 	if (params->padding == 1)
 	{
@@ -78,13 +62,14 @@ int	print_long(int spaces, char *zero_prec, t_param *params, long x)
 		if (params->precision == 0 && x == 0)
 			;
 		else
-			i += ft_putulong_fd(convert_lneg(x), 1);
+			i += ft_putulong_fd(x, 1);
 		i += fill_spaces(spaces);
 	}
 	return (i);
 }
 
-int	print_uint(int spaces, char *zero_prec, t_param *params, unsigned int x)
+int	print_ulonglong(int spaces, char *zero_prec, \
+t_param *params, unsigned long long x)
 {
 	int i;
 
@@ -97,7 +82,7 @@ int	print_uint(int spaces, char *zero_prec, t_param *params, unsigned int x)
 		if (params->precision == 0 && x == 0)
 			;
 		else
-			i += ft_putunbr_fd(x, 1);
+			i += ft_putulonglong_fd(x, 1);
 	}
 	if (params->padding == 1)
 	{
@@ -106,7 +91,7 @@ int	print_uint(int spaces, char *zero_prec, t_param *params, unsigned int x)
 		if (params->precision == 0 && x == 0)
 			;
 		else
-			i += ft_putunbr_fd(x, 1);
+			i += ft_putulonglong_fd(x, 1);
 		i += fill_spaces(spaces);
 	}
 	return (i);

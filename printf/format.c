@@ -6,7 +6,7 @@
 /*   By: agaubert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/02 19:39:36 by agaubert          #+#    #+#             */
-/*   Updated: 2020/01/13 20:39:32 by agaubert         ###   ########.fr       */
+/*   Updated: 2020/01/31 15:20:12 by agaubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int			format_string(char *x, t_param *params)
 		x = null_str();
 	if (!(to_print = malloc(sizeof(*to_print) * (ft_strlen(x) + 1))))
 		return (-1);
-	if ((int)ft_strlen(x) > params->precision && params->precision >= 0)
+	if (ft_strlen(x) > (size_t)params->precision && params->precision >= 0)
 		ft_strlcpy(to_print, x, params->precision + 1);
 	else
 		ft_strlcpy(to_print, x, ft_strlen(x) + 1);
@@ -92,17 +92,17 @@ int			format_ptr(void *ptr, t_param *params)
 
 	i = 0;
 	padding = create_padding((params->width - \
-	count_udigit((size_t)ptr, 16) - 2), params->zero);
+	count_ulldigit((unsigned long long)ptr, 16) - 2), params->zero);
 	if (params->padding == 0)
 	{
 		i += ft_putstr_fd(padding, 1);
 		i += ft_putstr_fd("0x", 1);
-		i += ft_putxnbr_fd((size_t)ptr, 1, params->zero);
+		i += ft_putxlonglong_fd((unsigned long long)ptr, 1, params->zero);
 	}
 	else if (params->padding == 1)
 	{
 		i += ft_putstr_fd("0x", 1);
-		i += ft_putxnbr_fd((size_t)ptr, 1, params->zero);
+		i += ft_putxlonglong_fd((unsigned long long)ptr, 1, params->zero);
 		i += ft_putstr_fd(padding, 1);
 	}
 	free(padding);

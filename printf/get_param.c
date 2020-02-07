@@ -6,7 +6,7 @@
 /*   By: agaubert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/02 19:43:11 by agaubert          #+#    #+#             */
-/*   Updated: 2020/01/13 20:44:05 by agaubert         ###   ########.fr       */
+/*   Updated: 2020/01/16 15:27:50 by agaubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 static int		sanity_check(t_param *node)
 {
-	node->type = handle_case(node->type);
+	node->type = handle_type(node->type);
 	if (node->width < 0)
 	{
 		node->width *= -1;
 		node->padding = 1;
 	}
+	if (node->precision >= 0)
+		node->zero = 0;
 	if (node->padding == 1)
 		node->zero = 0;
 	if ((node->type == 'c' || node->type == 'p') && node->zero == 1)
@@ -69,6 +71,10 @@ static int		handle_flags(t_param *node, char *str, va_list ap)
 		node->sign = 1;
 	if (c == '#')
 		node->alt = 1;
+	if (c == 'h')
+		return (h_modifier(node, str));
+	if (c == 'l')
+		return (l_modifier(node, str));
 	if (c == '.' || c == '*')
 		return (handle_width(node, str, ap));
 	return (1);

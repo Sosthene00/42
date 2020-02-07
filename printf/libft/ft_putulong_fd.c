@@ -1,49 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putunbr_fd.c                                    :+:      :+:    :+:   */
+/*   ft_putulong_fd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agaubert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/27 20:27:19 by agaubert          #+#    #+#             */
-/*   Updated: 2020/01/16 16:52:34 by agaubert         ###   ########.fr       */
+/*   Created: 2020/01/16 16:46:31 by agaubert          #+#    #+#             */
+/*   Updated: 2020/01/31 17:49:08 by agaubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	count_digit(size_t n)
+static int		count_ldigit(unsigned long n)
 {
-	int i;
+	int		i;
+	size_t	nb;
 
 	i = 0;
 	if (n == 0)
-		return (1);
-	while (n != 0)
+		return (i = 1);
+	if (n < 0)
 	{
-		n /= 16;
+		i++;
+		nb = n * -1;
+	}
+	else
+		nb = n;
+	while (nb != 0)
+	{
+		nb /= 10;
 		i++;
 	}
 	return (i);
 }
 
-int			ft_putxnbr_fd(unsigned int n, int fd, int upper)
+int				ft_putulong_fd(unsigned long n, int fd)
 {
-	int		i;
-	char	*set_low;
-	char	*set_up;
+	int i;
 
-	set_low = "0123456789abcdef";
-	set_up = "0123456789ABCDEF";
-	if (n <= 15)
-		if (upper == 1)
-			ft_putchar_fd(set_up[n], fd);
-		else
-			ft_putchar_fd(set_low[n], fd);
+	if (n <= 9)
+		ft_putchar_fd(n + '0', fd);
 	else
 	{
-		ft_putxnbr_fd(n / 16, fd, upper);
-		ft_putxnbr_fd(n % 16, fd, upper);
+		ft_putulong_fd(n / 10, fd);
+		ft_putulong_fd(n % 10, fd);
 	}
-	return (i = count_digit(n));
+	return (i = count_ldigit(n));
 }

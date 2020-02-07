@@ -6,7 +6,7 @@
 /*   By: agaubert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 15:32:24 by agaubert          #+#    #+#             */
-/*   Updated: 2020/01/08 16:01:47 by agaubert         ###   ########.fr       */
+/*   Updated: 2020/01/14 15:29:37 by agaubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,3 @@ void	print_error(int output)
 	if (output == -2)
 		ft_putstr_fd(NULL_POINTER, 2);
 }
-

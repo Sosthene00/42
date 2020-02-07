@@ -6,7 +6,7 @@
 /*   By: agaubert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 18:50:51 by agaubert          #+#    #+#             */
-/*   Updated: 2020/01/13 19:52:13 by agaubert         ###   ########.fr       */
+/*   Updated: 2020/01/15 18:04:16 by agaubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*fill_zero(int x, t_param *params)
 	return (res);
 }
 
-char	*fill_uzero(size_t x, int pos, t_param *params)
+char	*fill_uzero(unsigned int x, int pos, t_param *params)
 {
 	char	*res;
 	int		len;
@@ -44,7 +44,11 @@ char	*fill_uzero(size_t x, int pos, t_param *params)
 	if (params->precision > 0)
 		len = params->precision - count_udigit(x, pos);
 	else if (params->zero == 1)
+	{
 		len = params->width - count_udigit(x, pos) - params->sign;
+		if (params->alt == 1 && x != 0)
+			len -= 2;
+	}
 	else
 		return (res = NULL);
 	if (len > 0)
@@ -77,6 +81,8 @@ char	*create_padding(int len, int zero)
 	int		i;
 
 	i = 0;
+	if (len < 0)
+		len = 0;
 	if (zero == 1)
 		c = '0';
 	else

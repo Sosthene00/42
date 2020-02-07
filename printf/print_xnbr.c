@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_nbr.c                                        :+:      :+:    :+:   */
+/*   print_xnbr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agaubert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/13 20:05:33 by agaubert          #+#    #+#             */
-/*   Updated: 2020/01/31 17:43:43 by agaubert         ###   ########.fr       */
+/*   Created: 2020/01/31 16:14:28 by agaubert          #+#    #+#             */
+/*   Updated: 2020/01/31 17:46:03 by agaubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	print_sign(long long x, int sign)
+static int	print_xnbr(unsigned long long x, char *zero_prec, t_param *params)
 {
-	if (x < 0)
-	{
-		ft_putchar_fd('-', 1);
-		return (1);
-	}
-	else if (sign == 1)
-	{
-		ft_putchar_fd('+', 1);
-		return (1);
-	}
-	else
-		return (0);
+	int i;
+
+	i = 0;
+	if (params->alt == 1 && x != 0)
+		i += ft_putstr_fd((params->type == 'x') ? "0x" : "0X", 1);
+	i += ft_putstr_fd(zero_prec, 1);
+	i += ft_putxlong_fd(x, 1, (params->type == 'x') ? 0 : 1);
+	return (i);
 }
 
-int	print_int(int spaces, char *zero_prec, t_param *params, int x)
+int			print_xint(int spaces, char *zero_prec, \
+t_param *params, unsigned int x)
 {
 	int i;
 
@@ -36,27 +33,24 @@ int	print_int(int spaces, char *zero_prec, t_param *params, int x)
 	if (params->padding == 0)
 	{
 		i += fill_spaces(spaces);
-		i += print_sign(x, params->sign);
-		i += ft_putstr_fd(zero_prec, 1);
 		if (params->precision == 0 && x == 0)
 			;
 		else
-			i += ft_putunbr_fd(convert_neg(x), 1);
+			i += print_xnbr(x, zero_prec, params);
 	}
 	if (params->padding == 1)
 	{
-		i += print_sign(x, params->sign);
-		i += ft_putstr_fd(zero_prec, 1);
 		if (params->precision == 0 && x == 0)
 			;
 		else
-			i += ft_putunbr_fd(convert_neg(x), 1);
+			i += print_xnbr(x, zero_prec, params);
 		i += fill_spaces(spaces);
 	}
 	return (i);
 }
 
-int	print_long(int spaces, char *zero_prec, t_param *params, long x)
+int			print_xlong(int spaces, char *zero_prec, \
+t_param *params, unsigned long x)
 {
 	int i;
 
@@ -64,27 +58,24 @@ int	print_long(int spaces, char *zero_prec, t_param *params, long x)
 	if (params->padding == 0)
 	{
 		i += fill_spaces(spaces);
-		i += print_sign(x, params->sign);
-		i += ft_putstr_fd(zero_prec, 1);
 		if (params->precision == 0 && x == 0)
 			;
 		else
-			i += ft_putulong_fd(convert_lneg(x), 1);
+			i += print_xnbr(x, zero_prec, params);
 	}
 	if (params->padding == 1)
 	{
-		i += print_sign(x, params->sign);
-		i += ft_putstr_fd(zero_prec, 1);
 		if (params->precision == 0 && x == 0)
 			;
 		else
-			i += ft_putulong_fd(convert_lneg(x), 1);
+			i += print_xnbr(x, zero_prec, params);
 		i += fill_spaces(spaces);
 	}
 	return (i);
 }
 
-int	print_uint(int spaces, char *zero_prec, t_param *params, unsigned int x)
+int			print_xlonglong(int spaces, char *zero_prec, \
+t_param *params, unsigned long long x)
 {
 	int i;
 
@@ -92,21 +83,17 @@ int	print_uint(int spaces, char *zero_prec, t_param *params, unsigned int x)
 	if (params->padding == 0)
 	{
 		i += fill_spaces(spaces);
-		i += print_sign(x, params->sign);
-		i += ft_putstr_fd(zero_prec, 1);
 		if (params->precision == 0 && x == 0)
 			;
 		else
-			i += ft_putunbr_fd(x, 1);
+			i += print_xnbr(x, zero_prec, params);
 	}
 	if (params->padding == 1)
 	{
-		i += print_sign(x, params->sign);
-		i += ft_putstr_fd(zero_prec, 1);
 		if (params->precision == 0 && x == 0)
 			;
 		else
-			i += ft_putunbr_fd(x, 1);
+			i += print_xnbr(x, zero_prec, params);
 		i += fill_spaces(spaces);
 	}
 	return (i);

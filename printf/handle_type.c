@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_case.c                                      :+:      :+:    :+:   */
+/*   handle_type.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agaubert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/13 18:25:04 by agaubert          #+#    #+#             */
-/*   Updated: 2020/01/13 18:28:11 by agaubert         ###   ########.fr       */
+/*   Created: 2020/01/16 15:29:04 by agaubert          #+#    #+#             */
+/*   Updated: 2020/01/31 14:38:52 by agaubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-char	handle_case(char c)
+char	handle_type(char type)
 {
-	if (c != 'X')
-		return (ft_tolower(c));
+	char c;
+
+	if (type == 'X')
+		return (type);
 	else
-		return (c);
+		c = ft_tolower(type);
+	if (type == 'i')
+		c = 'd';
+	return (c);
 }

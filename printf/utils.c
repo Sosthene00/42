@@ -6,7 +6,7 @@
 /*   By: agaubert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/02 16:32:18 by agaubert          #+#    #+#             */
-/*   Updated: 2020/01/13 19:48:41 by agaubert         ###   ########.fr       */
+/*   Updated: 2020/01/30 18:11:29 by agaubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		count_digit_minus(int n)
 	return (i);
 }
 
-int		count_udigit(size_t n, int pos)
+int		count_udigit(unsigned int n, int pos)
 {
 	int i;
 
@@ -70,8 +70,8 @@ int		count_width(char *str)
 {
 	int		i;
 
-	i = 0;
-	while (ft_isdigit((int)str[i++]))
+	i = -1;
+	while (ft_isdigit((int)str[++i]))
 		;
 	return (i);
 }
