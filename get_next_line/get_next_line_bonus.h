@@ -6,12 +6,12 @@
 /*   By: agaubert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 15:12:08 by agaubert          #+#    #+#             */
-/*   Updated: 2019/12/23 17:50:54 by agaubert         ###   ########.fr       */
+/*   Updated: 2019/12/26 11:49:52 by agaubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # include <strings.h>
 # include <limits.h>

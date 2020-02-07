@@ -6,11 +6,11 @@
 /*   By: agaubert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 18:26:48 by agaubert          #+#    #+#             */
-/*   Updated: 2019/12/23 18:38:19 by agaubert         ###   ########.fr       */
+/*   Updated: 2019/12/26 11:49:02 by agaubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen_split(char const *str, char c)
 {

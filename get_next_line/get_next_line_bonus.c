@@ -6,11 +6,11 @@
 /*   By: agaubert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 15:13:34 by agaubert          #+#    #+#             */
-/*   Updated: 2019/12/23 20:19:06 by agaubert         ###   ########.fr       */
+/*   Updated: 2019/12/26 11:48:43 by agaubert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*ft_strdup_split(char const *str, char c)
 {
@@ -51,7 +51,7 @@ int			get_next_line(int fd, char **line)
 {
 	ssize_t			count;
 	char			buffer[BUFFER_SIZE + 1];
-	static char		*cur;
+	static char		*cur[OPEN_MAX];
 
 	count = 0;
 	if ((read(fd, buffer, 0) < 0) || line == NULL || BUFFER_SIZE <= 0)
@@ -59,16 +59,16 @@ int			get_next_line(int fd, char **line)
 	while ((count = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
 		buffer[count] = '\0';
-		if (!(cur = ft_strjoin(cur, buffer)))
+		if (!(cur[fd] = ft_strjoin(cur[fd], buffer)))
 			return (-1);
-		if (ft_strchr(cur, '\n'))
+		if (ft_strchr(cur[fd], '\n'))
 			break ;
 	}
-	if (cur == NULL)
+	if (cur[fd] == NULL)
 	{
-		if (!(cur = malloc(sizeof(*cur))))
+		if (!(cur[fd] = malloc(sizeof(*cur[fd]))))
 			return (-1);
 	}
-	count = do_line(count, &cur, line);
+	count = do_line(count, &cur[fd], line);
 	return (count);
 }
