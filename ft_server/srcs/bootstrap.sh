@@ -23,7 +23,7 @@ service nginx stop
 cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.bak
 mv nginx.conf /etc/nginx/nginx.conf
 echo -e "\n\e[92mCopying sites conf files\e[0m\n"
-mv /default.conf /etc/nginx/sites-available/default
+mv /default /etc/nginx/sites-available/default
 rm /etc/nginx/sites-enabled/default
 ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 
@@ -89,14 +89,15 @@ curl -LO https://wordpress.org/latest.tar.gz
 tar xzf latest.tar.gz
 cd /
 mv /wp-config.php /tmp/wordpress/wp-config.php
-cp -a /tmp/wordpress/* /var/www/html/
-chown -R www-data:www-data /var/www/html/
+mkdir /var/www/html/wordpress
+cp -a /tmp/wordpress/* /var/www/html/wordpress
+chown -R www-data:www-data /var/www/html/wordpress
 find /var/www/html/ -type d -exec chmod 750 {} \;
 find /var/www/html/ -type f -exec chmod 640 {} \;
-sed -i "0,/'password_here'/ s@'password_here'@'${PASS_MYSQL_ROOT}'@" /var/www/html/wp-config.php
-mkdir -p /var/www/html/wp-content/uploads/2020/02
-mv /sacrifice-1-1200x675.jpeg /var/www/html/wp-content/uploads/2020/02
-chown -R www-data:www-data /var/www/html/wp-content/uploads/
+sed -i "0,/'password_here'/ s@'password_here'@'${PASS_MYSQL_ROOT}'@" /var/www/html/wordpress/wp-config.php
+mkdir -p /var/www/html/wordpress/wp-content/uploads/2020/02
+mv /sacrifice-1200x675.jpeg /var/www/html/wordpress/wp-content/uploads/2020/02
+chown -R www-data:www-data /var/www/html/wordpress/wp-content/uploads/
 mysql -u wordpress_user wordpress < /dbdump.sql
 
 echo "==========================================="
@@ -137,4 +138,4 @@ echo -e "\n\e[92mCleaning the house\e[0m\n"
 rm -r /dbdump.sql phpMyAdmin-*
 rm -rf /tmp/wordpress
 mv *_pwd /root
-mv *.sh /root
+mv bootstrap.sh /root
