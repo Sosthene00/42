@@ -35,8 +35,8 @@ static	size_t	ltrim(char const *str, char const *set)
 
 static	size_t	rtrim(char const *str, char const *set)
 {
-	size_t i;
-	size_t count;
+	int     i;
+	size_t  count;
 
 	i = ft_strlen(str) - 1;
 	count = 0;
