@@ -20,8 +20,9 @@ all: $(NAME)
 
 $(NAME):
 	make -C $(LIBFTDIR)
-	make -C $(MLXDIR)
-	$(CC) $(CFLAGS) -o $@ $(SRCS) -L$(LIBFTDIR) -lft -L$(MLXDIR) -lmlx $(FRAMEWORK)
+	#make -C $(MLXDIR)
+	#$(CC) $(CFLAGS) -o $@ $(SRCS) -L$(LIBFTDIR) -lft -L$(MLXDIR) -lmlx $(FRAMEWORK)
+	$(CC) $(CFLAGS) -o $@ $(SRCS) -L$(LIBFTDIR) libmlx.a -lm -lX11 -lXext
 
 clean:
 	$(RM) $(OBJS) $(B_OBJS)
