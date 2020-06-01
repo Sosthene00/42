@@ -17,6 +17,19 @@
 # include <limits.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# define BUFFER_SIZE 4096 
+# define OPEN_MAX 256 
+
+int					get_next_line(int fd, char **line);
+
+size_t				ft_strlen_split(char const *str, char c);
+
+char				*ft_substr_mal(char *s, char c);
+
+void				free_mem(void **ptr);
 
 int					ft_atoi(const char *str);
 
