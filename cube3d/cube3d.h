@@ -17,4 +17,18 @@
 # include "./mlx/mlx.h"
 # include <math.h>
 
+# define WRONG_FILE "Non-existing or wrong map file, please check the file given as argument\n"
+
+typedef	struct		map_data
+{
+    int             x;
+    int             y;
+}					map;
+
+int                 parse_map_file(char *map_file, map *map_data);
+
+void                print_error(int error_code);
+
+int                 exit_program(void *mlx_ptr, void *win_ptr, int error_code);
+
 #endif

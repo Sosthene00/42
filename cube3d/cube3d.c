@@ -20,11 +20,19 @@ int main()
 	int y;
 	int i;
 	int j;
+	map *map_data;
 
 	x = 500;
 	y = 240;
 	i = -1;
 	j = -1;
+	if (!(map_data = (map *)malloc(sizeof(map))))
+		return (EXIT_FAILURE);
+	if (parse_map_file("./map", map_data) != 0)
+	{
+		print_error(parse_map_file("./map", map_data));
+		return (EXIT_FAILURE);
+	}
 	mlx_ptr = mlx_init();
 	win_ptr = mlx_new_window(mlx_ptr, x, y, "Test");
 	while (++i < x)
