@@ -12,32 +12,29 @@
 
 # include "./cube3d.h"
 
-int main()
+int main(int argc, char **argv)
 {
 	void *mlx_ptr;
 	void *win_ptr;
-	int x;
-	int y;
 	int i;
 	int j;
 	map *map_data;
+	(void)argc;
 
-	x = 500;
-	y = 240;
 	i = -1;
 	j = -1;
 	if (!(map_data = (map *)malloc(sizeof(map))))
 		return (EXIT_FAILURE);
-	if (parse_map_file("./map", map_data) != 0)
+	if (parse_map_file(argv[1], map_data) != 0)
 	{
-		print_error(parse_map_file("./map", map_data));
+		print_error(parse_map_file(argv[1], map_data));
 		return (EXIT_FAILURE);
 	}
 	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, x, y, "Test");
-	while (++i < x)
+	win_ptr = mlx_new_window(mlx_ptr, map_data->x, map_data->y, "Test");
+	while (++i < map_data->x)
 	{
-		while (++j < y)
+		while (++j < map_data->y)
 		{
 			mlx_pixel_put(mlx_ptr, win_ptr, i, j, 254);
 		}
