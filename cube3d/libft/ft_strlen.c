@@ -17,19 +17,21 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
+	if (!s)
+		return (i);
 	while (s[i])
 		i++;
 	return (i);
 }
 
-size_t	ft_strlen_split(char const *str, char c)
+size_t	ft_strlen_split(char const *s, char c)
 {
 	int	i;
 
 	i = 0;
-	if (!str)
+	if (!s)
 		return (i);
-	while (str[i] && str[i] != c)
+	while (s[i] && s[i] != c)
 		i++;
 	return (i);
 }
