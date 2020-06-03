@@ -14,16 +14,15 @@
 
 int main(int argc, char **argv)
 {
-	void *mlx_ptr;
-	void *win_ptr;
-	map *map_data;
-	(void)argc;
+	void	*mlx_ptr;
+	void	*win_ptr;
+	map		*map_data;
 
 	if (!(map_data = (map *)malloc(sizeof(map))))
 		return (EXIT_FAILURE);
-	if (parse_map_file(argv[1], map_data) != 0)
+	if ((argc != 2) || (parse_map_file(argv[1], map_data) != 0))
 	{
-		print_error(parse_map_file(argv[1], map_data));
+		print_error(1);
 		return (EXIT_FAILURE);
 	}
 	mlx_ptr = mlx_init();
