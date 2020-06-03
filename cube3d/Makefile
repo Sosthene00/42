@@ -27,7 +27,7 @@ $(NAME):
 clean:
 	$(RM) $(OBJS) $(B_OBJS)
 	make clean -C $(LIBFTDIR)
-	make clean -C $(MLXDIR)
+	#make clean -C $(MLXDIR)
 
 fclean: clean
 	$(RM) $(NAME)
@@ -36,5 +36,5 @@ re: fclean all
 
 bonus:
 	make -C $(LIBFTDIR)
-	make -C $(MLXDIR)
+	#make -C $(MLXDIR)
 	$(CC) $(CFLAGS) -o $(BONUS_NAME) $(SRCS) -L$(LIBFTDIR) -lft -L$(MLXDIR) -lmlx $(FRAMEWORK)
