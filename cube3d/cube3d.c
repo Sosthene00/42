@@ -18,15 +18,17 @@ int main(int argc, char **argv)
 	void	*win_ptr;
 	map		*map_data;
 
-	if (!(map_data = (map *)malloc(sizeof(map))))
+	if (!(map_data = init_map_data()))
 		return (EXIT_FAILURE);
 	if ((argc != 2) || (parse_map_file(argv[1], map_data) != 0))
 	{
 		print_error(1);
 		return (EXIT_FAILURE);
 	}
-	mlx_ptr = mlx_init();
-	win_ptr = init_win(mlx_ptr, map_data);
+	if (!(mlx_ptr = mlx_init()))
+		return (EXIT_FAILURE);
+	if (!(win_ptr = init_win(mlx_ptr, map_data)))
+		return (EXIT_FAILURE);
 	blue_screen(mlx_ptr, win_ptr, map_data);
 	mlx_loop(mlx_ptr);
 }

@@ -25,6 +25,7 @@
 
 # define WRONG_FILE "Something's wrong with the map file:\n"\
                     "Check that the file exists and its content is formatted correctly\n"
+# define ERROR_PARSING "Error parsing map file content\n"
 
 typedef	struct		map_data
 {
@@ -32,6 +33,8 @@ typedef	struct		map_data
     int             y;
     char            *name;
 }					map;
+
+map                 *init_map_data();
 
 int                 parse_map_file(char *map_file, map *map_data);
 
