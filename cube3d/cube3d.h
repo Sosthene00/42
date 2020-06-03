@@ -14,14 +14,8 @@
 # define CUBE3D_H
 
 # include "./libft/libft.h"
-# include "./mlx/mlx.h"
+# include "./mlx.h"
 # include <math.h>
-
-# define ONE_CHAR_IDENTIFIER "RSFC"
-# define NORTH "NO"
-# define SOUTH "SO"
-# define EAST "EA"
-# define WEST "WE"
 
 # define WRONG_FILE "Something's wrong with the map file:\n"\
                     "Check that the file exists and its content is formatted correctly\n"
@@ -34,7 +28,16 @@ typedef	struct		map_data
     char            *name;
 }					map;
 
+typedef	struct		mlx_data
+{
+    void            *mlx_ptr;
+    void            *win_ptr;
+    map             map;
+}					mlx;
+
 map                 *init_map_data();
+
+mlx                 *init_mlx_data(map *map_data);
 
 int                 parse_map_file(char *map_file, map *map_data);
 
@@ -44,6 +47,7 @@ int                 exit_program(void *mlx_ptr, void *win_ptr, int error_code);
 
 void                *init_win(void *mlx_ptr, map *map_data);
 
-void                blue_screen(void *mlx_ptr, void *win_ptr, map *map_data);
+//void                blue_screen(void *mlx_ptr, void *win_ptr, map *map_data);
+int                 blue_screen(mlx *mlx_data);
 
 #endif
