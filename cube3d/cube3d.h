@@ -23,7 +23,8 @@
 # define EAST "EA"
 # define WEST "WE"
 
-# define WRONG_FILE "Non-existing or wrong map file, please check the file given as argument\n"
+# define WRONG_FILE "Something's wrong with the map file:\n"\
+                    "Check that the file exists and its content is formatted correctly\n"
 
 typedef	struct		map_data
 {
