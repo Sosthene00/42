@@ -50,4 +50,6 @@ void                *init_win(void *mlx_ptr, map *map_data);
 //void                blue_screen(void *mlx_ptr, void *win_ptr, map *map_data);
 int                 blue_screen(mlx *mlx_data);
 
+int                 is_in_screen_size(void *mlx_ptr, int x, int y);
+
 #endif
