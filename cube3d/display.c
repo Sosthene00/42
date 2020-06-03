@@ -4,7 +4,8 @@ void *init_win(void *mlx_ptr, map *map_data)
 {
     void *win_ptr;
 
-	win_ptr = mlx_new_window(mlx_ptr, map_data->x, map_data->y, map_data->name);
+	if (!(win_ptr = mlx_new_window(mlx_ptr, map_data->x, map_data->y, map_data->name)))
+        return (NULL);
     return (win_ptr);
 }
 
