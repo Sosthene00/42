@@ -5,7 +5,7 @@ void    print_error(int error_code)
     if (error_code == 1)
         ft_putstr_fd(WRONG_FILE, 2);
     else
-        ft_putstr_fd("Unknown error code", 2);
+        ft_putstr_fd("Unknown error code\n", 2);
 }
 
 int     exit_program(void *mlx_ptr, void *win_ptr, int error_code)
