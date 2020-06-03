@@ -30,9 +30,11 @@ int get_xy_value(char *line, map *map_data)
             map_data->x = ft_atoi(tmp);
         else
             map_data->y = ft_atoi(tmp);
-        
     }
-    return (0);
+    if (is_in_screen_size(mlx_ptr, map_data->x, map_data->y) == 1)
+        return (0);
+    else
+        return (2);
 }
 
 int update_data(char *line, map *map_data)
