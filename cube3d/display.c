@@ -1,27 +1,20 @@
 #include "./cube3d.h"
 
-void *init_win(void *mlx_ptr, map *map_data)
-{
-    void *win_ptr;
-
-	if (!(win_ptr = mlx_new_window(mlx_ptr, map_data->x, map_data->y, map_data->name)))
-        return (NULL);
-    return (win_ptr);
-}
-
-void blue_screen(void *mlx_ptr, void *win_ptr, map *map_data)
+int blue_screen(int key, ctx *context)
 {
     int i;
     int j;
 
+	(void)key;
     i = -1;
     j = -1;
-	while (++i < map_data->x)
+	while (++i < context->win_x)
 	{
-		while (++j < map_data->y)
+		while (++j < context->win_y)
 		{
-			mlx_pixel_put(mlx_ptr, win_ptr, i, j, 254);
+			mlx_pixel_put(context->mlx_ptr, context->win_ptr, i, j, 254);
 		}
 		j = -1;
 	}
+    return (0);
 }
