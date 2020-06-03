@@ -58,8 +58,7 @@ int parse_map_file(char *map_file, map *map_data)
 
     if ((map_file == NULL) || (fd = open(map_file, O_RDONLY)) < 0)
         return (1);
-    if (!(line = malloc(sizeof(*line)*1024)))
-        return (9);
+    map_data->name = map_file;
     while (get_next_line(fd, &line) > 0)
     {
         if (ft_isalpha(line[0]))

@@ -16,13 +16,9 @@ int main(int argc, char **argv)
 {
 	void *mlx_ptr;
 	void *win_ptr;
-	int i;
-	int j;
 	map *map_data;
 	(void)argc;
 
-	i = -1;
-	j = -1;
 	if (!(map_data = (map *)malloc(sizeof(map))))
 		return (EXIT_FAILURE);
 	if (parse_map_file(argv[1], map_data) != 0)
@@ -31,14 +27,7 @@ int main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, map_data->x, map_data->y, "Test");
-	while (++i < map_data->x)
-	{
-		while (++j < map_data->y)
-		{
-			mlx_pixel_put(mlx_ptr, win_ptr, i, j, 254);
-		}
-		j = -1;
-	}
+	win_ptr = init_win(mlx_ptr, map_data);
+	blue_screen(mlx_ptr, win_ptr, map_data);
 	mlx_loop(mlx_ptr);
 }
