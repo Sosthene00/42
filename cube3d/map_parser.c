@@ -9,12 +9,12 @@ int get_identifier(char *line, char *identifier)
     return (2);
 }
 
-int get_xy_value(char *line, map *map_data)
+int get_xy_value(char *line, ctx *context)
 {
     int i;
     char tmp[5];
 
-    while (*line && ((map_data->x == 0) || (map_data->y == 0)))
+    while (*line && ((context->win_x == 0) || (context->win_y == 0)))
     {
         i = 0;
         while (*line == ' ')
@@ -26,18 +26,18 @@ int get_xy_value(char *line, map *map_data)
             line++;
         }
         tmp[i] = '\0';
-        if (map_data->x == 0)
-            map_data->x = ft_atoi(tmp);
+        if (context->win_x == 0)
+            context->win_x = ft_atoi(tmp);
         else
-            map_data->y = ft_atoi(tmp);
+            context->win_y = ft_atoi(tmp);
     }
-    if (is_in_screen_size(mlx_ptr, map_data->x, map_data->y) == 1)
+    if (is_in_screen_size(context->mlx_ptr, context->win_x, context->win_y) == 1)
         return (0);
     else
         return (2);
 }
 
-int update_data(char *line, map *map_data)
+int update_data(char *line, ctx *context)
 {
     // Take a line, parse the identifier and dispatch the content to the right function 
     // to update map_data
@@ -54,8 +54,11 @@ int update_data(char *line, map *map_data)
     if ((identifier[0] == 'R') && (identifier[1] == ' '))
     {
         // Parse x and y value from file, return 0 if ok, 2 otherwise
-        if (get_xy_value(line, map_data) == 0)
+        if (get_xy_value(line, context) == 0)
+        {
+            init_mlx(context);
             return (0);
+        }
         else
             return (2);
     }
@@ -63,7 +66,7 @@ int update_data(char *line, map *map_data)
 }
 
 // parse the map file
-int parse_map_file(char *map_file, map *map_data)
+int parse_map_file(char *map_file, ctx *context)
 {
     int fd;
     int ret;
@@ -71,13 +74,13 @@ int parse_map_file(char *map_file, map *map_data)
 
     //if ((map_file == NULL) || (fd = open(map_file, O_RDONLY)) < 0)
     if ((fd = open(map_file, O_RDONLY)) < 0)
-        return (1);
-    map_data->name = map_file;
+        exit(1);
+    context->name = map_file;
     while (get_next_line(fd, &line) > 0)
     {
         if (ft_isalpha(line[0]))
         {
-            ret = update_data(line, map_data);
+            ret = update_data(line, context);
             if (ret == 2)
                 break;
         }

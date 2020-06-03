@@ -14,21 +14,18 @@
 
 int main(int argc, char **argv)
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	map		*map_data;
+	ctx	*context;
 
-	if (!(map_data = init_map_data()))
-		return (EXIT_FAILURE);
-	if ((argc != 2) || (parse_map_file(argv[1], map_data) != 0))
+	if ((argc < 2) || (argc > 3) || (open(argv[1], O_RDONLY) < 0))
 	{
 		print_error(1);
-		return (EXIT_FAILURE);
+		exit(1);
 	}
-	if (!(mlx_ptr = mlx_init()))
-		return (EXIT_FAILURE);
-	if (!(win_ptr = init_win(mlx_ptr, map_data)))
-		return (EXIT_FAILURE);
-	blue_screen(mlx_ptr, win_ptr, map_data);
-	mlx_loop(mlx_ptr);
+	context = init_ctx();
+	if (!(context->mlx_ptr = mlx_init()))
+		exit(1);
+	parse_map_file(argv[1], context);
+	//blue_screen(mlx_ptr, win_ptr, map_data);
+	mlx_key_hook(context->win_ptr, blue_screen, context);
+	mlx_loop(context->mlx_ptr);
 }
