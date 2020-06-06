@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 {
 	ctx	*context;
 
-	if ((argc < 2) || (argc > 3) || (check_file_extension(argv[1]) == 0))
+	if (((argc < 2) || (argc > 3)) || (check_file_extension(argv[1]) == 1))
 	{
 		print_error(1);
 		exit(1);

@@ -19,9 +19,11 @@ int check_file_extension(char *filename)
 
     str = ft_split(filename, '.');
     extension = str[1];
-
-    if (ft_strncmp(extension, FILE_EXT, 3))
-        return (0);
+    if (extension != NULL)
+    {
+        if (!(ft_strncmp(extension, FILE_EXT, 3)))
+            return (0);
+    }
     return (1);
 }
 
