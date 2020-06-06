@@ -12,11 +12,24 @@ void    print_error(int error_code)
         ft_putstr_fd("Unknown error code\n", 2);
 }
 
+int check_file_extension(char *filename)
+{
+    char *extension;
+    char **str;
+
+    str = ft_split(filename, '.');
+    extension = str[1];
+
+    if (ft_strncmp(extension, FILE_EXT, 3))
+        return (0);
+    return (1);
+}
+
 void     exit_program(ctx *context, int error_code)
 {
     if (error_code != 0)
         print_error(error_code);
-    mlx_do_key_autorepeaton(context->mlx_ptr);
+    //mlx_do_key_autorepeaton(context->mlx_ptr);
     mlx_clear_window(context->mlx_ptr, context->win_ptr);
     mlx_destroy_window(context->mlx_ptr, context->win_ptr);    
     exit(error_code);

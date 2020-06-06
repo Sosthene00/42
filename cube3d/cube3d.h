@@ -22,7 +22,6 @@
 # define KEY_LEFT 0x0061
 # define KEY_RIGHT 0x0064
 # define KEY_DOWN 0x0073
-# define KEY_JUMP 49
 # define KEY_ESC 0xff1b
 
 # define KEY_PRESS_MASK (1L<<0)
@@ -32,6 +31,8 @@
                     "Check that the file exists and its content is formatted correctly\n"
 # define ERROR_PARSING "Error parsing map file content\n"
 # define MEMORY_ERROR "Error while initializing mlx or malloc\n"
+
+# define FILE_EXT "cub"
 
 typedef	struct		context
 {
@@ -52,6 +53,8 @@ int                 loop_hook(ctx *context);
 int		            key_press(int key, ctx *context);
 
 int	                key_hook(int key, ctx *context);
+
+int                 check_file_extension(char *filename);
 
 int                 parse_map_file(char *map_file, ctx *context);
 

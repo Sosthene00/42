@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 {
 	ctx	*context;
 
-	if ((argc < 2) || (argc > 3) || (open(argv[1], O_RDONLY) < 0))
+	if ((argc < 2) || (argc > 3) || (check_file_extension(argv[1]) == 0))
 	{
 		print_error(1);
 		exit(1);
@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 	if (!(context->mlx_ptr = mlx_init()))
 		exit(1);
 	parse_map_file(argv[1], context);
-	mlx_do_key_autorepeatoff(context->mlx_ptr);
+	//mlx_do_key_autorepeatoff(context->mlx_ptr);
 	mlx_loop_hook(context->mlx_ptr, loop_hook, context);
 	mlx_hook(context->win_ptr, KEY_PRESS, KEY_PRESS_MASK, key_press, context);
 	mlx_key_hook(context->win_ptr, key_hook, context);
