@@ -27,9 +27,9 @@ int get_xy_value(char *line, ctx *context)
         }
         tmp[i] = '\0';
         if (context->win_x == 0)
-            context->win_x = ft_atoi(tmp);
+            context->win_x = (unsigned int)ft_atoi(tmp);
         else
-            context->win_y = ft_atoi(tmp);
+            context->win_y = (unsigned int)ft_atoi(tmp);
     }
     if (is_in_screen_size(context->mlx_ptr, context->win_x, context->win_y) == 1)
         return (0);

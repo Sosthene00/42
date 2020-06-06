@@ -25,7 +25,11 @@ int main(int argc, char **argv)
 	if (!(context->mlx_ptr = mlx_init()))
 		exit(1);
 	parse_map_file(argv[1], context);
-	//blue_screen(mlx_ptr, win_ptr, map_data);
-	mlx_key_hook(context->win_ptr, blue_screen, context);
+	mlx_do_key_autorepeatoff(context->mlx_ptr);
+	mlx_loop_hook(context->mlx_ptr, loop_hook, context);
+	mlx_hook(context->win_ptr, KEY_PRESS, KEY_PRESS_MASK, key_press, context);
+	mlx_key_hook(context->win_ptr, key_hook, context);
+	mlx_loop(context->mlx_ptr);
+	mlx_key_hook(context->win_ptr, get_key, context);
 	mlx_loop(context->mlx_ptr);
 }

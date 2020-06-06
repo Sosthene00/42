@@ -16,18 +16,22 @@
 # include "./libft/libft.h"
 # include "./mlx.h"
 # include <math.h>
+# include <time.h> // don't forget to delete later
+
+# define KEY_UP 0x0077
+# define KEY_LEFT 0x0061
+# define KEY_RIGHT 0x0064
+# define KEY_DOWN 0x0073
+# define KEY_JUMP 49
+# define KEY_ESC 0xff1b
+
+# define KEY_PRESS_MASK (1L<<0)
+# define KEY_PRESS 2
 
 # define WRONG_FILE "Something's wrong with the map file:\n"\
                     "Check that the file exists and its content is formatted correctly\n"
 # define ERROR_PARSING "Error parsing map file content\n"
 # define MEMORY_ERROR "Error while initializing mlx or malloc\n"
-
-//typedef	struct		map_data
-//{
-//    int             x;
-//    int             y;
-//    char            *name;
-//}					map;
 
 typedef	struct		context
 {
@@ -35,25 +39,29 @@ typedef	struct		context
     void            *win_ptr;
     int             win_x;
     int             win_y;
+    unsigned int    color_floor;
     char            *name;
 }					ctx;
 
-//map                 *init_map_data();
-
-//mlx                 *init_mlx_data(map *map_data);
-
 ctx                 *init_ctx();
 
-void init_mlx(ctx *context);
+void                init_mlx(ctx *context);
+
+int                 loop_hook(ctx *context);
+
+int		            key_press(int key, ctx *context);
+
+int	                key_hook(int key, ctx *context);
 
 int                 parse_map_file(char *map_file, ctx *context);
 
 void                print_error(int error_code);
 
+int                 get_key(int key, ctx *context);
+
 void                exit_program(ctx *context, int error_code);
 
-//void                blue_screen(void *mlx_ptr, void *win_ptr, map *map_data);
-int                 blue_screen(int key, ctx *context);
+int                 print_whole_screen(unsigned int color, ctx* context);
 
 int                 is_in_screen_size(void *mlx_ptr, int x, int y);
 

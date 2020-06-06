@@ -16,7 +16,8 @@ void     exit_program(ctx *context, int error_code)
 {
     if (error_code != 0)
         print_error(error_code);
+    mlx_do_key_autorepeaton(context->mlx_ptr);
     mlx_clear_window(context->mlx_ptr, context->win_ptr);
     mlx_destroy_window(context->mlx_ptr, context->win_ptr);    
-    exit(1);
+    exit(error_code);
 }
