@@ -25,7 +25,9 @@
 # define KEY_ESC 0xff1b
 
 # define KEY_PRESS_MASK (1L<<0)
+# define KEY_RELEASE_MASK  (1L<<1)  
 # define KEY_PRESS 2
+# define KEY_RELEASE 3
 
 # define WRONG_FILE "Something's wrong with the map file:\n"\
                     "Check that the file exists and its content is formatted correctly\n"
