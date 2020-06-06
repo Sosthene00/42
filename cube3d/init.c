@@ -16,10 +16,8 @@ int is_in_screen_size(void *mlx_ptr, int x, int y)
 
 void init_mlx(ctx *context)
 {
-	//if (!(context->mlx_ptr = mlx_init()))
-	//	exit(1);
 	if (!(context->win_ptr = mlx_new_window(context->mlx_ptr, context->win_x, \
-                                          context->win_y, context->name)))
+                                          context->win_y, "Cub3d - level 1")))
 		exit(1);
 }
 

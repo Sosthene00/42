@@ -75,7 +75,6 @@ int parse_map_file(char *map_file, ctx *context)
     //if ((map_file == NULL) || (fd = open(map_file, O_RDONLY)) < 0)
     if ((fd = open(map_file, O_RDONLY)) < 0)
         exit(1);
-    context->name = map_file;
     while (get_next_line(fd, &line) > 0)
     {
         if (ft_isalpha(line[0]))

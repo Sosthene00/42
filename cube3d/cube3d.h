@@ -41,7 +41,6 @@ typedef	struct		context
     int             win_x;
     int             win_y;
     unsigned int    color_floor;
-    char            *name;
 }					ctx;
 
 ctx                 *init_ctx();
