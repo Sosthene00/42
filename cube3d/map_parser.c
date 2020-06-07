@@ -1,14 +1,5 @@
 # include "./cube3d.h"
 
-int get_identifier(char *line, char *identifier)
-{
-    // return either 2 or -1
-    ft_bzero(identifier, 4);
-    if (!(ft_memccpy(identifier, line, ' ', 3)))
-        return (-1);
-    return (2);
-}
-
 int get_xy_value(char *line, ctx *context)
 {
     int i;
@@ -40,21 +31,10 @@ int get_xy_value(char *line, ctx *context)
 int update_data(char *line, ctx *context)
 {
     // Take a line, parse the identifier and dispatch the content to the right function 
-    // to update map_data
-    char *identifier;
-    int i;
-
-    if (!(identifier = ft_calloc(4, sizeof(*identifier))))
-        return (2);
-    if ((i = get_identifier(line, identifier) > 0))
-        line = line + i;
-    else
-        return (2);
-    
-    if ((identifier[0] == 'R') && (identifier[1] == ' '))
+    if (ft_strncmp(line, RESOLUTION, 2) == 0)
     {
         // Parse x and y value from file, return 0 if ok, 2 otherwise
-        if (get_xy_value(line, context) == 0)
+        if (get_xy_value((line+2), context) == 0)
         {
             init_mlx(context);
             return (0);

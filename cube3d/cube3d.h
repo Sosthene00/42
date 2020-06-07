@@ -18,8 +18,7 @@
 # include <math.h>
 # include <time.h> // don't forget to delete later
 
-# define KEY_UP 0x0077
-# define KEY_LEFT 0x0061
+# define RESOLUTION "R "
 # define KEY_RIGHT 0x0064
 # define KEY_DOWN 0x0073
 # define KEY_ESC 0xff1b
