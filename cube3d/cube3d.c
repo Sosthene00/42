@@ -30,6 +30,4 @@ int main(int argc, char **argv)
 	mlx_hook(context->win_ptr, KEY_PRESS, KEY_PRESS_MASK, key_press, context);
 	mlx_key_hook(context->win_ptr, key_hook, context);
 	mlx_loop(context->mlx_ptr);
-	mlx_key_hook(context->win_ptr, get_key, context);
-	mlx_loop(context->mlx_ptr);
 }
