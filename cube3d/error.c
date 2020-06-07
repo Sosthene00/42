@@ -36,8 +36,6 @@ void     exit_program(ctx *context, int error_code)
     {
         mlx_clear_window(context->mlx_ptr, context->win_ptr);
         mlx_destroy_window(context->mlx_ptr, context->win_ptr);    
-    mlx_destroy_window(context->mlx_ptr, context->win_ptr);    
-        mlx_destroy_window(context->mlx_ptr, context->win_ptr);    
     }
     exit(error_code);
 }
