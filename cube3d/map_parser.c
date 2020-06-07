@@ -2,26 +2,13 @@
 
 int get_xy_value(char *line, ctx *context)
 {
-    int i;
-    char tmp[5];
+    char **val;
 
-    while (*line && ((context->win_x == 0) || (context->win_y == 0)))
-    {
-        i = 0;
-        while (*line == ' ')
-            line++;
-        while ((ft_isdigit(*line)) != 0)
-        {
-            tmp[i] = *line;
-            i++;
-            line++;
-        }
-        tmp[i] = '\0';
-        if (context->win_x == 0)
-            context->win_x = ft_atoi(tmp);
-        else
-            context->win_y = ft_atoi(tmp);
-    }
+    val = ft_split(line, ' ');
+    if (!(val[0]) || !(val[1]) || !(ft_isdigit(*val[0])) || !(ft_isdigit(*val[1])))
+        return (2);
+    context->win_x = ft_atoi(val[0]);
+    context->win_y = ft_atoi(val[1]);
     if (is_in_screen_size(context->mlx_ptr, context->win_x, context->win_y) == 1)
         return (0);
     else
@@ -52,7 +39,6 @@ int parse_map_file(char *map_file, ctx *context)
     int ret;
     char *line;
 
-    //if ((map_file == NULL) || (fd = open(map_file, O_RDONLY)) < 0)
     if ((fd = open(map_file, O_RDONLY)) < 0)
         exit(1);
     while (get_next_line(fd, &line) > 0)
