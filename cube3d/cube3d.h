@@ -19,6 +19,12 @@
 # include <time.h> // don't forget to delete later
 
 # define RESOLUTION "R "
+
+// All the mapping has been done on my AZERTY Ubuntu laptop, it might not work as expected
+//# define KEY_UP 0x0077 //'w' on AZERTY keyboard
+# define KEY_UP 0x007a //'z' on AZERTY keyboard
+//# define KEY_LEFT 0x0061 //'a' on AZERTY
+# define KEY_LEFT 0x0071 //'q' on AZERTY
 # define KEY_RIGHT 0x0064
 # define KEY_DOWN 0x0073
 # define KEY_ESC 0xff1b
