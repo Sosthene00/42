@@ -52,7 +52,7 @@ typedef	struct		context
 
 ctx                 *init_ctx();
 
-void                init_mlx(ctx *context);
+void                init_win(ctx *context);
 
 int                 loop_hook(ctx *context);
 
@@ -68,7 +68,7 @@ int                 parse_map_file(char *map_file, ctx *context);
 
 void                print_error(int error_code);
 
-int                 get_key(int key, ctx *context);
+//int                 get_key(int key, ctx *context);
 
 void                exit_program(ctx *context, int error_code);
 
