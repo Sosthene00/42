@@ -21,12 +21,16 @@ void init_mlx(ctx *context)
 		exit(1);
 }
 
-ctx *init_ctx()
+ctx *init_ctx(char *filename)
 {
     ctx *context;
 
     if (!(context = (ctx *)malloc(sizeof(ctx))))
-		  return (NULL);
+		  exit_program(context, 9);
     bzero(context, sizeof(*context));
+    if (!(context->mlx_ptr = mlx_init()))
+      exit_program(context, 9);
+    if ((parse_map_file(filename, context)) == 2)
+      exit_program(context, 2);
     return (context);
 }

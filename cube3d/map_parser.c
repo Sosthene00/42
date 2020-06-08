@@ -23,7 +23,7 @@ int update_data(char *line, ctx *context)
         // Parse x and y value from file, return 0 if ok, 2 otherwise
         if (get_xy_value((line+2), context) == 0)
         {
-            init_mlx(context);
+            init_win(context);
             return (0);
         }
         else
