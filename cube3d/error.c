@@ -31,11 +31,13 @@ void     exit_program(ctx *context, int error_code)
 {
     if (error_code != 0)
         print_error(error_code);
-    //mlx_do_key_autorepeaton(context->mlx_ptr);
+    if (context == NULL)
+        exit(error_code);
     if (context->win_ptr != NULL)
     {
         mlx_clear_window(context->mlx_ptr, context->win_ptr);
-        mlx_destroy_window(context->mlx_ptr, context->win_ptr);    
+        mlx_destroy_window(context->mlx_ptr, context->win_ptr);
+        free(context);    
     }
     exit(error_code);
 }
