@@ -5,6 +5,8 @@ int is_in_screen_size(void *mlx_ptr, int x, int y)
   int *max_x;
   int *max_y;
 
+  if (mlx_ptr == NULL)
+    exit(1);
   if ((!(max_x = malloc(sizeof(*max_x)))) || (!(max_y = malloc(sizeof(*max_y)))))
     exit(1);
   mlx_get_screen_size(mlx_ptr, max_x, max_y);
