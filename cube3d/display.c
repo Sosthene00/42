@@ -1,5 +1,15 @@
 #include "./cube3d.h"
 
+void			put_pxl(ctx *context, int x, int y, unsigned int c)
+{
+	int		i;
+
+	i = (x * 4) + (y * context->s_line);
+	context->pxl[i] = c;
+	context->pxl[++i] = c >> 8;
+	context->pxl[++i] = c >> 16;
+}
+
 int pick_random()
 {
 	int i, n;
@@ -26,7 +36,7 @@ int print_whole_screen(unsigned int color, ctx* context)
 	{
 		while (++j < context->win_y)
 		{
-			mlx_pixel_put(context->mlx_ptr, context->win_ptr, i, j, color);
+			put_pxl(context, i, j, color);
 		}
 		j = -1;
 	}

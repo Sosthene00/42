@@ -19,5 +19,6 @@ int		loop_hook(ctx *context)
 	raycasting(e);
 	mlx_put_image_to_window(e->mlx.mlx, e->mlx.win, e->mlx.img, 0, 0);
 	return (0);*/
+	mlx_put_image_to_window(context->mlx_ptr, context->win_ptr, context->img, 0, 0);
     return (0);
 }
