@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 		exit(1);
 	}
 	context = init_ctx(argv[1]);
-	//mlx_do_key_autorepeatoff(context->mlx_ptr);
+	mlx_do_key_autorepeatoff(context->mlx_ptr);
 	mlx_loop_hook(context->mlx_ptr, loop_hook, context); // Define the function to call in the loop if no event
 	mlx_hook(context->win_ptr, KEY_PRESS, KEY_PRESS_MASK, key_press, context); // create a new hook for key press events
 	mlx_hook(context->win_ptr, KEY_RELEASE, KEY_RELEASE_MASK, key_release, context); // create a new hook for key press events
