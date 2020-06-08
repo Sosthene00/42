@@ -16,11 +16,17 @@ int is_in_screen_size(void *mlx_ptr, int x, int y)
     return (0);
 }
 
-void init_mlx(ctx *context)
+static void init_ply(ctx *context)
+{
+    context->player.move_up = 0;
+    context->player.move_down = 0;
+}
+
+void init_win(ctx *context)
 {
 	if (!(context->win_ptr = mlx_new_window(context->mlx_ptr, context->win_x, \
-                                          context->win_y, "Cub3d - level 1")))
-		exit(1);
+                                          context->win_y, "Cub3d - Knee deep in Hell")))
+		exit_program(context, 9);
 }
 
 ctx *init_ctx(char *filename)
@@ -34,5 +40,6 @@ ctx *init_ctx(char *filename)
       exit_program(context, 9);
     if ((parse_map_file(filename, context)) == 2)
       exit_program(context, 2);
+    init_ply(context);
     return (context);
 }

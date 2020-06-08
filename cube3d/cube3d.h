@@ -41,8 +41,31 @@
 
 # define FILE_EXT "cub"
 
+typedef struct		direction
+{
+	double			x;
+	double			y;
+}					dir;
+
+typedef struct		player
+{
+	dir	            pos;
+	dir	            dir;
+	dir	            plane;
+	double			speed_turn;
+	double			speed_move;
+	int				z;
+	char			is_jump;
+	char			move_left;
+	char			move_right;
+	char			move_up;
+	char			move_down;
+	char			move_jump;
+}					ply;
+
 typedef	struct		context
 {
+    ply             player;
     void            *mlx_ptr;
     void            *win_ptr;
     int             win_x;
@@ -50,7 +73,7 @@ typedef	struct		context
     unsigned int    color_floor;
 }					ctx;
 
-ctx                 *init_ctx();
+ctx                 *init_ctx(char *filename);
 
 void                init_win(ctx *context);
 
@@ -67,6 +90,12 @@ int                 check_file_extension(char *filename);
 int                 parse_map_file(char *map_file, ctx *context);
 
 void                print_error(int error_code);
+
+void                move_up(ctx *context);
+
+void                move_down(ctx *context);
+
+int                 pick_random();
 
 //int                 get_key(int key, ctx *context);
 

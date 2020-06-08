@@ -2,12 +2,10 @@
 
 int key_press(int key, ctx *context)
 {
-	unsigned int	color;
-
 	if (key == KEY_UP)
-        print_whole_screen(color=pick_random(), context);
+		context->player.move_up = 1;
 	if (key == KEY_DOWN)
-        print_whole_screen(color=0x000001, context);
+		context->player.move_down = 1;
 	if (key == KEY_ESC)
         exit_program(context, 0);
     return (0);
@@ -15,10 +13,10 @@ int key_press(int key, ctx *context)
 
 int	key_release(int key, ctx *context)
 {
-	unsigned int	color;
-
+	if (key == KEY_UP)
+		context->player.move_up = 0;
 	if (key == KEY_DOWN)
-        print_whole_screen(color=0xffffff, context);
+		context->player.move_down = 0;
 	return (0);
 }
 
