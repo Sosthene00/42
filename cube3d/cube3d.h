@@ -70,6 +70,11 @@ typedef	struct		context
     void            *win_ptr;
     int             win_x;
     int             win_y;
+	void			*img;
+	char			*pxl;
+	int				bpp;
+	int				s_line;
+	int				ed;
     unsigned int    color_floor;
 }					ctx;
 
@@ -96,6 +101,8 @@ void                move_up(ctx *context);
 void                move_down(ctx *context);
 
 int                 pick_random();
+
+void			    put_pxl(ctx *context, int x, int y, unsigned int c);
 
 //int                 get_key(int key, ctx *context);
 
