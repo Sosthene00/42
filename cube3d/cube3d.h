@@ -58,6 +58,8 @@ int                 loop_hook(ctx *context);
 
 int		            key_press(int key, ctx *context);
 
+int                 key_release(int key, ctx *context);
+
 int	                key_hook(int key, ctx *context);
 
 int                 check_file_extension(char *filename);
