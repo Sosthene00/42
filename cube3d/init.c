@@ -27,6 +27,11 @@ void init_win(ctx *context)
 	if (!(context->win_ptr = mlx_new_window(context->mlx_ptr, context->win_x, \
                                           context->win_y, "Cub3d - Knee deep in Hell")))
 		exit_program(context, 9);
+	context->bpp = 0;
+	context->s_line = 0;
+	context->img = mlx_new_image(context->mlx_ptr, context->win_x, context->win_y);
+	context->pxl = mlx_get_data_addr(context->img, &(context->bpp), &(context->s_line),
+			&(context->ed));
 }
 
 ctx *init_ctx(char *filename)
