@@ -7,7 +7,7 @@ unsigned int    convert_color(int r, int g, int b)
     if ((r < 0) || (r > 255) ||\
         (g < 0) || (g > 255) ||\
         (b < 0) || (b > 255))
-        return (pow(2, 32) - 1);
+        return (INT_MAX);
     color = (r << 16) + (g << 8) + b;
     return (color);
 }
@@ -41,7 +41,7 @@ int get_color(char *line, ctx *context)
         !(ft_isdigit(*val[0])) || !(ft_isdigit(*val[1])) || !(ft_isdigit(*val[2])))
         return (2);
     color = convert_color(ft_atoi(val[0]), ft_atoi(val[1]), ft_atoi(val[2]));
-    if (color == (pow(2, 32) - 1))
+    if (color == INT_MAX)
         return (2);
     if (identifier == 'C')
         context->color.color_sky = color;
