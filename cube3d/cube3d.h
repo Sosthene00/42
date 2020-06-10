@@ -88,6 +88,8 @@ typedef	struct		context
 	int				bpp;
 	int				s_line;
 	int				ed;
+	int				complete;
+	char			**map;
 }					ctx;
 
 ctx                 *init_ctx(char *filename);
@@ -104,7 +106,7 @@ int	                key_hook(int key, ctx *context);
 
 int                 check_file_extension(char *filename);
 
-int                 parse_map_file(char *map_file, ctx *context);
+int                 parse_file(char *map_file, ctx *context);
 
 void                print_error(int error_code);
 

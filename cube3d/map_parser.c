@@ -1,5 +1,13 @@
 # include "./cube3d.h"
 
+/*void    update_completion(ctx *context)
+{
+    if (context->complete == 0)
+        context->complete = 2;
+    else
+        context->complete = context->complete << 1;
+}*/
+
 unsigned int    convert_color(int r, int g, int b)
 {
     unsigned int color;
@@ -68,25 +76,50 @@ int update_data(char *line, ctx *context)
     return (2);
 }
 
+//get a texture for the walls, or sprite
+
+// parse the map itself
+char **get_map(char *buf)
+{
+    char **map;
+    char *trimmed;
+
+    trimmed = ft_strtrim(buf, "+");
+    map = ft_split(trimmed, '+');
+    return (map);
+}
+
 // parse the map file
-int parse_map_file(char *map_file, ctx *context)
+int parse_file(char *map_file, ctx *context)
 {
     int fd;
-    int ret;
+    //int i;
     char *line;
+    char *buf;
+    char *sep;
 
     if ((fd = open(map_file, O_RDONLY)) < 0)
         exit(1);
+    //i = 0;
+    sep = ft_strjoin("", "+");
+    if (!(buf = malloc(sizeof(*buf))))
+        return (2);
+    ft_bzero(buf, 1);
     while (get_next_line(fd, &line) > 0)
     {
-        if (ft_isalpha(line[0]))
+        if (context->complete < 3 && ft_isalpha(line[0]))
         {
-            ret = update_data(line, context);
-            if (ret == 2)
+            if (update_data(line, context) == 2)
                 break;
+            //update_completion(context);
+            context->complete++;
         }
-        else
-            continue;
+        else if (context->complete == 3)
+        {
+            buf = ft_strjoin(buf, line);
+            buf = ft_strjoin(buf, sep);
+        }
     }
-    return (ret);
+    context->map = get_map(buf);
+    return (0);
 }

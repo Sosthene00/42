@@ -44,7 +44,7 @@ ctx *init_ctx(char *filename)
     bzero(context, sizeof(*context));
     if (!(context->mlx_ptr = mlx_init()))
       exit_program(context, 9);
-    if ((parse_map_file(filename, context)) == 2)
+    if ((parse_file(filename, context)) == 2)
       exit_program(context, 2);
     init_ply(context);
     return (context);
