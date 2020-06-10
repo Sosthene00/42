@@ -1,13 +1,5 @@
 # include "./cube3d.h"
 
-/*void    update_completion(ctx *context)
-{
-    if (context->complete == 0)
-        context->complete = 2;
-    else
-        context->complete = context->complete << 1;
-}*/
-
 unsigned int    convert_color(int r, int g, int b)
 {
     unsigned int color;
@@ -108,7 +100,6 @@ int parse_file(char *map_file, ctx *context)
         {
             if (update_data(line, context) == 2)
                 break;
-            //update_completion(context);
             context->complete++;
         }
         else if (context->complete == 3)
