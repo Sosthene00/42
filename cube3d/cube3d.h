@@ -113,6 +113,8 @@ void                move_up(ctx *context);
 
 void                move_down(ctx *context);
 
+void                stop(ctx *context);
+
 int                 pick_random();
 
 void			    put_pxl(ctx *context, int x, int y, unsigned int c);
