@@ -19,6 +19,8 @@
 # include <time.h> // don't forget to delete later
 
 # define RESOLUTION "R "
+# define CEILING "C "
+# define FLOOR "F "
 
 // All the mapping has been done on my AZERTY Ubuntu laptop, it might not work as expected
 //# define KEY_UP 0x0077 //'w' on AZERTY keyboard
@@ -61,11 +63,23 @@ typedef struct		player
 	char			move_up;
 	char			move_down;
 	char			move_jump;
+	char			stop;
 }					ply;
+
+typedef struct      color
+{
+    unsigned int    color_N;
+    unsigned int    color_S;
+    unsigned int    color_E;
+    unsigned int    color_W;
+    unsigned int    color_sky;
+    unsigned int    color_floor;
+}                   clr;
 
 typedef	struct		context
 {
     ply             player;
+    clr             color;
     void            *mlx_ptr;
     void            *win_ptr;
     int             win_x;
@@ -75,7 +89,6 @@ typedef	struct		context
 	int				bpp;
 	int				s_line;
 	int				ed;
-    unsigned int    color_floor;
 }					ctx;
 
 ctx                 *init_ctx(char *filename);
