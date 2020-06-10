@@ -63,7 +63,6 @@ typedef struct		player
 	char			move_up;
 	char			move_down;
 	char			move_jump;
-	char			stop;
 }					ply;
 
 typedef struct      color

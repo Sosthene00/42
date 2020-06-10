@@ -20,7 +20,6 @@ static void init_ply(ctx *context)
 {
     context->player.move_up = 0;
     context->player.move_down = 0;
-    context->player.stop = 1;
 }
 
 void init_win(ctx *context)
