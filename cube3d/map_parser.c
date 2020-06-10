@@ -21,10 +21,8 @@ int get_xy_value(char *line, ctx *context)
         return (2);
     context->win_x = ft_atoi(val[0]);
     context->win_y = ft_atoi(val[1]);
-    if (is_in_screen_size(context->mlx_ptr, context->win_x, context->win_y) == 1)
-        return (0);
-    else
-        return (2);
+    adapt_screen_size(context);
+    return (0);
 }
 
 int get_color(char *line, ctx *context)
