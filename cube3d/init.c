@@ -38,14 +38,15 @@ void init_win(ctx *context)
 ctx *init_ctx(char *filename)
 {
     ctx *context;
+    int error_code;
 
     if (!(context = (ctx *)malloc(sizeof(ctx))))
 		  exit_program(context, 9);
     bzero(context, sizeof(*context));
     if (!(context->mlx_ptr = mlx_init()))
       exit_program(context, 9);
-    if ((parse_file(filename, context)) == 2)
-      exit_program(context, 2);
+    if ((error_code = parse_file(filename, context)) != 0)
+      exit_program(context, error_code);
     init_ply(context);
     return (context);
 }
