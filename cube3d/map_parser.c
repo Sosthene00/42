@@ -93,17 +93,14 @@ char **get_map(char *buf)
 int parse_file(char *map_file, ctx *context)
 {
     int fd;
-    //int i;
     char *line;
     char *buf;
     char *sep;
 
     if ((fd = open(map_file, O_RDONLY)) < 0)
         exit(1);
-    //i = 0;
-    sep = ft_strjoin("", "+");
-    if (!(buf = malloc(sizeof(*buf))))
-        return (2);
+    if (!(buf = malloc(sizeof(*buf))) || !(sep = ft_strjoin("", "+")))
+        return (9);
     ft_bzero(buf, 1);
     while (get_next_line(fd, &line) > 0)
     {
