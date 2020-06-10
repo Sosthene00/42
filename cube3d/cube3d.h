@@ -21,6 +21,7 @@
 # define RESOLUTION "R "
 # define CEILING "C "
 # define FLOOR "F "
+# define AUTHORIZED_MAP "012 NSEW"
 
 // All the mapping has been done on my AZERTY Ubuntu laptop, it might not work as expected
 //# define KEY_UP 0x0077 //'w' on AZERTY keyboard
@@ -43,17 +44,23 @@
 
 # define FILE_EXT "cub"
 
-typedef struct		direction
+typedef struct		int_xy
+{
+	int				x;
+	int				y;
+}					ixy;
+
+typedef struct		double_xy
 {
 	double			x;
 	double			y;
-}					dir;
+}					dxy;
 
 typedef struct		player
 {
-	dir	            pos;
-	dir	            dir;
-	dir	            plane;
+	dxy	            pos;
+	dxy	            dir;
+	dxy	            plane;
 	double			speed_turn;
 	double			speed_move;
 	int				z;
@@ -89,6 +96,8 @@ typedef	struct		context
 	int				s_line;
 	int				ed;
 	int				complete;
+	int				map_width;
+	int				map_height;
 	char			**map;
 }					ctx;
 
