@@ -124,6 +124,6 @@ void                exit_program(ctx *context, int error_code);
 
 int                 print_whole_screen(unsigned int color, ctx* context);
 
-int                 is_in_screen_size(void *mlx_ptr, int x, int y);
+void 				adapt_screen_size(ctx *context);
 
 #endif
