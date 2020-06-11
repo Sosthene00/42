@@ -1,18 +1,36 @@
 #include "cube3d.h"
 
 // check for invalid map
-int map_sanity(char **map)
+int sanity_check(char *line, int i, int map_height)
 {
-
+    while (*line && (*line == ' '))
+        line++;
+    if (*line != '1')
+        return (2);
+    while (*line)
+    {
+        if ((i == 0) || (map_height > 0))
+        {
+            if (!((*line == '1') || (*line == ' ')))
+                return (2);
+        }
+        else
+        {
+            if (!(ft_strchr(PLAYER_START, *line) || \
+                ft_strchr(MAP_CASE, *line)))
+                return (2);
+        }
+        line++;
+    }
+    if (*(line - 1) != '1')
+        return (2);
+    return (0);
 }
 // extract the necessary information
 void update_player(char c, int i, int j, ctx *context)
 {
-    if (c == 'N' || c == 'E' || c == 'W' || c == 'S')
-    {
-        context->player.pos.x = j;
-        context->player.pos.y = i;
-    }
+    context->player.pos.x = j;
+    context->player.pos.y = i;
     if (c == 'N')
     {
         context->player.dir.x = 0;
@@ -43,13 +61,12 @@ int    read_map(ctx *context)
     i = j = 0;
     while (context->map[i])
     {
+        if (sanity_check(context->map[i], i, context->map_height) == 2)
+            return (2);
         while (context->map[i][j])
         {
-            if ((i == 0) && ((context->map[i][j] == 1 || (context->map[i][j] == ' '))))
-                return (2);
-            else if (!(ft_strchr(AUTHORIZED_MAP, context->map[i][j])))
-                return (2);
-            update_player(context->map[i][j], context);
+            if (ft_strchr(PLAYER_START, context->map[i][j]))
+                update_player(context->map[i][j], i, j, context);
             j++;
         }
         if (j > context->map_width)
@@ -58,5 +75,7 @@ int    read_map(ctx *context)
         i++;
     }
     context->map_height = i;
+    if (sanity_check(context->map[i-1], i, context->map_height) == 2)
+        return (2);
     return (0);
 }

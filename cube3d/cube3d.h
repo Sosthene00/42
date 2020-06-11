@@ -21,7 +21,8 @@
 # define RESOLUTION "R "
 # define CEILING "C "
 # define FLOOR "F "
-# define AUTHORIZED_MAP "012 NSEW"
+# define PLAYER_START "NSEW"
+# define MAP_CASE "012 "
 
 // All the mapping has been done on my AZERTY Ubuntu laptop, it might not work as expected
 //# define KEY_UP 0x0077 //'w' on AZERTY keyboard
@@ -116,6 +117,8 @@ int	                key_hook(int key, ctx *context);
 int                 check_file_extension(char *filename);
 
 int                 parse_file(char *map_file, ctx *context);
+
+int					read_map(ctx *context);
 
 void                print_error(int error_code);
 

@@ -102,12 +102,14 @@ int parse_file(char *map_file, ctx *context)
                 break;
             context->complete++;
         }
-        else if (context->complete == 3)
+        else if (context->complete == 3 && line)
         {
             buf = ft_strjoin(buf, line);
             buf = ft_strjoin(buf, sep);
         }
     }
     context->map = get_map(buf);
+    if (read_map(context) == 2)
+        return (2);
     return (0);
 }
