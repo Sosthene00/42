@@ -22,7 +22,7 @@
 # define CEILING "C "
 # define FLOOR "F "
 # define PLAYER_START "NSEW"
-# define MAP_CASE "012 "
+# define MAP_CASE "012"
 
 // All the mapping has been done on my AZERTY Ubuntu laptop, it might not work as expected
 //# define KEY_UP 0x0077 //'w' on AZERTY keyboard
