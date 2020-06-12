@@ -21,7 +21,6 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # define BUFFER_SIZE 4096 
-# define OPEN_MAX 256 
 
 int					get_next_line(int fd, char **line);
 

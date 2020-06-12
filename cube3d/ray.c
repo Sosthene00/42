@@ -1,6 +1,6 @@
 #include "cube3d.h"
 
-static void		ray_draw(ctx *context, int x)
+/*static void		ray_draw(ctx *context, int x)
 {
 	int		height;
 	int		start;
@@ -73,7 +73,7 @@ static void		ray_init(ctx *context, int x)
 {
 	context->ray.map.x = (int)context->ray.pos.x;
 	context->ray.map.y = (int)context->ray.pos.y;
-	context->ray.cam = 2 * x / (double)context->map_width - 1;
+	context->ray.cam = 2 * x / (double)context->win_x - 1;
 	context->ray.dir.x = context->player.dir.x + context->player.plane.x * context->ray.cam;
 	context->ray.dir.y = context->player.dir.y + context->player.plane.y * context->ray.cam;
 	context->ray.delta.x = sqrt(1 + (context->ray.dir.y * context->ray.dir.y) /
@@ -83,7 +83,7 @@ static void		ray_init(ctx *context, int x)
 	context->ray.hit = 0;
 	context->ray.dist = -1;
 	context->ray.hit_side = -1;
-}
+}*/
 
 void			raycasting(ctx *context)
 {
@@ -94,9 +94,10 @@ void			raycasting(ctx *context)
 	context->ray.pos.y = context->player.pos.y;
 	while (++x < context->map_width)
 	{
-		ray_init(context, x);
-		ray_cal_step_side(context);
-		ray_cal_dist(context);
-		ray_draw(context, x);
+		draw_line(context, x, context->win_y/2, context->win_y/2);
+		//ray_init(context, x);
+		//ray_cal_step_side(context);
+		//ray_cal_dist(context);
+		//ray_draw(context, x);
 	}
 }

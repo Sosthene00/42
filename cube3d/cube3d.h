@@ -14,7 +14,7 @@
 # define CUBE3D_H
 
 # include "./libft/libft.h"
-# include "./mlx.h"
+# include "./mlx/mlx.h"
 # include <math.h>
 # include <time.h> // don't forget to delete later
 
@@ -150,6 +150,10 @@ void			    put_pxl(ctx *context, int x, int y, unsigned int c);
 //int                 get_key(int key, ctx *context);
 
 void                exit_program(ctx *context, int error_code);
+
+void				raycasting(ctx *context);
+
+void				draw_line(ctx *context, int x, int wall_top, int wall_bottom);
 
 int                 print_whole_screen(unsigned int color, ctx* context);
 
