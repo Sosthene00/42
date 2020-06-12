@@ -73,6 +73,20 @@ typedef struct		player
 	char			move_jump;
 }					ply;
 
+typedef struct		s_ray
+{
+	dxy				pos;
+	dxy				dir;
+	ixy				map;
+	dxy				side;
+	dxy				delta;
+	ixy				step;
+	double			dist;
+	double			cam;
+	int				hit;
+	int				hit_side;
+}					ray;
+
 typedef struct      color
 {
     unsigned int    color_N;
@@ -87,6 +101,7 @@ typedef	struct		context
 {
     ply             player;
     clr             color;
+	ray				ray;
     void            *mlx_ptr;
     void            *win_ptr;
     int             win_x;
