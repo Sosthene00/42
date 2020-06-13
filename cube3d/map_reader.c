@@ -75,7 +75,8 @@ int    read_map(ctx *context)
         i++;
     }
     context->map_height = i;
-    if (sanity_check(context->map[i-1], i, context->map_height) == 2)
+    if (sanity_check(context->map[i-1], i, context->map_height) == 2 || \
+            context->player.pos.x == 0)
         return (2);
     return (0);
 }
