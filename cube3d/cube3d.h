@@ -14,7 +14,7 @@
 # define CUBE3D_H
 
 # include "./libft/libft.h"
-# include "./mlx/mlx.h"
+# include "./mlx.h"
 # include <math.h>
 # include <time.h> // don't forget to delete later
 

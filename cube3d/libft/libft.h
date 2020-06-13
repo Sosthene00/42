@@ -22,6 +22,10 @@
 # include <fcntl.h>
 # define BUFFER_SIZE 4096 
 
+#ifndef OPEN_MAX
+# define OPEN_MAX 1024
+#endif
+
 int					get_next_line(int fd, char **line);
 
 size_t				ft_strlen_split(char const *str, char c);
