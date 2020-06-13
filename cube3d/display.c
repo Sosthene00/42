@@ -49,9 +49,9 @@ void    draw_line(ctx *context, int x, int wall_top, int wall_bottom)
 
 	i = -1;
 	while (++i < wall_top + context->player.z)
-		put_pxl(context, x, i, context->color.color_sky);
+		put_pxl(context, x, i, context->color.sky);
 	while (++i < wall_bottom + context->player.z)
 		put_pxl(context, x, i, 0x010101);
 	while (++i < context->win_y)
-		put_pxl(context, x, i, context->color.color_floor);
+		put_pxl(context, x, i, context->color.floor);
 }

@@ -42,9 +42,9 @@ int get_color(char *line, ctx *context)
     if (color == INT_MAX)
         return (2);
     if (identifier == 'C')
-        context->color.color_sky = color;
+        context->color.sky = color;
     else if (identifier == 'F')
-        context->color.color_floor = color;
+        context->color.floor = color;
     return (0);
 }
 

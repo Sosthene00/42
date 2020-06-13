@@ -89,12 +89,12 @@ typedef struct		s_ray
 
 typedef struct      color
 {
-    unsigned int    color_N;
-    unsigned int    color_S;
-    unsigned int    color_E;
-    unsigned int    color_W;
-    unsigned int    color_sky;
-    unsigned int    color_floor;
+    unsigned int    N;
+    unsigned int    S;
+    unsigned int    E;
+    unsigned int    W;
+    unsigned int    sky;
+    unsigned int    floor;
 }                   clr;
 
 typedef	struct		context
