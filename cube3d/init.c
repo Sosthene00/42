@@ -21,6 +21,9 @@ static void init_ply(ctx *context)
 {
     context->player.move_up = 0;
     context->player.move_down = 0;
+    context->player.speed_move = 0.5;
+    context->player.plane.x = 0;
+    context->player.plane.y = 0.66;
 }
 
 void init_win(ctx *context)
