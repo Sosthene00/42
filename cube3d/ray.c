@@ -92,7 +92,7 @@ void			raycasting(ctx *context)
 	x = -1;
 	context->ray.pos.x = context->player.pos.x;
 	context->ray.pos.y = context->player.pos.y;
-	while (++x < context->map_width)
+	while (++x < context->win_y)
 	{
 		draw_line(context, x, context->win_y/2, context->win_y/2);
 		//ray_init(context, x);
