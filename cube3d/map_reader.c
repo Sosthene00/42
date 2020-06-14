@@ -27,56 +27,56 @@ int sanity_check(char *line, int i, int map_height)
     return (0);
 }
 // extract the necessary information
-void update_player(char c, int i, int j, ctx *context)
+void update_player(char c, int i, int j, ctx *c)
 {
-    context->player.pos.x = j;
-    context->player.pos.y = i;
+    c->player.pos.x = j;
+    c->player.pos.y = i;
     if (c == 'N')
     {
-        context->player.dir.x = 0;
-        context->player.dir.y = -1;
+        c->player.dir.x = 0;
+        c->player.dir.y = -1;
     }
     else if (c == 'S')
     {
-        context->player.dir.x = 0;
-        context->player.dir.y = 1;
+        c->player.dir.x = 0;
+        c->player.dir.y = 1;
     } 
     else if (c == 'W')
     {
-        context->player.dir.x = -1;
-        context->player.dir.y = 0;
+        c->player.dir.x = -1;
+        c->player.dir.y = 0;
     } 
     else if (c == 'E')
     {
-        context->player.dir.x = 1;
-        context->player.dir.y = 0;
+        c->player.dir.x = 1;
+        c->player.dir.y = 0;
     } 
 }
 
-int    read_map(ctx *context)
+int    read_map(ctx *c)
 {
     int i;
     int j;
 
     i = j = 0;
-    while (context->map[i])
+    while (c->map[i])
     {
-        if (sanity_check(context->map[i], i, context->map_height) == 2)
+        if (sanity_check(c->map[i], i, c->map_height) == 2)
             return (2);
-        while (context->map[i][j])
+        while (c->map[i][j])
         {
-            if (ft_strchr(PLAYER_START, context->map[i][j]))
-                update_player(context->map[i][j], i, j, context);
+            if (ft_strchr(PLAYER_START, c->map[i][j]))
+                update_player(c->map[i][j], i, j, c);
             j++;
         }
-        if (j > context->map_width)
-            context->map_width = j;
+        if (j > c->map_width)
+            c->map_width = j;
         j = 0;
         i++;
     }
-    context->map_height = i;
-    if (sanity_check(context->map[i-1], i, context->map_height) == 2 || \
-            context->player.pos.x == 0)
+    c->map_height = i;
+    if (sanity_check(c->map[i-1], i, c->map_height) == 2 || \
+            c->player.pos.x == 0)
         return (2);
     return (0);
 }

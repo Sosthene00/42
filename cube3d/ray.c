@@ -1,104 +1,108 @@
 #include "cube3d.h"
 
-static void		ray_draw(ctx *context, int x)
+static void		ray_draw(ctx *c, int x)
 {
 	int		height;
 	int		wall_top;
 	int		wall_bottom;
 
-	height = (int)(context->win_y / context->ray.dist);
-	wall_top = -height / 2 + context->win_y / 2;
+	height = (int)(c->win_y / c->ray.dist);
+	wall_top = -height / 2 + c->win_y / 2;
 	if (wall_top < 0)
 		wall_top = 0;
-	wall_bottom = height / 2 + context->win_y / 2;
-	if (wall_bottom >= context->win_y)
-		wall_bottom = context->win_y - 1;
-	draw_line(context, x, wall_top, wall_bottom);
+	wall_bottom = height / 2 + c->win_y / 2;
+	if (wall_bottom >= c->win_y)
+		wall_bottom = c->win_y - 1;
+	draw_line(c, x, wall_top, wall_bottom);
 }
 
-static void		ray_cal_dist(ctx *context)
+static void		ray_cal_dist(ctx *c)
 {
-	while (context->ray.hit == 0)
+	while (c->ray.hit == 0)
 	{
-		if (context->ray.side.x < context->ray.side.y)
+		if (c->ray.side.x < c->ray.side.y)
 		{
-			context->ray.side.x += context->ray.delta.x;
-			context->ray.map.x += context->ray.step.x;
-			context->ray.hit_side = 0;
+			c->ray.side.x += c->ray.delta.x;
+			c->ray.map.x += c->ray.step.x;
+			c->ray.hit_side = 0;
 		}
 		else
 		{
-			context->ray.side.y += context->ray.delta.y;
-			context->ray.map.y += context->ray.step.y;
-			context->ray.hit_side = 1;
+			c->ray.side.y += c->ray.delta.y;
+			c->ray.map.y += c->ray.step.y;
+			c->ray.hit_side = 1;
 		}
-		if (context->map[context->ray.map.x][context->ray.map.y] != '0')
+		if (c->map[c->ray.map.x][c->ray.map.y] > '0')
 		{
-			context->ray.hit = 1;
-			if (context->ray.hit_side == 0)
-				context->ray.dist = (context->ray.map.x - context->ray.pos.x + (1 - context->ray.step.x) / 2) / context->ray.dir.x;
+			c->ray.hit = 1;
+			if (c->ray.hit_side == 0)
+				c->ray.dist = (c->ray.map.x - c->ray.pos.x + (1 - c->ray.step.x) / 2) / c->ray.dir.x;
 			else
-				context->ray.dist = (context->ray.map.y - context->ray.pos.y + (1 - context->ray.step.y) / 2) / context->ray.dir.y;
+				c->ray.dist = (c->ray.map.y - c->ray.pos.y + (1 - c->ray.step.y) / 2) / c->ray.dir.y;
 		}
 	}
 }
 
-static void		ray_cal_step_side(ctx *context)
+static void		ray_cal_step_side(ctx *c)
 {
-	if (context->ray.dir.x < 0)
+	if (c->ray.dir.x < 0)
 	{
-		context->ray.step.x = -1;
-		context->ray.side.x = (context->ray.pos.x - context->ray.map.x) * context->ray.delta.x;
+		c->ray.step.x = -1;
+		c->ray.side.x = (c->ray.pos.x - c->ray.map.x) * c->ray.delta.x;
 	}
 	else
 	{
-		context->ray.step.x = 1;
-		context->ray.side.x = (context->ray.map.x + 1 - context->ray.pos.x) * context->ray.delta.x;
+		c->ray.step.x = 1;
+		c->ray.side.x = (c->ray.map.x + 1 - c->ray.pos.x) * c->ray.delta.x;
 	}
-	if (context->ray.dir.y < 0)
+	if (c->ray.dir.y < 0)
 	{
-		context->ray.step.y = -1;
-		context->ray.side.y = (context->ray.pos.y - context->ray.map.y) * context->ray.delta.y;
+		c->ray.step.y = -1;
+		c->ray.side.y = (c->ray.pos.y - c->ray.map.y) * c->ray.delta.y;
 	}
 	else
 	{
-		context->ray.step.y = 1;
-		context->ray.side.y = (context->ray.map.y + 1 - context->ray.pos.y) * context->ray.delta.y;
+		c->ray.step.y = 1;
+		c->ray.side.y = (c->ray.map.y + 1 - c->ray.pos.y) * c->ray.delta.y;
 	}
 }
 
-static void		ray_init(ctx *context, int x)
+static void		ray_init(ctx *c, int x)
 {
-	context->ray.map.x = (int)context->ray.pos.x;
-	context->ray.map.y = (int)context->ray.pos.y;
-	context->ray.cam = 2 * x / (double)context->win_x - 1;
-	context->ray.dir.x = context->player.dir.x + context->player.plane.x * context->ray.cam;
-	context->ray.dir.y = context->player.dir.y + context->player.plane.y * context->ray.cam;
-	if (context->ray.dir.y == 0)
-		context->ray.delta.x = 0;
+	c->ray.map.x = (int)c->ray.pos.x;
+	c->ray.map.y = (int)c->ray.pos.y;
+	c->ray.cam = 2 * x / (double)c->win_y - 1; // if x == 0, then cam == -1. x == max, cam == 1
+	c->ray.dir.x = c->player.dir.x + c->player.plane.x * c->ray.cam;
+	c->ray.dir.y = c->player.dir.y + c->player.plane.y * c->ray.cam;
+	if (c->ray.dir.y == 0)
+		c->ray.delta.x = 0;
 	else
-		context->ray.delta.x = (context->ray.dir.x == 0) ? 1 : abs(1 / context->ray.dir.x);
-	if (context->ray.dir.x == 0)
-		context->ray.delta.y = 0;
+		c->ray.delta.x = (c->ray.dir.x == 0) ? 1 : abs(1 / c->ray.dir.x);
+	if (c->ray.dir.x == 0)
+		c->ray.delta.y = 0;
 	else
-		context->ray.delta.y = (context->ray.dir.y == 0) ? 1 : abs(1 / context->ray.dir.y);
-	context->ray.hit = 0;
-	context->ray.dist = -1;
-	context->ray.hit_side = 0;
+		c->ray.delta.y = (c->ray.dir.y == 0) ? 1 : abs(1 / c->ray.dir.y);
+	/*c->ray.delta.x = sqrt(1 + (pow(c->ray.dir.y, 2) / (pow(c->ray.dir.x, 2))));
+	c->ray.delta.y = sqrt(1 + (pow(c->ray.dir.x, 2) / (pow(c->ray.dir.y, 2))));*/
+	/*c->ray.delta.x = (c->ray.dir.y == 0) ? 0 : ((c->ray.dir.x == 0) ? 1 : abs(1 / c->ray.dir.x));
+	c->ray.delta.y = (c->ray.dir.x == 0) ? 0 : ((c->ray.dir.y == 0) ? 1 : abs(1 / c->ray.dir.y));*/
+	c->ray.hit = 0;
+	c->ray.dist = -1;
+	c->ray.hit_side = 0;
 }
 
-void			raycasting(ctx *context)
+void			raycasting(ctx *c)
 {
 	int		x;
 
 	x = -1;
-	context->ray.pos.x = context->player.pos.x;
-	context->ray.pos.y = context->player.pos.y;
-	while (++x < context->win_y)
+	c->ray.pos.x = c->player.pos.x;
+	c->ray.pos.y = c->player.pos.y;
+	while (++x < c->win_y)
 	{
-		ray_init(context, x);
-		ray_cal_step_side(context);
-		ray_cal_dist(context);
-		ray_draw(context, x);
+		ray_init(c, x);
+		ray_cal_step_side(c);
+		ray_cal_dist(c);
+		ray_draw(c, x);
 	}
 }

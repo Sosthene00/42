@@ -27,17 +27,18 @@ int check_file_extension(char *filename)
     return (1);
 }
 
-void     exit_program(ctx *context, int error_code)
+void     exit_program(ctx *c, int error_code)
 {
     if (error_code != 0)
         print_error(error_code);
-    if (context == NULL)
+    if (c == NULL)
         exit(error_code);
-    if (context->win_ptr != NULL)
+    mlx_do_key_autorepeaton(c->mlx_ptr);
+    if (c->win_ptr != NULL)
     {
-        mlx_clear_window(context->mlx_ptr, context->win_ptr);
-        mlx_destroy_window(context->mlx_ptr, context->win_ptr);
-        free(context);    
+        mlx_clear_window(c->mlx_ptr, c->win_ptr);
+        mlx_destroy_window(c->mlx_ptr, c->win_ptr);
+        free(c);    
     }
     exit(error_code);
 }

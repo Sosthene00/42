@@ -1,14 +1,17 @@
 #include "cube3d.h"
 
-int		loop_hook(ctx *context)
+int		loop_hook(ctx *c)
 {
-	if (context->player.move_up)
-		move_up(context);
-	if (context->player.move_down)
-		move_down(context);
-	if (!(context->player.move_up) && !(context->player.move_down))
-		stop(context);
-	raycasting(context);
-	mlx_put_image_to_window(context->mlx_ptr, context->win_ptr, context->img, 0, 0);
+	if (c->player.move_up)
+		move_up(c);
+	if (c->player.move_down)
+		move_down(c);
+	if (c->player.move_right)
+		move_right(c);
+	if (c->player.move_left)
+		move_left(c);
+	raycasting(c);
+	mlx_put_image_to_window(c->mlx_ptr, c->win_ptr, c->img, 0, 0);
+	mlx_do_sync(c->mlx_ptr);
     return (0);
 }

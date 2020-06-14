@@ -1,13 +1,13 @@
 #include "./cube3d.h"
 
-void			put_pxl(ctx *context, int x, int y, unsigned int c)
+void			put_pxl(ctx *c, int x, int y, unsigned int c)
 {
 	int		i;
 
-	i = (x * 4) + (y * context->s_line);
-	context->pxl[i] = c;
-	context->pxl[++i] = c >> 8;
-	context->pxl[++i] = c >> 16;
+	i = (x * 4) + (y * c->size_line);
+	c->pxl[i] = c;
+	c->pxl[++i] = c >> 8;
+	c->pxl[++i] = c >> 16;
 }
 
 int pick_random()
@@ -23,7 +23,7 @@ int pick_random()
     return n;
 }
 
-int print_whole_screen(unsigned int color, ctx* context)
+int print_whole_screen(unsigned int color, ctx* c)
 {
     int i;
     int j;
@@ -32,26 +32,26 @@ int print_whole_screen(unsigned int color, ctx* context)
     j = -1;
 	if (color == 0)
 		color = pick_random();
-	while (++i < context->win_x)
+	while (++i < c->win_x)
 	{
-		while (++j < context->win_y)
+		while (++j < c->win_y)
 		{
-			put_pxl(context, i, j, color);
+			put_pxl(c, i, j, color);
 		}
 		j = -1;
 	}
     return (0);
 }
 
-void    draw_line(ctx *context, int x, int wall_top, int wall_bottom)
+void    draw_line(ctx *c, int x, int wall_top, int wall_bottom)
 {
 	int i;
 
 	i = -1;
-	while (++i < wall_top + context->player.z)
-		put_pxl(context, x, i, context->color.sky);
-	while (++i < wall_bottom + context->player.z)
-		put_pxl(context, x, i, 0x010101);
-	while (++i < context->win_y)
-		put_pxl(context, x, i, context->color.floor);
+	while (++i < wall_top + c->player.z)
+		put_pxl(c, x, i, c->color.sky);
+	while (++i < wall_bottom + c->player.z)
+		put_pxl(c, x, i, 0x010101);
+	while (++i < c->win_y)
+		put_pxl(c, x, i, c->color.floor);
 }

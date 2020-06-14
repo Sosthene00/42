@@ -29,7 +29,7 @@
 # define KEY_UP 0x007a //'z' on AZERTY keyboard
 //# define KEY_LEFT 0x0061 //'a' on AZERTY
 # define KEY_LEFT 0x0071 //'q' on AZERTY
-# define KEY_RIGHT 0x0064
+# define KEY_RIGHT 0x0064 // 'd' on AZERTY
 # define KEY_DOWN 0x0073
 # define KEY_ESC 0xff1b
 
@@ -65,12 +65,10 @@ typedef struct		player
 	double			speed_turn;
 	double			speed_move;
 	int				z;
-	char			is_jump;
 	char			move_left;
 	char			move_right;
 	char			move_up;
 	char			move_down;
-	char			move_jump;
 }					ply;
 
 typedef struct		s_ray
@@ -97,7 +95,7 @@ typedef struct      color
     unsigned int    floor;
 }                   clr;
 
-typedef	struct		context
+typedef	struct		c
 {
     ply             player;
     clr             color;
@@ -108,8 +106,8 @@ typedef	struct		context
     int             win_y;
 	void			*img;
 	char			*pxl;
-	int				bpp;
-	int				s_line;
+	int				bits_per_pixel;
+	int				size_line;
 	int				ed;
 	int				complete;
 	int				map_width;
@@ -119,44 +117,46 @@ typedef	struct		context
 
 ctx                 *init_ctx(char *filename);
 
-void                init_win(ctx *context);
+void                init_win(ctx *c);
 
-int                 loop_hook(ctx *context);
+int                 loop_hook(ctx *c);
 
-int		            key_press(int key, ctx *context);
+int		            key_press(int key, ctx *c);
 
-int                 key_release(int key, ctx *context);
+int                 key_release(int key, ctx *c);
 
-int	                key_hook(int key, ctx *context);
+int	                key_hook(int key, ctx *c);
 
 int                 check_file_extension(char *filename);
 
-int                 parse_file(char *map_file, ctx *context);
+int                 parse_file(char *map_file, ctx *c);
 
-int					read_map(ctx *context);
+int					read_map(ctx *c);
 
 void                print_error(int error_code);
 
-void                move_up(ctx *context);
+void                move_up(ctx *c);
 
-void                move_down(ctx *context);
+void                move_down(ctx *c);
 
-void                stop(ctx *context);
+void				move_right(ctx *c);
+
+void				move_left(ctx *c);
 
 int                 pick_random();
 
-void			    put_pxl(ctx *context, int x, int y, unsigned int c);
+void			    put_pxl(ctx *c, int x, int y, unsigned int c);
 
-//int                 get_key(int key, ctx *context);
+//int                 get_key(int key, ctx *c);
 
-void                exit_program(ctx *context, int error_code);
+void                exit_program(ctx *c, int error_code);
 
-void				raycasting(ctx *context);
+void				raycasting(ctx *c);
 
-void				draw_line(ctx *context, int x, int wall_top, int wall_bottom);
+void				draw_line(ctx *c, int x, int wall_top, int wall_bottom);
 
-int                 print_whole_screen(unsigned int color, ctx* context);
+int                 print_whole_screen(unsigned int color, ctx* c);
 
-void 				adapt_screen_size(ctx *context);
+void 				adapt_screen_size(ctx *c);
 
 #endif

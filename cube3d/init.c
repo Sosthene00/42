@@ -1,55 +1,56 @@
 #include "./cube3d.h"
 
-void adapt_screen_size(ctx *context)
+void adapt_screen_size(ctx *c)
 {
   int *max_x;
   int *max_y;
 
-  if (context->mlx_ptr == NULL)
+  if (c->mlx_ptr == NULL)
     exit(1);
   if ((!(max_x = malloc(sizeof(*max_x)))) || (!(max_y = malloc(sizeof(*max_y)))))
     exit(1);
-  mlx_get_screen_size(context->mlx_ptr, max_x, max_y);
-  if ((context->win_x >= *max_x) || (context->win_y >= *max_y))
+  mlx_get_screen_size(c->mlx_ptr, max_x, max_y);
+  if ((c->win_x >= *max_x) || (c->win_y >= *max_y))
   {
-    context->win_x = *max_x;
-    context->win_y = *max_y;
+    c->win_x = *max_x;
+    c->win_y = *max_y;
   }
 }
 
-static void init_ply(ctx *context)
+static void init_ply(ctx *c)
 {
-    context->player.move_up = 0;
-    context->player.move_down = 0;
-    context->player.speed_move = 0.5;
-    context->player.plane.x = 0;
-    context->player.plane.y = 0.66;
+    c->player.move_up = 0;
+    c->player.move_down = 0;
+    c->player.speed_move = 0.5;
+    c->player.speed_turn = 0.5;
+    c->player.plane.x = 0;
+    c->player.plane.y = 0.66;
 }
 
-void init_win(ctx *context)
+void init_win(ctx *c)
 {
-	if (!(context->win_ptr = mlx_new_window(context->mlx_ptr, context->win_x, \
-                                          context->win_y, "Cub3d - Knee deep in Hell")))
-		exit_program(context, 9);
-	context->bpp = 0;
-	context->s_line = 0;
-	context->img = mlx_new_image(context->mlx_ptr, context->win_x, context->win_y);
-	context->pxl = mlx_get_data_addr(context->img, &(context->bpp), &(context->s_line),
-			&(context->ed));
+	if (!(c->win_ptr = mlx_new_window(c->mlx_ptr, c->win_x, \
+                                          c->win_y, "Cub3d - Knee deep in Hell")))
+		exit_program(c, 9);
+	c->bits_per_pixel = 0;
+	c->size_line = 0;
+	c->img = mlx_new_image(c->mlx_ptr, c->win_x, c->win_y);
+	c->pxl = mlx_get_data_addr(c->img, &(c->bits_per_pixel), &(c->size_line),
+			&(c->ed));
 }
 
 ctx *init_ctx(char *filename)
 {
-    ctx *context;
+    ctx *c;
     int error_code;
 
-    if (!(context = (ctx *)malloc(sizeof(ctx))))
-		  exit_program(context, 9);
-    bzero(context, sizeof(*context));
-    if (!(context->mlx_ptr = mlx_init()))
-      exit_program(context, 9);
-    if ((error_code = parse_file(filename, context)) != 0)
-      exit_program(context, error_code);
-    init_ply(context);
-    return (context);
+    if (!(c = (ctx *)malloc(sizeof(ctx))))
+		  exit_program(c, 9);
+    bzero(c, sizeof(*c));
+    if (!(c->mlx_ptr = mlx_init()))
+      exit_program(c, 9);
+    if ((error_code = parse_file(filename, c)) != 0)
+      exit_program(c, error_code);
+    init_ply(c);
+    return (c);
 }
