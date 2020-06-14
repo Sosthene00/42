@@ -27,30 +27,33 @@ int sanity_check(char *line, int i, int map_height)
     return (0);
 }
 // extract the necessary information
-void update_player(char c, int i, int j, ctx *c)
+void update_player(char dir, int i, int j, ctx *c)
 {
-    c->player.pos.x = j;
-    c->player.pos.y = i;
-    if (c == 'N')
-    {
-        c->player.dir.x = 0;
-        c->player.dir.y = -1;
-    }
-    else if (c == 'S')
-    {
-        c->player.dir.x = 0;
-        c->player.dir.y = 1;
-    } 
-    else if (c == 'W')
+    if ((c->player.pos.x + c->player.pos.y) > 0)
+        exit_program(c, 2);
+    c->player.pos.x = i;
+    c->player.pos.y = j;
+    if (dir == 'N')
     {
         c->player.dir.x = -1;
         c->player.dir.y = 0;
-    } 
-    else if (c == 'E')
+    }
+    else if (dir == 'S')
     {
         c->player.dir.x = 1;
         c->player.dir.y = 0;
     } 
+    else if (dir == 'W')
+    {
+        c->player.dir.x = 0;
+        c->player.dir.y = -1;
+    } 
+    else if (dir == 'E')
+    {
+        c->player.dir.x = 0;
+        c->player.dir.y = 1;
+    }
+    c->map[i][j] = '0'; 
 }
 
 int    read_map(ctx *c)
