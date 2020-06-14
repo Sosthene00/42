@@ -145,7 +145,7 @@ void				move_left(ctx *c);
 
 int                 pick_random();
 
-void			    put_pxl(ctx *c, int x, int y, unsigned int c);
+void			    put_pxl(ctx *c, int x, int y, unsigned int color);
 
 //int                 get_key(int key, ctx *c);
 

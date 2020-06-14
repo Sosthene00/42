@@ -1,13 +1,13 @@
 #include "./cube3d.h"
 
-void			put_pxl(ctx *c, int x, int y, unsigned int c)
+void			put_pxl(ctx *c, int x, int y, unsigned int color)
 {
 	int		i;
 
 	i = (x * 4) + (y * c->size_line);
-	c->pxl[i] = c;
-	c->pxl[++i] = c >> 8;
-	c->pxl[++i] = c >> 16;
+	c->pxl[i] = color;
+	c->pxl[++i] = color >> 8;
+	c->pxl[++i] = color >> 16;
 }
 
 int pick_random()
