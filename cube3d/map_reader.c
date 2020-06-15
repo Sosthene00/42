@@ -36,22 +36,22 @@ void update_player(char dir, int i, int j, ctx *c)
     if (dir == 'N')
     {
         c->player.dir.x = -1;
-        c->player.dir.y = 0;
+        c->player.plane.y = -0.66;
     }
     else if (dir == 'S')
     {
         c->player.dir.x = 1;
-        c->player.dir.y = 0;
+        c->player.plane.y = 0.66;
     } 
     else if (dir == 'W')
     {
-        c->player.dir.x = 0;
         c->player.dir.y = -1;
+        c->player.plane.x = -0.66;
     } 
     else if (dir == 'E')
     {
-        c->player.dir.x = 0;
         c->player.dir.y = 1;
+        c->player.plane.x = 0.66;
     }
     c->map[i][j] = '0'; 
 }

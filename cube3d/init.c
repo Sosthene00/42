@@ -19,12 +19,8 @@ void adapt_screen_size(ctx *c)
 
 static void init_ply(ctx *c)
 {
-    c->player.move_up = 0;
-    c->player.move_down = 0;
     c->player.speed_move = 0.05;
     c->player.speed_turn = 0.05;
-    c->player.plane.x = 0;
-    c->player.plane.y = 0.66;
 }
 
 void init_win(ctx *c)
