@@ -26,14 +26,14 @@ void	move_right(ctx *c)
 
 	old.x = c->player.dir.x;
 	c->player.dir.x = c->player.dir.x * cos(-c->player.speed_turn) -
-		c->player.dir.y * sin(-c->player.speed_turn);
-	c->player.dir.y = old.x * sin(-c->player.speed_turn) + c->player.dir.y *
-		cos(-c->player.speed_turn);
+		c->player.dir.y * sin(-(c->player.speed_turn));
+	c->player.dir.y = old.x * sin(-(c->player.speed_turn)) + 
+		c->player.dir.y * cos(-(c->player.speed_turn));
 	old.x = c->player.plane.x;
-	c->player.plane.x = c->player.plane.x * cos(-c->player.speed_turn) -
-		c->player.plane.y * sin(-c->player.speed_turn);
-	c->player.plane.y = old.x * sin(-c->player.speed_turn) + c->player.plane.y *
-		cos(-c->player.speed_turn);
+	c->player.plane.x = c->player.plane.x * cos(-(c->player.speed_turn)) -
+		c->player.plane.y * sin(-(c->player.speed_turn));
+	c->player.plane.y = old.x * sin(-(c->player.speed_turn)) + 
+		c->player.plane.y * cos(-(c->player.speed_turn));
 }
 
 void	move_left(ctx *c)
@@ -41,13 +41,13 @@ void	move_left(ctx *c)
 	dxy	old;
 
 	old.x = c->player.dir.x;
-	c->player.dir.x = c->player.dir.x * cos(-c->player.speed_turn) -
-		c->player.dir.y * sin(-c->player.speed_turn);
-	c->player.dir.y = old.x * sin(c->player.speed_turn) + c->player.dir.y *
-		cos(c->player.speed_turn);
+	c->player.dir.x = c->player.dir.x * cos(c->player.speed_turn) -
+		c->player.dir.y * sin(c->player.speed_turn);
+	c->player.dir.y = old.x * sin(c->player.speed_turn) + 
+		c->player.dir.y * cos(c->player.speed_turn);
 	old.x = c->player.plane.x;
 	c->player.plane.x = c->player.plane.x * cos(c->player.speed_turn) -
 		c->player.plane.y * sin(c->player.speed_turn);
-	c->player.plane.y = old.x * sin(c->player.speed_turn) + c->player.plane.y *
-		cos(c->player.speed_turn);
+	c->player.plane.y = old.x * sin(c->player.speed_turn) + 
+		c->player.plane.y * cos(c->player.speed_turn);
 }
