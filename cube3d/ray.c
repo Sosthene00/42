@@ -69,9 +69,11 @@ static void		ray_cal_step_side(ctx *c)
 
 static void		ray_init(ctx *c, int x)
 {
+	c->ray.pos.x = c->player.pos.x;
+	c->ray.pos.y = c->player.pos.y;
 	c->ray.map.x = (int)c->ray.pos.x;
 	c->ray.map.y = (int)c->ray.pos.y;
-	c->ray.cam = 2 * x / (double)c->win_y - 1; // if x == 0, then cam == -1. x == max, cam == 1
+	c->ray.cam = 2 * x / (double)c->win_x - 1; // if x == 0, then cam == -1. x == max, cam == 1
 	c->ray.dir.x = c->player.dir.x + c->player.plane.x * c->ray.cam;
 	c->ray.dir.y = c->player.dir.y + c->player.plane.y * c->ray.cam;
 	if (c->ray.dir.y == 0)
@@ -96,9 +98,7 @@ void			raycasting(ctx *c)
 	int		x;
 
 	x = -1;
-	c->ray.pos.x = c->player.pos.x;
-	c->ray.pos.y = c->player.pos.y;
-	while (++x < c->win_y)
+	while (++x < c->win_x)
 	{
 		ray_init(c, x);
 		ray_cal_step_side(c);
