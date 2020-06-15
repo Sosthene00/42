@@ -20,7 +20,7 @@ void adapt_screen_size(ctx *c)
 static void init_ply(ctx *c)
 {
     c->player.speed_move = 0.05;
-    c->player.speed_turn = 0.05;
+    c->player.speed_turn = 0.01;
 }
 
 void init_win(ctx *c)
@@ -28,11 +28,9 @@ void init_win(ctx *c)
 	if (!(c->win_ptr = mlx_new_window(c->mlx_ptr, c->win_x, \
                                           c->win_y, "Cub3d - Knee deep in Hell")))
 		exit_program(c, 9);
-	c->bits_per_pixel = 0;
-	c->size_line = 0;
-	c->img = mlx_new_image(c->mlx_ptr, c->win_x, c->win_y);
-	c->pxl = mlx_get_data_addr(c->img, &(c->bits_per_pixel), &(c->size_line),
-			&(c->ed));
+	c->screen.img_ptr = mlx_new_image(c->mlx_ptr, c->win_x, c->win_y);
+	c->screen.data = mlx_get_data_addr(c->screen.img_ptr, &(c->screen.bits_per_pixel), &(c->screen.size_line),
+			&(c->screen.endianness));
 }
 
 ctx *init_ctx(char *filename)

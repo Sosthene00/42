@@ -18,9 +18,11 @@
 # include <math.h>
 # include <time.h> // don't forget to delete later
 
-# define RESOLUTION "R "
-# define CEILING "C "
-# define FLOOR "F "
+# define RESOLUTION 'R'
+# define CEILING 'C'
+# define FLOOR 'F'
+# define SPRITE 'S'
+# define WALLS "NOSOEAWE"
 # define PLAYER_START "NSEW"
 # define MAP_CASE "012"
 
@@ -95,20 +97,34 @@ typedef struct      color
     unsigned int    floor;
 }                   clr;
 
+typedef	struct 		textures
+{
+	void			*img_ptr;
+	char			*data;
+	int				width;
+	int				height;
+	int				bits_per_pixel;
+	int				size_line;
+	int				endianness;
+}					img;
+
+
 typedef	struct		c
 {
     ply             player;
     clr             color;
 	ray				ray;
+    img	        	screen;
+    img	        	N_wall;
+    img	        	E_wall;
+    img	        	W_wall;
+    img	        	S_wall;
+    img	        	sprite;
     void            *mlx_ptr;
     void            *win_ptr;
+	int				fd;
     int             win_x;
     int             win_y;
-	void			*img;
-	char			*pxl;
-	int				bits_per_pixel;
-	int				size_line;
-	int				ed;
 	int				complete;
 	int				map_width;
 	int				map_height;
@@ -131,6 +147,8 @@ int                 check_file_extension(char *filename);
 
 int                 parse_file(char *map_file, ctx *c);
 
+int 				extract_textures(char **items, ctx *c);
+
 int					read_map(ctx *c);
 
 void                print_error(int error_code);
@@ -143,19 +161,13 @@ void				move_right(ctx *c);
 
 void				move_left(ctx *c);
 
-int                 pick_random();
-
-void			    put_pxl(ctx *c, int x, int y, unsigned int color);
-
-//int                 get_key(int key, ctx *c);
+void			    put_pxl(img img, int x, int y, unsigned int color);
 
 void                exit_program(ctx *c, int error_code);
 
 void				raycasting(ctx *c);
 
 void				draw_line(ctx *c, int x, int wall_top, int wall_bottom);
-
-int                 print_whole_screen(unsigned int color, ctx* c);
 
 void 				adapt_screen_size(ctx *c);
 

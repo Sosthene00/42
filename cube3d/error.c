@@ -33,6 +33,11 @@ void     exit_program(ctx *c, int error_code)
         print_error(error_code);
     if (c == NULL)
         exit(error_code);
+    if (c->fd != 0)
+    {
+        if (close(c->fd) < 0)
+            exit(1);
+    }
     mlx_do_key_autorepeaton(c->mlx_ptr);
     if (c->win_ptr != NULL)
     {
