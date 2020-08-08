@@ -95,14 +95,14 @@ int parse_file(char *map_file, ctx *c)
     ft_bzero(buf, 1);
     while (get_next_line(c->fd, &line) > 0)
     {
-        if (c->complete < 4 && ft_isalpha(line[0]))
+        if (c->complete < EXPECTED_ARG && ft_isalpha(line[0]))
         {
             items = ft_split(line, ' ');
             if (update_data(items, c) == 2)
                 break;
             c->complete++;
         }
-        else if (c->complete == 4 && *line)
+        else if (c->complete == EXPECTED_ARG && *line)
         {
             buf = ft_strjoin(buf, line);
             buf = ft_strjoin(buf, sep);

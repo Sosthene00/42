@@ -18,6 +18,7 @@
 # include <math.h>
 # include <time.h> // don't forget to delete later
 
+# define EXPECTED_ARG 4
 # define RESOLUTION 'R'
 # define CEILING 'C'
 # define FLOOR 'F'
@@ -83,21 +84,20 @@ typedef struct		s_ray
 	ixy				step;
 	double			dist;
 	double			cam;
+	double			wall_x;
 	int				hit;
 	int				hit_side;
+	int				tex_x;
+	int				tex_y;
 }					ray;
 
 typedef struct      color
 {
-    unsigned int    N;
-    unsigned int    S;
-    unsigned int    E;
-    unsigned int    W;
     unsigned int    sky;
     unsigned int    floor;
 }                   clr;
 
-typedef	struct 		textures
+typedef	struct 		image
 {
 	void			*img_ptr;
 	char			*data;
@@ -161,14 +161,17 @@ void				move_right(ctx *c);
 
 void				move_left(ctx *c);
 
-void			    put_pxl(img img, int x, int y, unsigned int color);
+void			    put_pxl(img *img, int x, int y, unsigned int color);
 
 void                exit_program(ctx *c, int error_code);
 
 void				raycasting(ctx *c);
 
-void				draw_line(ctx *c, int x, int wall_top, int wall_bottom);
+//void				draw_line(ctx *c, int x, int height, int wall_top, int wall_bottom);
+void				draw_line(ctx *c, img *texture, int x, int wall_top, int wall_bottom);
 
 void 				adapt_screen_size(ctx *c);
+
+void				calc_tex_x(ctx *c, img *tex);
 
 #endif

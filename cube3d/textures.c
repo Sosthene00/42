@@ -1,7 +1,22 @@
 #include "cube3d.h"
 
+void calc_tex_x(ctx *c, img *tex)
+{
+    if (c->ray.hit_side == 0)
+        c->ray.wall_x = c->ray.pos.y + c->ray.dist * c->ray.dir.y;
+    else
+        c->ray.wall_x = c->ray.pos.y + c->ray.dist * c->ray.dir.x;
+    c->ray.wall_x -= floor(c->ray.wall_x);
+    c->ray.tex_x = (int)(c->ray.wall_x * (double)(tex->width));
+    if ((c->ray.hit_side == 0) && (c->ray.dir.x > 0))
+        c->ray.tex_x = tex->width - c->ray.tex_x - 1;
+    if ((c->ray.hit_side == 1) && (c->ray.dir.y < 0))
+        c->ray.tex_x = tex->width - c->ray.tex_x - 1;
+}
+
 int extract_textures(char **items, ctx *c)
 {
+    // Add a generic init_tex function that can initialize any wall or sprite
     if (ft_strncmp(items[0], "NO", 2) == 0)
     {
         if ((c->N_wall.img_ptr = mlx_xpm_file_to_image(c->mlx_ptr, items[1], &(c->N_wall.width), 
