@@ -61,7 +61,7 @@ void    draw_line(ctx *c, img *texture, int x, int wall_top, int wall_bottom)
 	i = -1;
 	while (++i < wall_top)
 		put_pxl(&(c->screen), x, i, c->color.sky);
-	i += draw_texture(c, texture, x, i, wall_bottom);
+	i = draw_texture(c, texture, x, i, wall_bottom);
 	while (++i < c->win_y)
 		put_pxl(&(c->screen), x, i, c->color.floor);
 }
