@@ -13,19 +13,18 @@ void			put_pxl(img *img, int x, int y, unsigned int color)
 unsigned int extract_color(ctx *c, img *texture)
 {
 	unsigned int *color;
-	//char	*buffer;
+	char	*buffer;
 	int		i;
 
-	/*i = (c->ray.tex_x * 4) + (c->ray.tex_y * texture->size_line);
-	texture->data += i;
+	i = (c->ray.tex_x * 4) + (c->ray.tex_y * texture->size_line);
 	if ((buffer = malloc(sizeof(unsigned int))) == NULL || (color = malloc(sizeof(unsigned int))) == NULL)
 		exit_program(c, 9);	
-	ft_memcpy(buffer, texture->data, sizeof(unsigned int));
-	*color = *(unsigned int*)(buffer);*/
-	i = (c->ray.tex_x * 4) + (c->ray.tex_y * texture->size_line);
+	ft_memcpy(buffer, (texture->data + i), sizeof(unsigned int));
+	*color = *(unsigned int*)(buffer);
+	/*i = (c->ray.tex_x * 4) + (c->ray.tex_y * texture->size_line);
 	if ((color = malloc(sizeof(unsigned int*))) == NULL)
 		exit_program(c, 9);	
-	color = (unsigned int*)(texture->data + i);
+	color = (unsigned int*)(texture->data + i);*/
 	return (*color);
 }
 
@@ -39,7 +38,7 @@ int	draw_texture(ctx *c, img *texture, int x, int y, int drawEnd)
 
 	lineHeight = drawEnd - y;
 	calc_tex_x(c, texture);
-	step = 1.0 * texture->height / lineHeight;
+	step = (double)texture->height / lineHeight;
 	texPos = (y - c->win_y / 2 + lineHeight / 2) * step;
 	while (y < drawEnd)
 	{
