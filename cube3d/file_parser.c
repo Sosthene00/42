@@ -16,6 +16,8 @@ int get_xy_value(char **val, ctx *c)
 {
     if (!(val[0]) || !(val[1]) || !(ft_isdigit(*val[0])) || !(ft_isdigit(*val[1])))
         return (2);
+    //TODO: write those values in c->screen.width and heigth, and modify the rest of the code
+    // accordingly
     c->win_x = ft_atoi(val[0]);
     c->win_y = ft_atoi(val[1]);
     adapt_screen_size(c);
