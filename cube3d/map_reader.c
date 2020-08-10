@@ -27,12 +27,12 @@ int sanity_check(char *line, int i, int map_height)
     return (0);
 }
 // extract the necessary information
-void update_player(char dir, int i, int j, ctx *c)
+void update_player(char dir, int x, int y, ctx *c)
 {
     if ((c->player.pos.x + c->player.pos.y) > 0)
         exit_program(c, 2);
-    c->player.pos.x = i;
-    c->player.pos.y = j;
+    c->player.pos.x = x;
+    c->player.pos.y = y;
     if (dir == 'N')
     {
         c->player.dir.x = -1;
@@ -53,32 +53,32 @@ void update_player(char dir, int i, int j, ctx *c)
         c->player.dir.y = 1;
         c->player.plane.x = 0.66;
     }
-    c->map[i][j] = '0'; 
+    c->map[x][y] = '0'; 
 }
 
 int    read_map(ctx *c)
 {
-    int i;
-    int j;
+    int x;
+    int y;
 
-    i = j = 0;
-    while (c->map[i])
+    x = y = 0;
+    while (c->map[x])
     {
-        if (sanity_check(c->map[i], i, c->map_height) == 2)
+        if (sanity_check(c->map[x], x, c->map_width) == 2)
             return (2);
-        while (c->map[i][j])
+        while (c->map[x][y])
         {
-            if (ft_strchr(PLAYER_START, c->map[i][j]))
-                update_player(c->map[i][j], i, j, c);
-            j++;
+            if (ft_strchr(PLAYER_START, c->map[x][y]))
+                update_player(c->map[x][y], x, y, c);
+            y++;
         }
-        if (j > c->map_width)
-            c->map_width = j;
-        j = 0;
-        i++;
+        if (y > c->map_height)
+            c->map_height = y;
+        y = 0;
+        x++;
     }
-    c->map_height = i;
-    if (sanity_check(c->map[i-1], i, c->map_height) == 2 || \
+    c->map_width = x;
+    if (sanity_check(c->map[x-1], x, c->map_width) == 2 || \
             c->player.pos.x == 0)
         return (2);
     return (0);
