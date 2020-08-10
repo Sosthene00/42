@@ -5,7 +5,7 @@ void calc_tex_x(ctx *c, img *tex)
     if (c->ray.hit_side == 0)
         c->ray.wall_x = c->ray.pos.y + c->ray.dist * c->ray.dir.y;
     else
-        c->ray.wall_x = c->ray.pos.y + c->ray.dist * c->ray.dir.x;
+        c->ray.wall_x = c->ray.pos.x + c->ray.dist * c->ray.dir.x;
     c->ray.wall_x -= floor(c->ray.wall_x);
     c->ray.tex_x = (int)(c->ray.wall_x * (double)(tex->width));
     c->ray.tex_x = tex->width - c->ray.tex_x - 1;
