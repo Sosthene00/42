@@ -167,7 +167,6 @@ void                exit_program(ctx *c, int error_code);
 
 void				raycasting(ctx *c);
 
-//void				draw_line(ctx *c, int x, int height, int wall_top, int wall_bottom);
 void				draw_line(ctx *c, img *texture, int x, int wall_top, int wall_bottom);
 
 void 				adapt_screen_size(ctx *c);

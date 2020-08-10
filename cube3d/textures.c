@@ -8,10 +8,7 @@ void calc_tex_x(ctx *c, img *tex)
         c->ray.wall_x = c->ray.pos.y + c->ray.dist * c->ray.dir.x;
     c->ray.wall_x -= floor(c->ray.wall_x);
     c->ray.tex_x = (int)(c->ray.wall_x * (double)(tex->width));
-    if ((c->ray.hit_side == 0) && (c->ray.dir.x > 0))
-        c->ray.tex_x = tex->width - c->ray.tex_x - 1;
-    if ((c->ray.hit_side == 1) && (c->ray.dir.y < 0))
-        c->ray.tex_x = tex->width - c->ray.tex_x - 1;
+    c->ray.tex_x = tex->width - c->ray.tex_x - 1;
 }
 
 int extract_textures(char **items, ctx *c)
