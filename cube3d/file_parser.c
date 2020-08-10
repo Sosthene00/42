@@ -69,8 +69,6 @@ int update_data(char **items, ctx *c)
     return (2);
 }
 
-//get a texture for the walls, or sprite
-
 // parse the map itself
 char **get_map(char *buf)
 {

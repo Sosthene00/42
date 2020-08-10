@@ -73,21 +73,11 @@ static void		ray_init(ctx *c, int x)
 	c->ray.pos.y = c->player.pos.y;
 	c->ray.map.x = (int)c->ray.pos.x;
 	c->ray.map.y = (int)c->ray.pos.y;
-	c->ray.cam = 2 * x / (double)c->screen.width - 1; // if x == 0, then cam == -1. x == max, cam == 1
+	c->ray.cam = 2 * x / (double)c->screen.width - 1;
 	c->ray.dir.x = c->player.dir.x + c->player.plane.x * c->ray.cam;
 	c->ray.dir.y = c->player.dir.y + c->player.plane.y * c->ray.cam;
-	/*if (c->ray.dir.y == 0)
-		c->ray.delta.x = 0;
-	else
-		c->ray.delta.x = (c->ray.dir.x == 0) ? 1 : fabs(1 / c->ray.dir.x);
-	if (c->ray.dir.x == 0)
-		c->ray.delta.y = 0;
-	else
-		c->ray.delta.y = (c->ray.dir.y == 0) ? 1 : fabs(1 / c->ray.dir.y);*/
 	c->ray.delta.x = sqrt(1 + (pow(c->ray.dir.y, 2) / (pow(c->ray.dir.x, 2))));
 	c->ray.delta.y = sqrt(1 + (pow(c->ray.dir.x, 2) / (pow(c->ray.dir.y, 2))));
-	/*c->ray.delta.x = (c->ray.dir.y == 0) ? 0 : ((c->ray.dir.x == 0) ? 1 : abs(1 / c->ray.dir.x));
-	c->ray.delta.y = (c->ray.dir.x == 0) ? 0 : ((c->ray.dir.y == 0) ? 1 : abs(1 / c->ray.dir.y));*/
 	c->ray.hit = 0;
 	c->ray.dist = -1;
 	c->ray.hit_side = 0;
