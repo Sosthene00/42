@@ -39,7 +39,7 @@ int	draw_texture(ctx *c, img *texture, int x, int y, int drawEnd)
 	lineHeight = drawEnd - y;
 	calc_tex_x(c, texture);
 	step = (double)texture->height / lineHeight;
-	texPos = (y - c->win_y / 2 + lineHeight / 2) * step;
+	texPos = (y - c->screen.height / 2 + lineHeight / 2) * step;
 	while (y < drawEnd)
 	{
 		//d = y * 256 - c->screen.height * 128 + lineHeight * 128;
@@ -61,6 +61,6 @@ void    draw_line(ctx *c, img *texture, int x, int wall_top, int wall_bottom)
 	while (++i < wall_top)
 		put_pxl(&(c->screen), x, i, c->color.sky);
 	i = draw_texture(c, texture, x, i, wall_bottom);
-	while (++i < c->win_y)
+	while (++i < c->screen.height)
 		put_pxl(&(c->screen), x, i, c->color.floor);
 }

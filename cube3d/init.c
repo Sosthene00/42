@@ -10,10 +10,10 @@ void adapt_screen_size(ctx *c)
   if ((!(max_x = malloc(sizeof(*max_x)))) || (!(max_y = malloc(sizeof(*max_y)))))
     exit(1);
   mlx_get_screen_size(c->mlx_ptr, max_x, max_y);
-  if ((c->win_x >= *max_x) || (c->win_y >= *max_y))
+  if ((c->screen.width >= *max_x) || (c->screen.height >= *max_y))
   {
-    c->win_x = *max_x;
-    c->win_y = *max_y;
+    c->screen.width = *max_x;
+    c->screen.height = *max_y;
   }
 }
 
@@ -25,10 +25,10 @@ static void init_ply(ctx *c)
 
 void init_win(ctx *c)
 {
-	if (!(c->win_ptr = mlx_new_window(c->mlx_ptr, c->win_x, \
-                                          c->win_y, "Cub3d - Knee deep in Hell")))
+	if (!(c->win_ptr = mlx_new_window(c->mlx_ptr, c->screen.width, \
+                                          c->screen.height, "Cub3d - Knee deep in Hell")))
 		exit_program(c, 9);
-	c->screen.img_ptr = mlx_new_image(c->mlx_ptr, c->win_x, c->win_y);
+	c->screen.img_ptr = mlx_new_image(c->mlx_ptr, c->screen.width, c->screen.height);
 	c->screen.data = mlx_get_data_addr(c->screen.img_ptr, &(c->screen.bits_per_pixel), &(c->screen.size_line),
 			&(c->screen.endianness));
 }

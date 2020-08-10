@@ -123,8 +123,6 @@ typedef	struct		c
     void            *mlx_ptr;
     void            *win_ptr;
 	int				fd;
-    int             win_x;
-    int             win_y;
 	int				complete;
 	int				map_width;
 	int				map_height;

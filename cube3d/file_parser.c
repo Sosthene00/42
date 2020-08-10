@@ -18,8 +18,8 @@ int get_xy_value(char **val, ctx *c)
         return (2);
     //TODO: write those values in c->screen.width and heigth, and modify the rest of the code
     // accordingly
-    c->win_x = ft_atoi(val[0]);
-    c->win_y = ft_atoi(val[1]);
+    c->screen.width = ft_atoi(val[0]);
+    c->screen.height = ft_atoi(val[1]);
     adapt_screen_size(c);
     return (0);
 }
