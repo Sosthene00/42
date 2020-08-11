@@ -103,6 +103,8 @@ int					ft_tolower(int c);
 
 int					ft_toupper(int c);
 
+void 				ft_freesplit(char **ptr);
+
 typedef	struct		s_list
 {
 	void			*content;
