@@ -43,12 +43,8 @@ int extract_textures(char **items, ctx *c)
     else if (ft_strncmp(items[0], "WE", 2) == 0)
         return (init_texture(&(c->W_wall), items[1], c));
     else if (ft_strncmp(items[0], "EA", 2) == 0)
-    {
         return (init_texture(&(c->E_wall), items[1], c));
-    }
-    else
-    {
+    else if (ft_strncmp(items[0], "S", 1) == 0)
         return (init_texture(&(c->sprite), items[1], c));
-    }
     return (2);
 }
