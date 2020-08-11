@@ -40,6 +40,7 @@ int get_color(char **items, ctx *c)
         c->color.sky = color;
     else if (items[0][0] == 'F')
         c->color.floor = color;
+    ft_freesplit(val);
     return (0);
 }
 
@@ -100,6 +101,7 @@ int parse_file(char *map_file, ctx *c)
             items = ft_split(line, ' ');
             if (update_data(items, c) == 2)
                 break;
+            ft_freesplit(items);
             c->complete++;
         }
         else if (c->complete == EXPECTED_ARG && *line)
@@ -116,5 +118,7 @@ int parse_file(char *map_file, ctx *c)
     c->map = get_map(buf);
     if (read_map(c) == 2)
         return (2);
+    free(buf);
+    free(sep);
     return (0);
 }
