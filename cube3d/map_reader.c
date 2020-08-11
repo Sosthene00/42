@@ -22,6 +22,8 @@ int sanity_check(char *line, int i, int map_height)
         }
         line++;
     }
+    //TODO: must be able to have blank space inside the map, and not only at beginning/end
+    //of the line
     if (*(line - 1) != '1')
         return (2);
     return (0);
@@ -70,6 +72,8 @@ int    read_map(ctx *c)
         {
             if (ft_strchr(PLAYER_START, c->map[x][y]))
                 update_player(c->map[x][y], x, y, c);
+            if (c->map[x][y] == '2')
+                update_sprite(c, x, y);
             y++;
         }
         if (y > c->map_height)
