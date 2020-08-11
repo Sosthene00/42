@@ -15,6 +15,8 @@ void adapt_screen_size(ctx *c)
     c->screen.width = *max_x;
     c->screen.height = *max_y;
   }
+  free(max_x);
+  free(max_y);
 }
 
 static void init_ply(ctx *c)
