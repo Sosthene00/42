@@ -11,24 +11,44 @@ void calc_tex_x(ctx *c, img *tex)
     c->ray.tex_x = tex->width - c->ray.tex_x - 1;
 }
 
+img *wall_orientation(ctx *c)
+{
+    if ((c->ray.hit_side == 0) && (c->ray.step.x == -1))
+        return (&(c->N_wall));
+    else if ((c->ray.hit_side == 0) && (c->ray.step.x == 1))
+        return (&(c->S_wall));
+    else if ((c->ray.hit_side == 1) && (c->ray.step.y == -1))
+        return (&(c->W_wall));
+    else if ((c->ray.hit_side == 1) && (c->ray.step.y == 1))
+        return (&(c->E_wall));
+    return (NULL);
+}
+
+int init_texture(img* texture, char *filename, ctx *c)
+{
+    if ((texture->img_ptr = mlx_xpm_file_to_image(c->mlx_ptr, filename, &(texture->width), 
+        &(texture->height))) == NULL)
+        return (2);
+    texture->data = mlx_get_data_addr(texture->img_ptr, &(texture->bits_per_pixel), 
+        &(texture->size_line), &(texture->endianness));
+    return (0);
+}
+
 int extract_textures(char **items, ctx *c)
 {
-    // Add a generic init_tex function that can initialize any wall or sprite
     if (ft_strncmp(items[0], "NO", 2) == 0)
+        return (init_texture(&(c->N_wall), items[1], c));
+    else if (ft_strncmp(items[0], "SO", 2) == 0)
+        return (init_texture(&(c->S_wall), items[1], c));
+    else if (ft_strncmp(items[0], "WE", 2) == 0)
+        return (init_texture(&(c->W_wall), items[1], c));
+    else if (ft_strncmp(items[0], "EA", 2) == 0)
     {
-        if ((c->N_wall.img_ptr = mlx_xpm_file_to_image(c->mlx_ptr, items[1], &(c->N_wall.width), 
-            &(c->N_wall.height))) == NULL)
-            return (2);
-        c->N_wall.data = mlx_get_data_addr(c->N_wall.img_ptr, &(c->N_wall.bits_per_pixel), 
-            &(c->N_wall.size_line), &(c->N_wall.endianness));
+        return (init_texture(&(c->E_wall), items[1], c));
     }
     else
     {
-        if ((c->sprite.img_ptr = mlx_xpm_file_to_image(c->mlx_ptr, items[1], &(c->sprite.width), 
-            &(c->sprite.height))) == NULL)
-            return (2);
-        c->sprite.data = mlx_get_data_addr(c->sprite.img_ptr, &(c->sprite.bits_per_pixel), 
-            &(c->sprite.size_line), &(c->sprite.endianness));
+        return (init_texture(&(c->sprite), items[1], c));
     }
-    return (0);
+    return (2);
 }

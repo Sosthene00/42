@@ -18,7 +18,7 @@
 # include <math.h>
 # include <time.h> // don't forget to delete later
 
-# define EXPECTED_ARG 4
+# define EXPECTED_ARG 7
 # define RESOLUTION 'R'
 # define CEILING 'C'
 # define FLOOR 'F'
@@ -170,5 +170,7 @@ void				draw_line(ctx *c, img *texture, int x, int wall_top, int wall_bottom);
 void 				adapt_screen_size(ctx *c);
 
 void				calc_tex_x(ctx *c, img *tex);
+
+img 				*wall_orientation(ctx *c);
 
 #endif

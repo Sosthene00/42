@@ -5,6 +5,7 @@ static void		ray_draw(ctx *c, int x)
 	int		height;
 	int		wall_top;
 	int		wall_bottom;
+	img		*texture;
 
 	height = (int)(c->screen.height / c->ray.dist);
 	wall_top = -height / 2 + c->screen.height / 2;
@@ -13,7 +14,8 @@ static void		ray_draw(ctx *c, int x)
 	wall_bottom = height / 2 + c->screen.height / 2;
 	if (wall_bottom >= c->screen.height)
 		wall_bottom = c->screen.height - 1;
-	draw_line(c, &(c->N_wall), x, wall_top, wall_bottom);
+	texture = wall_orientation(c);
+	draw_line(c, texture, x, wall_top, wall_bottom);
 }
 
 static void		ray_cal_dist(ctx *c)
