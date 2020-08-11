@@ -18,7 +18,7 @@
 # include <math.h>
 # include <time.h> // don't forget to delete later
 
-# define EXPECTED_ARG 7
+# define EXPECTED_ARG 8
 # define RESOLUTION 'R'
 # define CEILING 'C'
 # define FLOOR 'F'
@@ -106,6 +106,10 @@ typedef	struct 		image
 	int				bits_per_pixel;
 	int				size_line;
 	int				endianness;
+	int				order;
+	double			map_x;
+	double			map_y;
+	struct	image	*next;
 }					img;
 
 
@@ -172,5 +176,7 @@ void 				adapt_screen_size(ctx *c);
 void				calc_tex_x(ctx *c, img *tex);
 
 img 				*wall_orientation(ctx *c);
+
+int					update_sprite(ctx *c, int x, int y);
 
 #endif
