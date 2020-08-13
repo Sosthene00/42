@@ -38,15 +38,18 @@ void init_win(ctx *c)
 ctx *init_ctx(char *filename)
 {
     ctx *c;
+    double *zbuffer;
     int error_code;
 
-    if (!(c = (ctx *)malloc(sizeof(ctx))))
+    if (!(c = (ctx *)ft_calloc(1, sizeof(*c))))
 		  exit_program(c, 9);
-    bzero(c, sizeof(*c));
     if (!(c->mlx_ptr = mlx_init()))
       exit_program(c, 9);
     if ((error_code = parse_file(filename, c)) != 0)
       exit_program(c, error_code);
     init_ply(c);
+    if (!(zbuffer = ft_calloc(c->screen.width, sizeof(*zbuffer))))
+		  exit_program(c, 9);
+    c->ray.zbuffer = zbuffer;
     return (c);
 }

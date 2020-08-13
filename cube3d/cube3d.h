@@ -48,6 +48,10 @@
 
 # define FILE_EXT "cub"
 
+#define uDiv 1
+#define vDiv 1
+#define vMove 0.0
+
 typedef struct		int_xy
 {
 	int				x;
@@ -89,6 +93,7 @@ typedef struct		s_ray
 	int				hit_side;
 	int				tex_x;
 	int				tex_y;
+	double			*zbuffer;
 }					ray;
 
 typedef struct      color
@@ -109,6 +114,7 @@ typedef	struct 		image
 	int				order;
 	double			map_x;
 	double			map_y;
+	double			distance;
 	struct	image	*next;
 }					img;
 
@@ -178,5 +184,7 @@ void				calc_tex_x(ctx *c, img *tex);
 img 				*wall_orientation(ctx *c);
 
 int					update_sprite(ctx *c, int x, int y);
+
+void				draw_sprite(ctx *c, img *sprite);
 
 #endif
