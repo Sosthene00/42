@@ -60,8 +60,9 @@ void	draw_sprite(ctx *c, img *sprite)
 		double spriteX;
 		double spriteY;
 		double invDet;
+		spriteY = 0.0;
 		spriteX = temp->map_x - c->player.pos.x;
-		spriteY = temp->map_y - c->player.pos.x;
+		spriteY = temp->map_y - c->player.pos.y;
 		invDet = 1.0 / (c->player.plane.x * c->player.dir.y - c->player.dir.x * c->player.plane.y);
 
 		double transformX;
