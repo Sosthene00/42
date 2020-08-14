@@ -112,6 +112,7 @@ typedef	struct 		image
 	int				size_line;
 	int				endianness;
 	int				order;
+	int				amt;
 	double			map_x;
 	double			map_y;
 	double			distance;
@@ -186,5 +187,7 @@ img 				*wall_orientation(ctx *c);
 int					update_sprite(ctx *c, int x, int y);
 
 void				draw_sprite(ctx *c, img *sprite);
+
+void				order_sprite_dist(ctx *c, img *sprite);
 
 #endif

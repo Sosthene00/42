@@ -53,10 +53,14 @@ int	draw_texture(ctx *c, img *texture, int x, int y, int drawEnd)
 void	draw_sprite(ctx *c, img *sprite)
 {
 	img	*temp;
+	int i;
 
-	temp = sprite;
-	while (temp)
+	i = -1;
+	while (++i < sprite->amt)
 	{
+		temp = sprite;
+		while (temp->order != i)
+			temp = temp->next;
 		double spriteX;
 		double spriteY;
 		double invDet;
@@ -116,7 +120,6 @@ void	draw_sprite(ctx *c, img *sprite)
 			}
 			stripe++;
 		}
-		temp = temp->next;
     }
 }
 

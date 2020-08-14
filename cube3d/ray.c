@@ -98,5 +98,6 @@ void			raycasting(ctx *c)
 		c->ray.zbuffer[x] = c->ray.dist;
 		ray_draw(c, x);
 	}
+	order_sprite_dist(c, &(c->sprite));
 	draw_sprite(c, &(c->sprite));
 }
