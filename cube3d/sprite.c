@@ -24,62 +24,6 @@ static void swap_order(img *a, img *b)
     b->order = c;
 }
 
-/*static double   partition(struct ordered *arr, int low, int high)
-{
-    double pivot;
-    int i;
-    int j;
-
-    pivot = arr[high].distance;
-    i = (low - 1);
-    j = low;
-    while (j <= high-1)
-    {
-        if (arr[j].distance < pivot)
-        {
-            i++;
-            swap(&arr[i].distance, &arr[j]);
-        }
-        j++;
-    }
-    swap(&arr[i+1], &arr[high]);
-    return (i + 1);
-}
-
-static void quickSort_sprite(struct ordered *arr, int low, int high)
-{
-    if (low < high)
-    {
-        int pi;
-    
-        pi = partition(arr, low, high);
-        quickSort_sprite(arr, low, pi-1);
-        quickSort_sprite(arr, pi+1, high);
-    }
-}
-
-void    sort_sprite(ctx *c, int *list, img *sprite)
-{
-    img *temp;
-    struct ordered {
-        int order;
-        double distance;
-    } *ordered;
-    int i;
-
-    i = 0;
-    temp = sprite;
-    if (!(ordered = ft_calloc(1, sizeof(*ordered))))
-        exit_program(c, 9);
-    while (temp && temp->next)
-    {
-        ordered[i].order = temp->order;
-        ordered[i].distance = temp->distance;
-        i++;
-    }
-    quickSort_sprite(ordered, 0, i);
-}*/
-
 static img *go_to_order(img *sprite, int n)
 {
     img *temp;

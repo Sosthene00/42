@@ -120,7 +120,7 @@ typedef	struct 		image
 }					img;
 
 
-typedef	struct		c
+typedef	struct		context
 {
     ply             player;
     clr             color;
@@ -139,6 +139,23 @@ typedef	struct		c
 	int				map_height;
 	char			**map;
 }					ctx;
+
+typedef struct		sprite
+{
+	double			spriteX;
+	double			spriteY;
+	double			invDet;
+	double			transformX;
+	double			transformY;
+	int				screenX;
+	int				vMoveScreen;
+	int				height;
+	int				width;
+	int				drawStartX;
+	int				drawStartY;
+	int				drawEndX;
+	int				drawEndY;
+}					sprt;
 
 ctx                 *init_ctx(char *filename);
 
@@ -178,6 +195,8 @@ void				raycasting(ctx *c);
 
 void				draw_line(ctx *c, img *texture, int x, int wall_top, int wall_bottom);
 
+unsigned int 		extract_color(ctx *c, img *texture);
+
 void 				adapt_screen_size(ctx *c);
 
 void				calc_tex_x(ctx *c, img *tex);
@@ -190,4 +209,9 @@ void				draw_sprite(ctx *c, img *sprite);
 
 void				order_sprite_dist(ctx *c, img *sprite);
 
+sprt    			*init_sprite(ctx *c, img *sprite);
+
+void 				get_values(ctx *c, sprt *sprite);
+
+void   				draw_stripes(ctx *c, img *texture, sprt *sprite);
 #endif
