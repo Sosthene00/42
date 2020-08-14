@@ -30,7 +30,7 @@ int					get_next_line(int fd, char **line);
 
 size_t				ft_strlen_split(char const *str, char c);
 
-char				*ft_substr_mal(char *s, char c);
+char				*ft_substr_free(char *s, char c);
 
 void				free_mem(void **ptr);
 

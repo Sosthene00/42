@@ -21,7 +21,7 @@ void	free_mem(void **ptr)
 	}
 }
 
-char	*ft_substr_mal(char *s, char c)
+char	*ft_substr_free(char *s, char c)
 {
 	void	*bgn;
 	char	*res;
@@ -40,7 +40,7 @@ char	*ft_substr_mal(char *s, char c)
 		if (*s == c)
 			s++;
 	}
-	if (!(res = malloc(sizeof(*res) * (ft_strlen_split(s, '\0') + 1))))
+	if (!(res = malloc(sizeof(*res) * (ft_strlen(s) + 1))))
 		return (NULL);
 	while (s[++i])
 		res[i] = s[i];
@@ -79,7 +79,7 @@ static int	do_line(ssize_t count, char **cur, char **line)
 	}
 	if (!(*line = ft_strdup_split(*cur, '\n')))
 		return (-1);
-	if (!(*cur = ft_substr_mal(*cur, '\n')))
+	if (!(*cur = ft_substr_free(*cur, '\n')))
 		return (-1);
 	return (1);
 }
