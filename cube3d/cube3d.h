@@ -26,6 +26,7 @@
 # define WALLS "NOSOEAWE"
 # define PLAYER_START "NSEW"
 # define MAP_CASE "012"
+# define SEP '+'
 
 // All the mapping has been done on my AZERTY Ubuntu laptop, it might not work as expected
 //# define KEY_UP 0x0077 //'w' on AZERTY keyboard
@@ -159,7 +160,7 @@ typedef struct		sprite
 
 ctx                 *init_ctx(char *filename);
 
-void                init_win(ctx *c);
+int	                init_win(ctx *c);
 
 int                 loop_hook(ctx *c);
 
@@ -214,4 +215,7 @@ sprt    			*init_sprite(ctx *c, img *sprite);
 void 				get_values(ctx *c, sprt *sprite);
 
 void   				draw_stripes(ctx *c, img *texture, sprt *sprite);
+
+void			    free_all(ctx *c);
+
 #endif

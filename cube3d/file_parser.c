@@ -14,12 +14,10 @@ unsigned int    convert_color(int r, int g, int b)
 
 int get_xy_value(char **val, ctx *c)
 {
-    if (!(val[0]) || !(val[1]) || !(ft_isdigit(*val[0])) || !(ft_isdigit(*val[1])))
+    if (!(val[1]) || !(val[2]) || !(ft_isdigit(*val[1])) || !(ft_isdigit(*val[2])))
         return (2);
-    //TODO: write those values in c->screen.width and heigth, and modify the rest of the code
-    // accordingly
-    c->screen.width = ft_atoi(val[0]);
-    c->screen.height = ft_atoi(val[1]);
+    c->screen.width = ft_atoi(val[1]);
+    c->screen.height = ft_atoi(val[2]);
     adapt_screen_size(c);
     return (0);
 }
@@ -46,31 +44,26 @@ int get_color(char **items, ctx *c)
 
 int update_data(char **items, ctx *c)
 {
-    // Take a line, parse the identifier and dispatch the content to the right function 
     if ((items[0][0] == RESOLUTION) && (items[0][1] == 0))
     {
-        // Parse x and y value from file, return 0 if ok, 2 otherwise
-        if (get_xy_value((items+1), c) == 0)
-        {
-            init_win(c);
-            return (0);
-        }
+        if (get_xy_value((items), c) != 0 || init_win(c) != 0)
+            return (2);
     }
     else if (((items[0][0] == CEILING) || (items[0][0] == FLOOR)) && (items[0][1] == 0))
     {
-        if (get_color(items, c) == 0)
-            return (0);
+        if (get_color(items, c) != 0)
+            return (2);
     }
     else if (((items[0][0] == SPRITE) && (items[0][1] == 0)) || 
         (ft_strnstr(WALLS, items[0], ft_strlen(WALLS))))
     {
-        if (extract_textures(items, c) == 0)
-            return (0);
+        if (extract_textures(items, c) != 0)
+            return (2);
     }
-    return (2);
+    ft_freesplit(items);
+    return (0);
 }
 
-// parse the map itself
 char **get_map(char *buf)
 {
     char **map;
@@ -78,47 +71,65 @@ char **get_map(char *buf)
 
     trimmed = ft_strtrim(buf, "+");
     map = ft_split(trimmed, '+');
+    free(trimmed);
     return (map);
 }
 
-// parse the map file
+char *concatenate(char *buf, char *new)
+{
+    char    *temp;
+    char    *res;
+    size_t  len;
+
+    temp = ft_strdup(buf);
+    free(buf);
+    len = ft_strlen(temp) + ft_strlen(new) + 1;
+    if (!(res = ft_calloc(len + 1, sizeof(*res))))
+        return (NULL);
+    if (!*temp)
+        ft_strlcpy(res, new, len);
+    else
+        ft_strlcpy(res + ft_strlcpy(res, temp, len), new, len);
+    res[len-1] = SEP;
+    free(temp);
+    return (res);
+}
+
 int parse_file(char *map_file, ctx *c)
 {
     char *line;
     char **items;
     char *buf;
-    char *sep;
 
     if ((c->fd = open(map_file, O_RDONLY)) < 0)
-        exit(1);
-    if (!(buf = malloc(sizeof(*buf))) || !(sep = ft_strjoin("", "+")))
-        return (9);
-    ft_bzero(buf, 1);
+        exit_program(c, 2);
+    if (!(buf = ft_calloc(1, sizeof(*buf))))
+        exit_program(c, 9);
     while (get_next_line(c->fd, &line) > 0)
     {
         if (c->complete < EXPECTED_ARG && ft_isalpha(line[0]))
         {
             items = ft_split(line, ' ');
+            free(line);
             if (update_data(items, c) == 2)
-                break;
-            ft_freesplit(items);
+                exit_program(c, 2);
             c->complete++;
         }
         else if (c->complete == EXPECTED_ARG && *line)
         {
-            buf = ft_strjoin(buf, line);
-            buf = ft_strjoin(buf, sep);
+            if (!(buf = concatenate(buf, line)))
+                exit_program(c, 9);
+            free(line);
         }
         else if ((*line == '\0') && (*buf != '\0'))
             return (2);
     }
     if (close(c->fd) < 0)
         return (2);
-    c->fd = 0;
     c->map = get_map(buf);
     if (read_map(c) == 2)
         return (2);
     free(buf);
-    free(sep);
+    free(line);
     return (0);
 }

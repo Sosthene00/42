@@ -1,7 +1,6 @@
 #include "cube3d.h"
 
-// check for invalid map
-int sanity_check(char *line, int i, int map_height)
+static int sanity_check(char *line, int i, int map_width)
 {
     while (*line && (*line == ' '))
         line++;
@@ -9,7 +8,7 @@ int sanity_check(char *line, int i, int map_height)
         return (2);
     while (*line)
     {
-        if ((i == 0) || (map_height > 0))
+        if ((i == 0) || (map_width > 0))
         {
             if (!((*line == '1') || (*line == ' ')))
                 return (2);
@@ -29,7 +28,7 @@ int sanity_check(char *line, int i, int map_height)
     return (0);
 }
 // extract the necessary information
-void update_player(char dir, int x, int y, ctx *c)
+static void update_player(char dir, int x, int y, ctx *c)
 {
     if ((c->player.pos.x + c->player.pos.y) > 0)
         exit_program(c, 2);

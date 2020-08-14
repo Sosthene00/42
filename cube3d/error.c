@@ -14,16 +14,18 @@ void    print_error(int error_code)
 
 int check_file_extension(char *filename)
 {
-    char *extension;
     char **str;
 
     str = ft_split(filename, '.');
-    extension = str[1];
-    if (extension != NULL)
+    if (str[1] != NULL)
     {
-        if (!(ft_strncmp(extension, FILE_EXT, 3)))
+        if (!(ft_strncmp(str[1], FILE_EXT, 3)))
+        {
+            ft_freesplit(str);
             return (0);
+        }
     }
+    ft_freesplit(str);
     return (1);
 }
 
@@ -43,7 +45,7 @@ void     exit_program(ctx *c, int error_code)
     {
         mlx_clear_window(c->mlx_ptr, c->win_ptr);
         mlx_destroy_window(c->mlx_ptr, c->win_ptr);
-        free(c);    
+        free_all(c);
     }
     exit(error_code);
 }
