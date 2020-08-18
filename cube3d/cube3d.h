@@ -42,10 +42,11 @@
 # define KEY_PRESS 2
 # define KEY_RELEASE 3
 
-# define WRONG_FILE "Something's wrong with the map file:\n"\
+# define WRONG_FILE "Error\nSomething's wrong with the map file:\n"\
                     "Check that the file exists and its content is formatted correctly\n"
-# define ERROR_PARSING "Error parsing map file content\n"
-# define MEMORY_ERROR "Error while initializing mlx or malloc\n"
+# define ERROR_PARSING "Error\nIncorrect map file content\n"
+# define ERROR_WRITING	"Error\nSomething went wrong while saving a screenshot\n"
+# define MEMORY_ERROR "Error\nmemory error while initializing mlx or malloc\n"
 
 # define FILE_EXT "cub"
 
