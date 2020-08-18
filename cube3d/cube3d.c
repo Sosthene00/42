@@ -22,6 +22,8 @@ int main(int argc, char **argv)
 		exit(1);
 	}
 	c = init_ctx(argv[1]);
+	if (ft_strncmp(argv[2], SCREENSHOT_OPT, ft_strlen(SCREENSHOT_OPT)) == 0)
+		c->screenshot = 1;
 	//mlx_do_key_autorepeatoff(c->mlx_ptr);
 	mlx_loop_hook(c->mlx_ptr, loop_hook, c); // Define the function to call in the loop if no event
 	mlx_hook(c->win_ptr, KEY_PRESS, KEY_PRESS_MASK, key_press, c); // create a new hook for key press events

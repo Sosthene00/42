@@ -49,6 +49,7 @@
 # define MEMORY_ERROR "Error\nmemory error while initializing mlx or malloc\n"
 
 # define FILE_EXT "cub"
+# define SCREENSHOT_OPT "--save"
 
 #define uDiv 1
 #define vDiv 1
@@ -136,6 +137,7 @@ typedef	struct		context
     void            *mlx_ptr;
     void            *win_ptr;
 	int				fd;
+	int				screenshot;
 	int				complete;
 	int				map_width;
 	int				map_height;

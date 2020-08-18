@@ -6,6 +6,8 @@ void    print_error(int error_code)
         ft_putstr_fd(WRONG_FILE, 2);
     else if (error_code == 2)
         ft_putstr_fd(ERROR_PARSING, 2);
+    else if (error_code == 3)
+        ft_putstr_fd(ERROR_WRITING, 2);
     else if (error_code == 9)
         ft_putstr_fd(MEMORY_ERROR, 2);
     else
