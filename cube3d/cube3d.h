@@ -161,6 +161,26 @@ typedef struct		sprite
 	int				drawEndY;
 }					sprt;
 
+typedef	struct		bmp_file
+{
+	unsigned int	FileSize;
+	unsigned short	Reserved1;
+	unsigned short	Reserved2;
+	unsigned int	PixelDataOffset;
+	unsigned int	HeaderSize;
+	int				ImageWidth;
+	int				ImageHeight;
+	unsigned short	Planes;
+	unsigned short	BitsPerPixel;
+	unsigned int	Compression;
+	unsigned int	ImageSize;
+	int				XpixelsPerMeter;
+	int				YpixelsPerMeter;
+	unsigned int	TotalColors;
+	unsigned int	ImportantColors;
+}					bmp;
+
+
 ctx                 *init_ctx(char *filename);
 
 int	                init_win(ctx *c);
@@ -220,5 +240,7 @@ void 				get_values(ctx *c, sprt *sprite);
 void   				draw_stripes(ctx *c, img *texture, sprt *sprite);
 
 void			    free_all(ctx *c);
+
+int 				save_screenshot(ctx *c);
 
 #endif
