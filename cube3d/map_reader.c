@@ -54,35 +54,45 @@ static void update_player(char dir, int x, int y, ctx *c)
         c->player.dir.y = 1;
         c->player.plane.x = 0.66;
     }
-    c->map[x][y] = '0'; 
 }
+
+static int read_line(char *line, int x, ctx *c)
+{
+    int y;
+
+    y = 0;
+    while (line[y])
+    {
+        if (line[y] == ' ' || line[y] == '0' ||
+            line[y] == '1')
+            y++;
+        else if (ft_strchr(PLAYER_START, line[y]))
+        {
+            update_player(line[y], x, y, c);
+            c->map[x][y] = '0'; 
+        }
+        else if (line[y] == '2')
+            update_sprite(c, x, y);
+        else
+            return (2);
+    }
+    return (0);
+}
+
 
 int    read_map(ctx *c)
 {
     int x;
-    int y;
 
-    x = y = 0;
+    x = 0;
     while (c->map[x])
     {
-        if (sanity_check(c->map[x], x, c->map_width) == 2)
-            return (2);
-        while (c->map[x][y])
-        {
-            if (ft_strchr(PLAYER_START, c->map[x][y]))
-                update_player(c->map[x][y], x, y, c);
-            if (c->map[x][y] == '2')
-                update_sprite(c, x, y);
-            y++;
-        }
-        if (y > c->map_height)
-            c->map_height = y;
-        y = 0;
+        if (read_line(c->map[x], x, c) == 2)
+            exit_program(c, 2);
         x++;
     }
     c->map_width = x;
-    if (sanity_check(c->map[x-1], x, c->map_width) == 2 || \
-            c->player.pos.x == 0)
-        return (2);
+    /*if (sanity_check(c->map, c) == 2 || c->player.pos.x == 0)
+        return (2);*/
     return (0);
 }
