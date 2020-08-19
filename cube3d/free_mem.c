@@ -19,6 +19,8 @@ static void    free_context(ctx *c)
         free(c->ray.zbuffer);
     if (c->sprite.next)
         free_sprite_list(c->sprite);
+    if (c->map)
+        ft_freesplit(c->map);
     if (c)
         free(c);
 }
