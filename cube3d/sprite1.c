@@ -1,4 +1,4 @@
-# include "cube3d.h"
+#include "cube3d.h"
 
 static void	add_sprite_to_list(img **alst, img *new)
 {
@@ -13,7 +13,7 @@ static void	add_sprite_to_list(img **alst, img *new)
 	temp->amt = new->order + 1;
 }
 
-int update_sprite(ctx *c, int x, int y)
+int			update_sprite(ctx *c, int x, int y)
 {
 	img *texture;
 	img *root;

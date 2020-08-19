@@ -1,6 +1,6 @@
 #include "cube3d.h"
 
-int key_press(int key, ctx *c)
+int	key_press(int key, ctx *c)
 {
 	if (key == KEY_UP)
 		c->player.move_up = 1;
@@ -11,8 +11,8 @@ int key_press(int key, ctx *c)
 	if (key == KEY_LEFT)
 		c->player.move_left = 1;
 	if (key == KEY_ESC)
-        exit_program(c, 0);
-    return (0);
+		exit_program(c, 0);
+	return (0);
 }
 
 int	key_release(int key, ctx *c)
@@ -27,9 +27,3 @@ int	key_release(int key, ctx *c)
 		c->player.move_left = 0;
 	return (0);
 }
-
-/*int		key_hook(int key, ctx *c)
-{
-	get_key(key, c);
-	return (0);
-}*/

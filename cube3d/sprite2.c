@@ -1,6 +1,6 @@
-# include "cube3d.h"
+#include "cube3d.h"
 
-static void swap_order(img *a, img *b)
+static void	swap_order(img *a, img *b)
 {
 	int c;
 
@@ -9,7 +9,7 @@ static void swap_order(img *a, img *b)
 	b->order = c;
 }
 
-static img *go_to_order(img *sprite, int n)
+static img	*go_to_order(img *sprite, int n)
 {
 	img *temp;
 
@@ -19,7 +19,7 @@ static img *go_to_order(img *sprite, int n)
 	return (temp);
 }
 
-static void bubblesort(img *sprite)
+static void	bubblesort(img *sprite)
 {
 	int i;
 	int j;
@@ -30,17 +30,17 @@ static void bubblesort(img *sprite)
 	while (++i < (sprite->amt))
 	{
 		j = -1;
-		while (++j < (sprite->amt)-i-1)
+		while (++j < (sprite->amt) - i - 1)
 		{
 			a = go_to_order(sprite, j);
-			b = go_to_order(sprite, j+1);
+			b = go_to_order(sprite, j + 1);
 			if (a->distance < b->distance)
 				swap_order(a, b);
 		}
 	}
 }
 
-void order_sprite_dist(ctx *c, img *sprite)
+void		order_sprite_dist(ctx *c, img *sprite)
 {
 	img *temp;
 	int count;
@@ -49,8 +49,8 @@ void order_sprite_dist(ctx *c, img *sprite)
 	temp = sprite;
 	while (temp)
 	{
-		temp->distance = ((c->player.pos.x - temp->map_x) * (c->player.pos.x - temp->map_x) +
-			(c->player.pos.y - temp->map_y) * (c->player.pos.y - temp->map_y));
+		temp->distance = (pow(c->player.pos.x - temp->map_x, 2) +
+			pow(c->player.pos.y - temp->map_y, 2));
 		temp->order = count;
 		temp = temp->next;
 		count++;

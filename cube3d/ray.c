@@ -38,9 +38,11 @@ static void		ray_cal_dist(ctx *c)
 		{
 			c->ray.hit = 1;
 			if (c->ray.hit_side == 0)
-				c->ray.dist = (c->ray.map.x - c->ray.pos.x + (1 - c->ray.step.x) / 2) / c->ray.dir.x;
+				c->ray.dist = (c->ray.map.x - c->ray.pos.x +
+					(1 - c->ray.step.x) / 2) / c->ray.dir.x;
 			else
-				c->ray.dist = (c->ray.map.y - c->ray.pos.y + (1 - c->ray.step.y) / 2) / c->ray.dir.y;
+				c->ray.dist = (c->ray.map.y - c->ray.pos.y +
+					(1 - c->ray.step.y) / 2) / c->ray.dir.y;
 		}
 	}
 }

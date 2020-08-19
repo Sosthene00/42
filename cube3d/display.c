@@ -1,4 +1,4 @@
-#include "./cube3d.h"
+#include "cube3d.h"
 
 void			put_pxl(img *img, int x, int y, unsigned int color)
 {
@@ -10,11 +10,11 @@ void			put_pxl(img *img, int x, int y, unsigned int color)
 	img->data[++i] = color >> 16;
 }
 
-unsigned int extract_color(ctx *c, img *texture)
+unsigned int	extract_color(ctx *c, img *texture)
 {
-	unsigned int color;
-	char	*buffer;
-	int		i;
+	unsigned int	color;
+	char			*buffer;
+	int				i;
 
 	i = (c->ray.tex_x * 4) + (c->ray.tex_y * texture->size_line);
 	if ((buffer = malloc(sizeof(unsigned int))) == NULL)
@@ -25,11 +25,10 @@ unsigned int extract_color(ctx *c, img *texture)
 	return (color);
 }
 
-int	draw_texture(ctx *c, img *texture, int x, int y, int drawEnd)
+int				draw_texture(ctx *c, img *texture, int x, int y, int drawEnd)
 {
 	double 			step;
 	int				lineHeight;
-	//int				d;
 	unsigned int 	color;
 	double			texPos;
 
@@ -39,8 +38,6 @@ int	draw_texture(ctx *c, img *texture, int x, int y, int drawEnd)
 	texPos = (y - c->screen.height / 2 + lineHeight / 2) * step;
 	while (y < drawEnd)
 	{
-		//d = y * 256 - c->screen.height * 128 + lineHeight * 128;
-		//c->ray.tex_y = ((d * texture->height) / lineHeight) / 256;
 		c->ray.tex_y = (int)texPos & (texture->height - 1);
 		texPos += step;
 		color = extract_color(c, texture);
@@ -50,11 +47,11 @@ int	draw_texture(ctx *c, img *texture, int x, int y, int drawEnd)
 	return (y);
 }
 
-void	draw_sprite(ctx *c, img *texture)
+void			draw_sprite(ctx *c, img *texture)
 {
 	img		*temp;
 	sprt	*sprite;
-	int 	i;
+	int		i;
 
 	i = -1;
 	while (++i < texture->amt)
@@ -69,9 +66,9 @@ void	draw_sprite(ctx *c, img *texture)
     }
 }
 
-void    draw_line(ctx *c, img *texture, int x, int wall_top, int wall_bottom)
+void			draw_line(ctx *c, img *texture, int x, int wall_top, int wall_bottom)
 {
-	int y;
+	int	y;
 
 	y = -1;
 	while (++y < wall_top)

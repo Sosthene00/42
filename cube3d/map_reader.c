@@ -1,33 +1,10 @@
 #include "cube3d.h"
 
-static int sanity_check(char *line, int i, int map_width)
+/*static int sanity_check(char **map, ctx *c)
 {
-    while (*line && (*line == ' '))
-        line++;
-    if (*line != '1')
-        return (2);
-    while (*line)
-    {
-        if ((i == 0) || (map_width > 0))
-        {
-            if (!((*line == '1') || (*line == ' ')))
-                return (2);
-        }
-        else
-        {
-            if (!(ft_strchr(PLAYER_START, *line) || \
-                ft_strchr(MAP_CASE, *line)))
-                return (2);
-        }
-        line++;
-    }
-    //TODO: must be able to have blank space inside the map, and not only at beginning/end
-    //of the line
-    if (*(line - 1) != '1')
-        return (2);
-    return (0);
-}
-// extract the necessary information
+
+}*/
+
 static void update_player(char dir, int x, int y, ctx *c)
 {
     if ((c->player.pos.x + c->player.pos.y) > 0)
