@@ -126,6 +126,7 @@ int parse_file(char *map_file, ctx *c)
     }
     if (close(c->fd) < 0)
         return (2);
+    c->fd = 0;
     c->map = get_map(buf);
     if (read_map(c) == 2)
         return (2);
