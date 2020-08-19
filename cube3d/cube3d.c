@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 		exit(1);
 	}
 	c = init_ctx(argv[1]);
-	if (ft_strncmp(argv[2], SCREENSHOT_OPT, ft_strlen(SCREENSHOT_OPT)) == 0)
+	if (argv[2] && (ft_strncmp(argv[2], SCREENSHOT_OPT, ft_strlen(SCREENSHOT_OPT))) == 0)
 		c->screenshot = 1;
 	//mlx_do_key_autorepeatoff(c->mlx_ptr);
 	mlx_loop_hook(c->mlx_ptr, loop_hook, c); // Define the function to call in the loop if no event

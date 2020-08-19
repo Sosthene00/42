@@ -16,7 +16,7 @@
 # include "./libft/libft.h"
 # include "./mlx.h"
 # include <math.h>
-# include <time.h> // don't forget to delete later
+# include <stdio.h>
 
 # define EXPECTED_ARG 8
 # define RESOLUTION 'R'
