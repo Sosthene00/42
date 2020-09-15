@@ -26,13 +26,13 @@
 # define SCREEN_MIN_W 200
 # define SCREEN_MIN_H 200
 
-# define KEY_ESC		0x35
-# define KEY_UP			0x0D
-# define KEY_DOWN		0x01
-# define KEY_LEFT		0x7b
-# define KEY_RIGHT		0x7c
-# define STRAFE_RIGHT	0x02
-# define STRAFE_LEFT	0x00
+# define KEY_ESC		0xff1b
+# define KEY_UP			0x77
+# define KEY_DOWN		0x73
+# define KEY_LEFT		0xff51
+# define KEY_RIGHT		0xff53
+# define STRAFE_RIGHT	0x64
+# define STRAFE_LEFT	0x61
 
 # define KEY_PRESS_MASK 	1L
 # define KEY_RELEASE_MASK  	2L
