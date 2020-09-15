@@ -30,8 +30,8 @@ int	main(int argc, char **argv)
 			ft_putstr_fd(WRONG_ARG, 2);
 	}
 	mlx_loop_hook(c->mlx_ptr, loop_hook, c);
-	mlx_hook(c->win_ptr, KEY_PRESS, KEY_PRESS_MASK, key_press, c);
-	mlx_hook(c->win_ptr, KEY_RELEASE, KEY_RELEASE_MASK, key_release, c);
-	mlx_hook(c->win_ptr, DESTROY_NOTIFY, STRUCTURE_NOTIFY_MASK, exit_hook, c);
+	mlx_hook(c->win_ptr, KEY_PRESS, KEY_PRESS_MASK, &key_press, c);
+	mlx_hook(c->win_ptr, KEY_RELEASE, KEY_RELEASE_MASK, &key_release, c);
+	mlx_hook(c->win_ptr, DESTROY_NOTIFY, STRUCTURE_NOTIFY_MASK, &exit_hook, c);
 	mlx_loop(c->mlx_ptr);
 }

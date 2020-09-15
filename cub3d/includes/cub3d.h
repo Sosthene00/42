@@ -17,6 +17,8 @@
 # include "mlx.h"
 # include <math.h>
 # include <stdio.h>
+# include <X11/Xlib.h>
+# include "mlx_int.h"
 
 # define EXPECTED_ARG 8
 # define WALLS "NOSOEAWE"
@@ -39,7 +41,11 @@
 # define KEY_PRESS 2
 # define KEY_RELEASE 3
 
+<<<<<<< HEAD
 # define DESTROY_NOTIFY	33
+=======
+# define DESTROY_NOTIFY	17
+>>>>>>> WIP memory
 # define STRUCTURE_NOTIFY_MASK 1L<<17
 
 # define WRONG_FILE "Error\nFile absent or wrong extension\n"
@@ -111,7 +117,7 @@ typedef struct		s_clr
 	unsigned int	floor;
 }					t_clr;
 
-typedef	struct		s_img
+typedef	struct		s_image
 {
 	void			*img_ptr;
 	char			*data;
@@ -125,8 +131,8 @@ typedef	struct		s_img
 	double			map_x;
 	double			map_y;
 	double			distance;
-	struct s_img	*next;
-}					t_img;
+	struct s_image	*next;
+}					t_ima;
 
 typedef	struct		s_bmp
 {
@@ -152,12 +158,12 @@ typedef	struct		s_ctx
 	t_ply			player;
 	t_clr			color;
 	t_ray			ray;
-	t_img			screen;
-	t_img			n_wall;
-	t_img			e_wall;
-	t_img			w_wall;
-	t_img			s_wall;
-	t_img			sprite;
+	t_ima			screen;
+	t_ima			n_wall;
+	t_ima			e_wall;
+	t_ima			w_wall;
+	t_ima			s_wall;
+	t_ima			sprite;
 	t_bmp			screenshot;
 	void			*mlx_ptr;
 	void			*win_ptr;
@@ -189,6 +195,7 @@ typedef struct		s_sprt
 t_ctx				*init_ctx(char *filename);
 
 void				init_win(t_ctx *c);
+void				init_img(t_ctx *c);
 
 int					loop_hook(t_ctx *c);
 
@@ -216,33 +223,33 @@ void				move_right(t_ctx *c);
 
 void				move_left(t_ctx *c);
 
-void				put_pxl(t_img *screen, int x, int y, unsigned int color);
+void				put_pxl(t_ima *screen, int x, int y, unsigned int color);
 
 void				exit_program(t_ctx *c, int error_code);
 
 void				raycasting(t_ctx *c);
 
-void				draw_line(t_ctx *c, t_img *texture, int x);
+void				draw_line(t_ctx *c, t_ima *texture, int x);
 
-unsigned int		extract_color(t_ctx *c, t_img *texture);
+unsigned int		extract_color(t_ctx *c, t_ima *texture);
 
 void				adapt_screen_size(t_ctx *c);
 
-void				calc_tex_x(t_ctx *c, t_img *tex);
+void				calc_tex_x(t_ctx *c, t_ima *tex);
 
-t_img				*wall_orientation(t_ctx *c);
+t_ima				*wall_orientation(t_ctx *c);
 
 int					update_sprite(t_ctx *c, int x, int y);
 
-void				draw_sprite(t_ctx *c, t_img *sprite);
+void				draw_sprite(t_ctx *c, t_ima *sprite);
 
-void				order_sprite_dist(t_ctx *c, t_img *sprite);
+void				order_sprite_dist(t_ctx *c, t_ima *sprite);
 
-t_sprt				*init_sprite(t_ctx *c, t_img *sprite);
+t_sprt				*init_sprite(t_ctx *c, t_ima *sprite);
 
 void				get_values(t_ctx *c, t_sprt *sprite);
 
-void				draw_stripes(t_ctx *c, t_img *texture, t_sprt *sprite);
+void				draw_stripes(t_ctx *c, t_ima *texture, t_sprt *sprite);
 
 void				free_all(t_ctx *c);
 

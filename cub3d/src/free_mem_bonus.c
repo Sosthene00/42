@@ -12,10 +12,10 @@
 
 #include "cub3d_bonus.h"
 
-static void	free_sprite_list(t_img head)
+static void	free_sprite_list(t_ima head)
 {
-	t_img *cur;
-	t_img *next;
+	t_ima *cur;
+	t_ima *next;
 
 	cur = head.next;
 	while (cur != NULL)

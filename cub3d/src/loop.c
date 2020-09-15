@@ -26,10 +26,12 @@ int		loop_hook(t_ctx *c)
 		move_left(c);
 	if (c->player.strafe_left)
 		strafe_left(c);
+	init_img(c);
 	raycasting(c);
 	if (c->do_screenshot == 1)
 		save_screenshot(c);
 	mlx_put_image_to_window(c->mlx_ptr, c->win_ptr, c->screen.img_ptr, 0, 0);
+	mlx_destroy_image(c->mlx_ptr, c->screen.img_ptr);
 	mlx_do_sync(c->mlx_ptr);
 	return (0);
 }

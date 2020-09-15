@@ -12,9 +12,9 @@
 
 #include "cub3d_bonus.h"
 
-static void	add_sprite_to_list(t_img **alst, t_img *new)
+static void	add_sprite_to_list(t_ima **alst, t_ima *new)
 {
-	t_img	*temp;
+	t_ima	*temp;
 
 	temp = *alst;
 	while (temp && temp->next)
@@ -27,8 +27,8 @@ static void	add_sprite_to_list(t_img **alst, t_img *new)
 
 int			update_sprite(t_ctx *c, int x, int y)
 {
-	t_img *texture;
-	t_img *root;
+	t_ima *texture;
+	t_ima *root;
 
 	root = &(c->sprite);
 	if (root->map_x == 0)

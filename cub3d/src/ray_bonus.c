@@ -14,7 +14,7 @@
 
 static void		ray_draw(t_ctx *c, int x)
 {
-	t_img		*texture;
+	t_ima		*texture;
 
 	c->ray.wall_height = (int)floor(c->screen.height / c->ray.dist);
 	c->ray.wall_top = -c->ray.wall_height / 2 + c->screen.height / 2;

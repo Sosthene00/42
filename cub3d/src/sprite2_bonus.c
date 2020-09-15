@@ -12,7 +12,7 @@
 
 #include "cub3d_bonus.h"
 
-static void		swap_order(t_img *a, t_img *b)
+static void		swap_order(t_ima *a, t_ima *b)
 {
 	int c;
 
@@ -21,9 +21,9 @@ static void		swap_order(t_img *a, t_img *b)
 	b->order = c;
 }
 
-static t_img	*go_to_order(t_img *sprite, int n)
+static t_ima	*go_to_order(t_ima *sprite, int n)
 {
-	t_img *temp;
+	t_ima *temp;
 
 	temp = sprite;
 	while (temp->order != n)
@@ -31,12 +31,12 @@ static t_img	*go_to_order(t_img *sprite, int n)
 	return (temp);
 }
 
-static void		bubblesort(t_img *sprite)
+static void		bubblesort(t_ima *sprite)
 {
 	int		i;
 	int		j;
-	t_img	*a;
-	t_img	*b;
+	t_ima	*a;
+	t_ima	*b;
 
 	i = -1;
 	while (++i < (sprite->amt))
@@ -52,9 +52,9 @@ static void		bubblesort(t_img *sprite)
 	}
 }
 
-void			order_sprite_dist(t_ctx *c, t_img *sprite)
+void			order_sprite_dist(t_ctx *c, t_ima *sprite)
 {
-	t_img	*temp;
+	t_ima	*temp;
 	int		count;
 
 	count = 0;

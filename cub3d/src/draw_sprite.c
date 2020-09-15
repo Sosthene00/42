@@ -37,7 +37,7 @@ void	get_values(t_ctx *c, t_sprt *s)
 		s->draw_end_x = c->screen.width - 1;
 }
 
-void	draw_stripes(t_ctx *c, t_img *texture, t_sprt *s)
+void	draw_stripes(t_ctx *c, t_ima *texture, t_sprt *s)
 {
 	int				stripe;
 	int				y;
@@ -66,7 +66,7 @@ void	draw_stripes(t_ctx *c, t_img *texture, t_sprt *s)
 	}
 }
 
-t_sprt	*init_sprite(t_ctx *c, t_img *texture)
+t_sprt	*init_sprite(t_ctx *c, t_ima *texture)
 {
 	t_sprt *sprite_data;
 

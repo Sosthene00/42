@@ -66,6 +66,10 @@ void		init_win(t_ctx *c)
 	if (!(c->win_ptr = mlx_new_window(c->mlx_ptr, c->screen.width, \
 			c->screen.height, "Cub3d - Knee deep in Hell")))
 		exit_program(c, 9);
+}
+
+void		init_img(t_ctx *c)
+{
 	c->screen.img_ptr = mlx_new_image(c->mlx_ptr, c->screen.width,
 		c->screen.height);
 	c->screen.data = mlx_get_data_addr(c->screen.img_ptr,

@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void			put_pxl(t_img *screen, int x, int y, unsigned int color)
+void			put_pxl(t_ima *screen, int x, int y, unsigned int color)
 {
 	int		i;
 
@@ -20,7 +20,7 @@ void			put_pxl(t_img *screen, int x, int y, unsigned int color)
 	*(unsigned int*)(screen->data + i) = color;
 }
 
-unsigned int	extract_color(t_ctx *c, t_img *texture)
+unsigned int	extract_color(t_ctx *c, t_ima *texture)
 {
 	unsigned int	color;
 	int				i;
@@ -30,7 +30,7 @@ unsigned int	extract_color(t_ctx *c, t_img *texture)
 	return (color);
 }
 
-static int		draw_walls(t_ctx *c, t_img *texture, int x, int y)
+static int		draw_walls(t_ctx *c, t_ima *texture, int x, int y)
 {
 	int				d;
 	unsigned int	color;
@@ -47,9 +47,9 @@ static int		draw_walls(t_ctx *c, t_img *texture, int x, int y)
 	return (y);
 }
 
-void			draw_sprite(t_ctx *c, t_img *texture)
+void			draw_sprite(t_ctx *c, t_ima *texture)
 {
-	t_img	*temp;
+	t_ima	*temp;
 	t_sprt	*sprite;
 	int		i;
 
@@ -66,7 +66,7 @@ void			draw_sprite(t_ctx *c, t_img *texture)
 	}
 }
 
-void			draw_line(t_ctx *c, t_img *texture, int x)
+void			draw_line(t_ctx *c, t_ima *texture, int x)
 {
 	int	y;
 

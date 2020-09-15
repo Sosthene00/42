@@ -12,7 +12,7 @@
 
 #include "cub3d_bonus.h"
 
-void	calc_tex_x(t_ctx *c, t_img *tex)
+void	calc_tex_x(t_ctx *c, t_ima *tex)
 {
 	if (c->ray.hit_side == 0)
 		c->ray.wall_x = c->ray.pos.y + c->ray.dist * c->ray.dir.y;
@@ -23,7 +23,7 @@ void	calc_tex_x(t_ctx *c, t_img *tex)
 	c->ray.tex_x = tex->width - c->ray.tex_x - 1;
 }
 
-t_img	*wall_orientation(t_ctx *c)
+t_ima	*wall_orientation(t_ctx *c)
 {
 	if ((c->ray.hit_side == 0) && (c->ray.step.x == -1))
 		return (&(c->n_wall));
@@ -36,7 +36,7 @@ t_img	*wall_orientation(t_ctx *c)
 	return (NULL);
 }
 
-int		init_texture(t_img *txt, char *filename, t_ctx *c)
+int		init_texture(t_ima *txt, char *filename, t_ctx *c)
 {
 	if (!(txt->img_ptr = mlx_xpm_file_to_image(c->mlx_ptr, filename,
 		&(txt->width), &(txt->height))))

@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-static void		get_bitmap_header(t_bmp *file, t_img *screen)
+static void		get_bitmap_header(t_bmp *file, t_ima *screen)
 {
 	file->pixel_data_offset = 54;
 	file->filesize = ((screen->size_line) * screen->height) +
@@ -48,7 +48,7 @@ static ssize_t	write_data(int fd, void *buffer, size_t n)
 	return (count);
 }
 
-static void		*reverse_data(t_img *screen)
+static void		*reverse_data(t_ima *screen)
 {
 	char	*res;
 	int		i;
@@ -72,7 +72,7 @@ static void		*reverse_data(t_img *screen)
 	return (res);
 }
 
-static ssize_t	write_to_disk(int fd, t_bmp *f, t_img *screen)
+static ssize_t	write_to_disk(int fd, t_bmp *f, t_ima *screen)
 {
 	ssize_t	count;
 	size_t	data_size;
