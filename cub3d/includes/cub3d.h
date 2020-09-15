@@ -39,8 +39,8 @@
 # define KEY_PRESS 2
 # define KEY_RELEASE 3
 
-# define DESTROY_NOTIFY	17
-# define STRUCTURE_NOTIFY_MASK 131072L
+# define DESTROY_NOTIFY	33
+# define STRUCTURE_NOTIFY_MASK 1L<<17
 
 # define WRONG_FILE "Error\nFile absent or wrong extension\n"
 # define ERROR_PARSING "Error\nIncorrect map file content\n"
