@@ -93,7 +93,7 @@ int				get_color(char **items, t_ctx *c)
 	unsigned int	color;
 
 	val = ft_split(items[1], ',');
-	if (!(val[0]) || !(val[1]) || !(val[2]) || \
+	if (!(val[0]) || !(val[1]) || !(val[2]) || val[3] ||\
 		!(ft_isdigit(*val[0])) || !(ft_isdigit(*val[1])) ||
 		!(ft_isdigit(*val[2])))
 		return (2);

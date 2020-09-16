@@ -1,7 +1,8 @@
 NAME = cub3d
 BONUS_NAME = cub3d_bonus
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g3
+CFLAGS = -Wall -Werror -Wextra -g 
+DEBUG = -fsanitize=address
 RM = rm -f
 SRC_DIR = ./src
 OBJ_DIR = ./obj
@@ -30,6 +31,7 @@ $(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
 $(NAME): | $(OBJ_DIR) $(OBJ)
 	make -C $(LIBFTDIR)
 	make -C $(MLXDIR)
+	#$(CC) $(CFLAGS) $(DEBUG) -o $@ $(OBJ) -L$(LIBFTDIR) -L$(MLXDIR) -I$(INC_DIR) -lft -lm -lmlx -lX11 -lXext  
 	$(CC) $(CFLAGS) -o $@ $(OBJ) -L$(LIBFTDIR) -L$(MLXDIR) -I$(INC_DIR) -lft -lm -lmlx -lX11 -lXext  
 
 $(BONUS_NAME): | $(OBJ_DIR) $(B_OBJ)
