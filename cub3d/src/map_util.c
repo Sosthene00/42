@@ -32,34 +32,6 @@ int		is_map(char *line)
 	return (1);
 }
 
-/*char	**copy_map(t_ctx *c, char **bare_map)
-{
-	char	**copy;
-	int		x;
-
-	x = -1;
-	while (bare_map[++x])
-	{
-		if (ft_strlen(bare_map[x]) > (size_t)c->map_height)
-			c->map_height = ft_strlen(bare_map[x]);
-	}
-	c->map_width = x;
-	if (!(copy = ft_calloc(c->map_width + 3, sizeof(*copy))))
-		exit_program(c, 9);
-	if (!(copy[0] = ft_calloc(c->map_height, sizeof(**copy))))
-		exit_program(c, 9);
-	if (!(copy[c->map_width + 1] = ft_calloc(c->map_height, sizeof(**copy))))
-		exit_program(c, 9);
-	x = 0;
-	while ((++x - 1) < c->map_width)
-	{
-		if (!(copy[x] = ft_strdup(bare_map[x - 1])))
-			exit_program(c, 9);
-	}
-	copy[c->map_width + 2] = 0;
-	return (copy);
-}*/
-
 void	follow_wall(char **map, t_ixy start, int x, int y)
 {
 	map[x][y] = '3';
