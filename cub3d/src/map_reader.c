@@ -94,9 +94,9 @@ int				read_map(t_ctx *c)
 	int x;
 	int ret;
 
-	x = 1;
+	x = 0;
 	ret = 0;
-	while (x < c->map_width)
+	while (c->map[x])
 	{
 		if (read_line(c->map[x], x, c) == 2)
 			exit_program(c, 2);

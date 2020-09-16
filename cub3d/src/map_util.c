@@ -32,7 +32,7 @@ int		is_map(char *line)
 	return (1);
 }
 
-char	**copy_map(t_ctx *c, char **bare_map)
+/*char	**copy_map(t_ctx *c, char **bare_map)
 {
 	char	**copy;
 	int		x;
@@ -56,8 +56,9 @@ char	**copy_map(t_ctx *c, char **bare_map)
 		if (!(copy[x] = ft_strdup(bare_map[x - 1])))
 			exit_program(c, 9);
 	}
+	copy[c->map_width + 2] = 0;
 	return (copy);
-}
+}*/
 
 void	follow_wall(char **map, t_ixy start, int x, int y)
 {
@@ -70,14 +71,14 @@ void	follow_wall(char **map, t_ixy start, int x, int y)
 		follow_wall(map, start, x, y - 1);
 	if (x > 0 && map[x - 1][y] == '1')
 		follow_wall(map, start, x - 1, y);
-	if (map[x + 1][y] == '1')
+	if (map[x + 1] && map[x + 1][y] == '1')
 		follow_wall(map, start, x + 1, y);
-	if (map[x + 1][y + 1] == '1')
+	if (map[x + 1] && map[x + 1][y + 1] == '1')
 		follow_wall(map, start, x + 1, y + 1);
 	if (y > 0 && x > 0 && (map[x - 1][y - 1] == '1'))
 		follow_wall(map, start, x - 1, y - 1);
-	if (x > 0 && y > 0 && map[x - 1][y + 1] == '1')
+	if (x > 0 && map[x - 1][y + 1] == '1')
 		follow_wall(map, start, x - 1, y + 1);
-	if (map[x + 1][y - 1] == '1')
+	if (map[x + 1] && y > 0 && map[x + 1][y - 1] == '1')
 		follow_wall(map, start, x + 1, y - 1);
 }

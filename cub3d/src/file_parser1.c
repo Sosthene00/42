@@ -12,20 +12,16 @@
 
 #include "cub3d.h"
 
-static char	**get_map(t_ctx *c, char *buf)
+static char	**get_map(char *buf)
 {
 	char **map;
-	char **bare_map;
 	char *trimmed;
 
 	if (!(trimmed = ft_strtrim(buf, "+")))
 		return (NULL);
-	if (!(bare_map = ft_split(trimmed, '+')))
-		return (NULL);
-	if (!(map = copy_map(c, bare_map)))
+	if (!(map = ft_split(trimmed, '+')))
 		return (NULL);
 	free(trimmed);
-	ft_freesplit(bare_map);
 	return (map);
 }
 
@@ -75,7 +71,7 @@ static void	extract_map_from_file(t_ctx *c, char *line)
 	}
 	if (!(buf = concatenate(buf, line)))
 		exit_program(c, 9);
-	c->map = get_map(c, buf);
+	c->map = get_map(buf);
 	free(line);
 	free(buf);
 }
