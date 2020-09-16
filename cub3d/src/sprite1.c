@@ -35,6 +35,7 @@ int			update_sprite(t_ctx *c, int x, int y)
 	{
 		root->map_x = ((double)x + 0.5);
 		root->map_y = ((double)y + 0.5);
+		root->amt = 1;
 		return (0);
 	}
 	else
