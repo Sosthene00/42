@@ -260,8 +260,6 @@ int					get_color(char **items, t_ctx *c);
 
 int					update_data(char **items, t_ctx *c);
 
-char				**copy_map(t_ctx *c, char **bare_map);
-
 void				follow_wall(char **map, t_ixy start, int x, int y);
 
 void				strafe_right(t_ctx *c);
