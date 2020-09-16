@@ -41,11 +41,7 @@
 # define KEY_PRESS 2
 # define KEY_RELEASE 3
 
-<<<<<<< HEAD
 # define DESTROY_NOTIFY	33
-=======
-# define DESTROY_NOTIFY	17
->>>>>>> WIP memory
 # define STRUCTURE_NOTIFY_MASK 1L<<17
 
 # define WRONG_FILE "Error\nFile absent or wrong extension\n"
