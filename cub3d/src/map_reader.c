@@ -39,8 +39,8 @@ static	void	update_player(char dir, int x, int y, t_ctx *c)
 {
 	if ((c->player.pos.x + c->player.pos.y) > 0)
 		exit_program(c, 2);
-	c->player.pos.x = x;
-	c->player.pos.y = y;
+	c->player.pos.x = (double)x + 0.5;
+	c->player.pos.y = (double)y + 0.5;
 	if (dir == 'N')
 	{
 		c->player.dir.x = -1;
