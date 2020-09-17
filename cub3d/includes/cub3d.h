@@ -55,10 +55,6 @@
 # define FILE_EXT "cub"
 # define SCREENSHOT_OPT "--save"
 
-# define UDIV 1
-# define VDIV 1
-# define VMOVE 0.0
-
 typedef struct		s_ixy
 {
 	int				x;
@@ -119,7 +115,7 @@ typedef	struct		s_image
 	char			*data;
 	int				width;
 	int				height;
-	int				bits_per_pixel;
+	int				bpp;
 	int				size_line;
 	int				endianness;
 	int				order;

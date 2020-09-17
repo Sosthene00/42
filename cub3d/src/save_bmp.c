@@ -21,7 +21,7 @@ static void		get_bitmap_header(t_bmp *file, t_ima *screen)
 	file->image_width = screen->width;
 	file->image_height = screen->height;
 	file->planes = 1;
-	file->bpp = (unsigned short)screen->bits_per_pixel;
+	file->bpp = (unsigned short)screen->bpp;
 }
 
 static ssize_t	write_data(int fd, void *buffer, size_t n)
@@ -34,9 +34,9 @@ static ssize_t	write_data(int fd, void *buffer, size_t n)
 		return (-1);
 	count = 0;
 	to_free = buffer;
-	while (n > PIPE_BUF)
+	while (n > 4096)
 	{
-		temp = write(fd, buffer, PIPE_BUF);
+		temp = write(fd, buffer, 4096);
 		if (temp == -1)
 			return (-1);
 		buffer += temp;

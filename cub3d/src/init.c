@@ -73,7 +73,7 @@ void		init_img(t_ctx *c)
 	c->screen.img_ptr = mlx_new_image(c->mlx_ptr, c->screen.width,
 		c->screen.height);
 	c->screen.data = mlx_get_data_addr(c->screen.img_ptr,
-		&(c->screen.bits_per_pixel), &(c->screen.size_line),
+		&(c->screen.bpp), &(c->screen.size_line),
 		&(c->screen.endianness));
 }
 

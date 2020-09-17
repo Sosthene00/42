@@ -42,7 +42,7 @@ int		init_texture(t_ima *txt, char *filename, t_ctx *c)
 		&(txt->width), &(txt->height))))
 		return (2);
 	txt->data = mlx_get_data_addr(txt->img_ptr,
-		&(txt->bits_per_pixel), &(txt->size_line), &(txt->endianness));
+		&(txt->bpp), &(txt->size_line), &(txt->endianness));
 	return (0);
 }
 

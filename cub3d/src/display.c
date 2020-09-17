@@ -20,19 +20,20 @@ void			put_pxl(t_ima *screen, int x, int y, unsigned int color)
 	*(unsigned int*)(screen->data + i) = color;
 }
 
-unsigned int	extract_color(t_ctx *c, t_ima *texture)
+unsigned int	extract_color(t_ctx *c, t_ima *tex)
 {
 	unsigned int	color;
 	int				i;
 
-	i = (c->ray.tex_x * 4) + (c->ray.tex_y * texture->size_line);
-	color = *(unsigned int*)(texture->data + i);
+	i = (c->ray.tex_x % c->sprite.width * tex->bpp / 8) +
+		(c->ray.tex_y % c->sprite.height * tex->size_line);
+	color = *(unsigned int*)(tex->data + i);
 	return (color);
 }
 
 static int		draw_walls(t_ctx *c, t_ima *texture, int x, int y)
 {
-	int				d;
+	unsigned int	d;
 	unsigned int	color;
 
 	calc_tex_x(c, texture);
