@@ -38,6 +38,16 @@ t_ima	*wall_orientation(t_ctx *c)
 
 int		init_texture(t_ima *txt, char *filename, t_ctx *c)
 {
+	if (txt->img_ptr != 0)
+	{
+		print_warning(TEXTURE_EXIST);
+		return (0);
+	}
+	if (open(filename, O_RDONLY) < 0)
+	{
+		print_error(MISSING_TEXTURE);
+		return (2);
+	}
 	if (!(txt->img_ptr = mlx_xpm_file_to_image(c->mlx_ptr, filename,
 		&(txt->width), &(txt->height))))
 		return (2);
