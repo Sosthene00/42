@@ -12,17 +12,6 @@
 
 #include "cub3d.h"
 
-static void	mlx_terminate(void *mlxptr)
-{
-	struct s_xvar	*xvar;
-
-	xvar = mlxptr;
-	if (xvar->private_cmap)
-		XFreeColormap(xvar->display, (Colormap)xvar->private_cmap);
-	XCloseDisplay(xvar->display);
-	free(xvar);
-}
-
 static void free_mlx_img(t_ctx *c)
 {
 	if (c->sprite.img_ptr)
@@ -60,8 +49,7 @@ static void	free_context(t_ctx *c)
 	if (c->map)
 		ft_freesplit(c->map);
 	free_mlx_img(c);
-	if (c->mlx_ptr)
-		mlx_terminate(c->mlx_ptr);
+	free(c->mlx_ptr);
 	if (c)
 		free(c);
 }
