@@ -47,9 +47,9 @@ void			strafe_right(t_ctx *c)
 	new_dir = rotate_90_right(c);
 	new_x = (int)(c->player.pos.x + new_dir->x * c->player.speed_move);
 	new_y = (int)(c->player.pos.y + new_dir->y * c->player.speed_move);
-	if (c->map[new_x][(int)c->player.pos.y] != '3')
+	if (c->map[new_x][(int)c->player.pos.y] == '0')
 		c->player.pos.x += new_dir->x * c->player.speed_move;
-	if (c->map[(int)c->player.pos.x][new_y] != '3')
+	if (c->map[(int)c->player.pos.x][new_y] == '0')
 		c->player.pos.y += new_dir->y * c->player.speed_move;
 	free(new_dir);
 }
@@ -63,9 +63,9 @@ void			strafe_left(t_ctx *c)
 	new_dir = rotate_90_left(c);
 	new_x = (int)(c->player.pos.x + new_dir->x * c->player.speed_move);
 	new_y = (int)(c->player.pos.y + new_dir->y * c->player.speed_move);
-	if (c->map[new_x][(int)c->player.pos.y] != '3')
+	if (c->map[new_x][(int)c->player.pos.y] == '0')
 		c->player.pos.x += new_dir->x * c->player.speed_move;
-	if (c->map[(int)c->player.pos.x][new_y] != '3')
+	if (c->map[(int)c->player.pos.x][new_y] == '0')
 		c->player.pos.y += new_dir->y * c->player.speed_move;
 	free(new_dir);
 }
