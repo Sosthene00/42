@@ -18,17 +18,18 @@ int	main(int argc, char **argv)
 
 	if (((argc < 2) || (argc > 3)) || (check_file_extension(argv[1])))
 	{
-		print_error(1);
+		print_error(WRONG_FILE);
 		exit(1);
 	}
 	c = init_ctx(argv[1]);
 	if (argc == 3)
 	{
 		if (!(ft_strncmp(argv[2], SCREENSHOT_OPT, ft_strlen(SCREENSHOT_OPT))))
-			c->do_screenshot = 1;
+			save_screenshot(c);
 		else
-			ft_putstr_fd(WRONG_ARG, 2);
+			print_warning(WRONG_ARG);
 	}
+	init_win(c);
 	mlx_loop_hook(c->mlx_ptr, loop_hook, c);
 	mlx_hook(c->win_ptr, KEY_PRESS, KEY_PRESS_MASK, key_press, c);
 	mlx_hook(c->win_ptr, KEY_RELEASE, KEY_RELEASE_MASK, key_release, c);

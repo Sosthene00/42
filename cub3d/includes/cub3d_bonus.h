@@ -13,13 +13,19 @@
 #ifndef CUB3D_BONUS_H
 # define CUB3D_BONUS_H
 
-# include "libft.h"
-# include "mlx.h"
 # include <math.h>
 # include <stdio.h>
+# include <X11/Xlib.h>
+# include <errno.h>
+
+# include "mlx_int.h"
+# include "libft.h"
+# include "mlx.h"
+
+# include "cub3d_exit.h"
 
 # define EXPECTED_ARG 8
-# define WALLS "NOSOEAWESK"
+# define WALLS "NOSOEAWE"
 # define PLAYER_START "NSEW"
 # define SEP '+'
 
@@ -39,29 +45,11 @@
 # define KEY_PRESS 2
 # define KEY_RELEASE 3
 
-<<<<<<< HEAD
 # define DESTROY_NOTIFY	33
-# define STRUCTURE_NOTIFY_MASK 131072L
-=======
-# define DESTROY_NOTIFY	17
-# define STRUCTURE_NOTIFY_MASK 1L >> 17
->>>>>>> WIP memory
-
-# define WRONG_FILE "Error\nFile absent or wrong extension\n"
-# define ERROR_PARSING "Error\nIncorrect map file content\n"
-# define ERROR_WRITING	"Error\nCouldn't save a screenshot\n"
-# define MEMORY_ERROR "Error\nmemory error while initializing mlx or malloc\n"
-# define WRONG_ARG "Warning\nsecond argument can only be \"--save\"\n"
-# define TOO_MANY_ARG "Warning\nignoring lines before the map\n"
-# define SCREEN_EXIST "Warning\nscreen already exists, ignoring new values\n"
-# define COLOR_EXIST "Warning\ncolor already exists, ignoring new values\n"
+# define STRUCTURE_NOTIFY_MASK 1L<<17
 
 # define FILE_EXT "cub"
 # define SCREENSHOT_OPT "--save"
-
-# define UDIV 1
-# define VDIV 1
-# define VMOVE 0.0
 
 typedef struct		s_ixy
 {
@@ -123,7 +111,7 @@ typedef	struct		s_image
 	char			*data;
 	int				width;
 	int				height;
-	int				bits_per_pixel;
+	int				bpp;
 	int				size_line;
 	int				endianness;
 	int				order;
@@ -164,12 +152,10 @@ typedef	struct		s_ctx
 	t_ima			w_wall;
 	t_ima			s_wall;
 	t_ima			sprite;
-	t_ima			skybox;
 	t_bmp			screenshot;
 	void			*mlx_ptr;
 	void			*win_ptr;
 	int				fd;
-	int				do_screenshot;
 	int				complete;
 	int				map_width;
 	int				map_height;
@@ -197,6 +183,8 @@ t_ctx				*init_ctx(char *filename);
 
 void				init_win(t_ctx *c);
 
+void				init_img(t_ctx *c);
+
 int					loop_hook(t_ctx *c);
 
 int					key_press(int key, t_ctx *c);
@@ -207,13 +195,11 @@ int					key_hook(int key, t_ctx *c);
 
 int					check_file_extension(char *filename);
 
-int					parse_file(char *map_file, t_ctx *c);
+void				parse_file(char *map_file, t_ctx *c);
 
 int					extract_textures(char **items, t_ctx *c);
 
-int					read_map(t_ctx *c);
-
-void				print_error(int error_code);
+void				read_map(t_ctx *c);
 
 void				move_up(t_ctx *c);
 
@@ -224,8 +210,6 @@ void				move_right(t_ctx *c);
 void				move_left(t_ctx *c);
 
 void				put_pxl(t_ima *screen, int x, int y, unsigned int color);
-
-void				exit_program(t_ctx *c, int error_code);
 
 void				raycasting(t_ctx *c);
 
@@ -267,8 +251,6 @@ int					get_color(char **items, t_ctx *c);
 
 int					update_data(char **items, t_ctx *c);
 
-char				**copy_map(t_ctx *c, char **bare_map);
-
 void				follow_wall(char **map, t_ixy start, int x, int y);
 
 void				strafe_right(t_ctx *c);
@@ -276,5 +258,7 @@ void				strafe_right(t_ctx *c);
 void				strafe_left(t_ctx *c);
 
 int					is_map(char *line);
+
+void				exit_program(t_ctx *c, t_errid error_code);
 
 #endif

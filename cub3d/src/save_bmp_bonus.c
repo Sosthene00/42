@@ -21,7 +21,7 @@ static void		get_bitmap_header(t_bmp *file, t_ima *screen)
 	file->image_width = screen->width;
 	file->image_height = screen->height;
 	file->planes = 1;
-	file->bpp = (unsigned short)screen->bits_per_pixel;
+	file->bpp = (unsigned short)screen->bpp;
 }
 
 static ssize_t	write_data(int fd, void *buffer, size_t n)
@@ -34,9 +34,9 @@ static ssize_t	write_data(int fd, void *buffer, size_t n)
 		return (-1);
 	count = 0;
 	to_free = buffer;
-	while (n > PIPE_BUF)
+	while (n > 4096)
 	{
-		temp = write(fd, buffer, PIPE_BUF);
+		temp = write(fd, buffer, 4096);
 		if (temp == -1)
 			return (-1);
 		buffer += temp;
@@ -103,15 +103,16 @@ void			save_screenshot(t_ctx *c)
 {
 	int fd;
 
-	c->do_screenshot = 0;
 	if ((fd = open("screenshot.bmp", O_WRONLY | O_CREAT | O_TRUNC,
 			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) < 0)
-		exit_program(c, 3);
+		exit_program(c, OPEN_FAILURE);
+	init_img(c);
+	raycasting(c);
 	get_bitmap_header(&(c->screenshot), &(c->screen));
 	if (write_to_disk(fd, &(c->screenshot), &(c->screen)) !=
 		c->screenshot.filesize)
-		exit_program(c, 3);
+		exit_program(c, ERROR_WRITING);
 	if (close(fd) < 0)
-		exit_program(c, 3);
+		exit_program(c, DEFAULT_ERROR);
 	exit_program(c, 0);
 }

@@ -38,11 +38,21 @@ t_ima	*wall_orientation(t_ctx *c)
 
 int		init_texture(t_ima *txt, char *filename, t_ctx *c)
 {
+	if (txt->img_ptr != 0)
+	{
+		print_warning(TEXTURE_EXIST);
+		return (0);
+	}
+	if (open(filename, O_RDONLY) < 0)
+	{
+		print_error(MISSING_TEXTURE);
+		return (2);
+	}
 	if (!(txt->img_ptr = mlx_xpm_file_to_image(c->mlx_ptr, filename,
 		&(txt->width), &(txt->height))))
 		return (2);
 	txt->data = mlx_get_data_addr(txt->img_ptr,
-		&(txt->bits_per_pixel), &(txt->size_line), &(txt->endianness));
+		&(txt->bpp), &(txt->size_line), &(txt->endianness));
 	return (0);
 }
 
@@ -56,9 +66,7 @@ int		extract_textures(char **items, t_ctx *c)
 		return (init_texture(&(c->w_wall), items[1], c));
 	else if (ft_strncmp(items[0], "EA", 2) == 0)
 		return (init_texture(&(c->e_wall), items[1], c));
-	else if (ft_memcmp(items[0], &"S", 2) == 0)
+	else if (ft_strncmp(items[0], "S", 1) == 0)
 		return (init_texture(&(c->sprite), items[1], c));
-	else if (ft_memcmp(items[0], &"SK", 2) == 0)
-		return (init_texture(&(c->skybox), items[1], c));
 	return (2);
 }

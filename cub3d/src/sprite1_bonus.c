@@ -35,12 +35,13 @@ int			update_sprite(t_ctx *c, int x, int y)
 	{
 		root->map_x = ((double)x + 0.5);
 		root->map_y = ((double)y + 0.5);
+		root->amt = 1;
 		return (0);
 	}
 	else
 	{
 		if (!(texture = ft_calloc(1, sizeof(*texture))))
-			exit_program(c, 9);
+			exit_program(c, MEMORY_ERROR);
 		texture->map_x = ((double)x + 0.5);
 		texture->map_y = ((double)y + 0.5);
 		add_sprite_to_list(&root, texture);

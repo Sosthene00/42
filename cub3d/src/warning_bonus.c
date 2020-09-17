@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static t_warn	warnings[] =
 {
@@ -19,7 +19,7 @@ static t_warn	warnings[] =
 	{ COLOR_EXIST, "color already exists, ignoring new values\n" },
 	{ TEXTURE_EXIST, "texture already exists, ignoring new values\n" },
 	{ RES_HIGH, "Resolution too high, setting to screen size\n"},
-	{ RES_LOW, "Resolution can't be zero or negative, setting minimal values\n"},
+	{ RES_LOW, "Resolution can't be zero or negative, setting\n"},
 	{ DEFAULT_WARN, "Unknown warning\n"},
 };
 

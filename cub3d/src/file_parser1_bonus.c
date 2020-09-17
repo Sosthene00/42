@@ -12,20 +12,16 @@
 
 #include "cub3d_bonus.h"
 
-static char	**get_map(t_ctx *c, char *buf)
+static char	**get_map(char *buf)
 {
 	char **map;
-	char **bare_map;
 	char *trimmed;
 
 	if (!(trimmed = ft_strtrim(buf, "+")))
 		return (NULL);
-	if (!(bare_map = ft_split(trimmed, '+')))
-		return (NULL);
-	if (!(map = copy_map(c, bare_map)))
+	if (!(map = ft_split(trimmed, '+')))
 		return (NULL);
 	free(trimmed);
-	ft_freesplit(bare_map);
 	return (map);
 }
 
@@ -56,9 +52,9 @@ static void	extract_map_from_file(t_ctx *c, char *line)
 	char *buf;
 
 	if (!(buf = ft_calloc(1, sizeof(*buf))))
-		exit_program(c, 9);
+		exit_program(c, MEMORY_ERROR);
 	if (!(buf = concatenate(buf, line)))
-		exit_program(c, 9);
+		exit_program(c, MEMORY_ERROR);
 	free(line);
 	while (get_next_line(c->fd, &line) > 0)
 	{
@@ -66,16 +62,16 @@ static void	extract_map_from_file(t_ctx *c, char *line)
 		{
 			free(line);
 			if (buf[0] != 0)
-				exit_program(c, 2);
+				exit_program(c, MAP_ERROR);
 			continue;
 		}
 		if (!(buf = concatenate(buf, line)))
-			exit_program(c, 9);
+			exit_program(c, MEMORY_ERROR);
 		free(line);
 	}
 	if (!(buf = concatenate(buf, line)))
-		exit_program(c, 9);
-	c->map = get_map(c, buf);
+		exit_program(c, MEMORY_ERROR);
+	c->map = get_map(buf);
 	free(line);
 	free(buf);
 }
@@ -94,7 +90,7 @@ static char	*extract_params_from_file(t_ctx *c)
 			if (update_data(items, c) > 0)
 			{
 				ft_freesplit(items);
-				exit_program(c, 2);
+				exit_program(c, INVALID_PARAM);
 			}
 			ft_freesplit(items);
 		}
@@ -102,22 +98,20 @@ static char	*extract_params_from_file(t_ctx *c)
 			free(line);
 	}
 	if (is_complete(c) > 0)
-		exit_program(c, 2);
+		exit_program(c, MISSING_PARAM);
 	return (line);
 }
 
-int			parse_file(char *map_file, t_ctx *c)
+void		parse_file(char *map_file, t_ctx *c)
 {
 	char *line;
 
 	if ((c->fd = open(map_file, O_RDONLY)) < 0)
-		exit_program(c, 2);
+		exit_program(c, WRONG_FILE);
 	line = extract_params_from_file(c);
 	extract_map_from_file(c, line);
 	if (close(c->fd) < 0)
-		return (2);
+		exit_program(c, DEFAULT_ERROR);
 	c->fd = 0;
-	if (read_map(c) == 2)
-		return (2);
-	return (0);
+	read_map(c);
 }

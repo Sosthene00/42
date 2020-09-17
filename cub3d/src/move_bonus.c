@@ -19,9 +19,9 @@ void	move_up(t_ctx *c)
 
 	new_x = (int)(c->player.pos.x + c->player.dir.x * c->player.speed_move);
 	new_y = (int)(c->player.pos.y + c->player.dir.y * c->player.speed_move);
-	if (c->map[new_x][(int)c->player.pos.y] == '0')
+	if (c->map[new_x][(int)c->player.pos.y] != '3')
 		c->player.pos.x += c->player.dir.x * c->player.speed_move;
-	if (c->map[(int)c->player.pos.x][new_y] == '0')
+	if (c->map[(int)c->player.pos.x][new_y] != '3')
 		c->player.pos.y += c->player.dir.y * c->player.speed_move;
 }
 
@@ -32,9 +32,9 @@ void	move_down(t_ctx *c)
 
 	new_x = (int)(c->player.pos.x - c->player.dir.x * c->player.speed_move);
 	new_y = (int)(c->player.pos.y - c->player.dir.y * c->player.speed_move);
-	if (c->map[new_x][(int)c->player.pos.y] == '0')
+	if (c->map[new_x][(int)c->player.pos.y] != '3')
 		c->player.pos.x -= c->player.dir.x * c->player.speed_move;
-	if (c->map[(int)c->player.pos.x][new_y] == '0')
+	if (c->map[(int)c->player.pos.x][new_y] != '3')
 		c->player.pos.y -= c->player.dir.y * c->player.speed_move;
 }
 
