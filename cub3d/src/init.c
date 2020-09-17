@@ -35,11 +35,11 @@ void		adapt_screen_size(t_ctx *c)
 	int *max_y;
 
 	if (c->mlx_ptr == NULL)
-		exit_program(c, 9);
+		exit_program(c, MEMORY_ERROR);
 	if ((!(max_x = malloc(sizeof(*max_x)))))
-		exit_program(c, 9);
+		exit_program(c, MEMORY_ERROR);
 	if ((!(max_y = malloc(sizeof(*max_y)))))
-		exit_program(c, 9);
+		exit_program(c, MEMORY_ERROR);
 	mlx_get_screen_size(c->mlx_ptr, max_x, max_y);
 	if ((c->screen.width >= *max_x) || (c->screen.height >= *max_y))
 	{

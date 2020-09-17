@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 
 	if (((argc < 2) || (argc > 3)) || (check_file_extension(argv[1])))
 	{
-		print_error(1);
+		print_error(WRONG_FILE);
 		exit(1);
 	}
 	c = init_ctx(argv[1]);
@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 		if (!(ft_strncmp(argv[2], SCREENSHOT_OPT, ft_strlen(SCREENSHOT_OPT))))
 			save_screenshot(c);
 		else
-			ft_putstr_fd(WRONG_ARG, 2);
+			print_warning(WRONG_ARG);
 	}
 	init_win(c);
 	mlx_loop_hook(c->mlx_ptr, loop_hook, c);

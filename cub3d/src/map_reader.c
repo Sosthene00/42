@@ -38,7 +38,7 @@ static	int		check_map_enclosure(char **map)
 static	void	update_player(char dir, int x, int y, t_ctx *c)
 {
 	if ((c->player.pos.x + c->player.pos.y) > 0)
-		exit_program(c, 2);
+		exit_program(c, MULTI_SPAWN);
 	c->player.pos.x = (double)x + 0.5;
 	c->player.pos.y = (double)y + 0.5;
 	if (dir == 'N')
@@ -89,20 +89,17 @@ static	int		read_line(char *line, int x, t_ctx *c)
 	return (0);
 }
 
-int				read_map(t_ctx *c)
+void			read_map(t_ctx *c)
 {
 	int x;
-	int ret;
 
 	x = 0;
-	ret = 0;
 	while (c->map[x])
 	{
 		if (read_line(c->map[x], x, c) == 2)
-			exit_program(c, 2);
+			exit_program(c, MAP_ERROR);
 		x++;
 	}
 	if (check_map_enclosure(c->map) == 2 || c->player.pos.x == 0)
-		ret = 2;
-	return (ret);
+		exit_program(c, OPEN_MAP);
 }

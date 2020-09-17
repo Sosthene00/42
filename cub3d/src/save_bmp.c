@@ -105,14 +105,14 @@ void			save_screenshot(t_ctx *c)
 
 	if ((fd = open("screenshot.bmp", O_WRONLY | O_CREAT | O_TRUNC,
 			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) < 0)
-		exit_program(c, 3);
+		exit_program(c, OPEN_FAILURE);
 	init_img(c);
 	raycasting(c);
 	get_bitmap_header(&(c->screenshot), &(c->screen));
 	if (write_to_disk(fd, &(c->screenshot), &(c->screen)) !=
 		c->screenshot.filesize)
-		exit_program(c, 3);
+		exit_program(c, ERROR_WRITING);
 	if (close(fd) < 0)
-		exit_program(c, 3);
+		exit_program(c, DEFAULT_ERROR);
 	exit_program(c, 0);
 }

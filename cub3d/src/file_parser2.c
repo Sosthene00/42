@@ -74,12 +74,12 @@ int				get_xy_value(char **val, t_ctx *c)
 {
 	if (c->screen.width != 0)
 	{
-		ft_putstr_fd(SCREEN_EXIST, 2);
+		print_warning(SCREEN_EXIST);
 		return (0);
 	}
 	if (!(val[1]) || !(val[2]) || val[3] ||\
 			!(ft_isdigit(*val[1])) || !(ft_isdigit(*val[2])))
-		return (2);
+		exit_program(c, INVALID_PARAM);
 	c->screen.width = ft_atoi(val[1]);
 	c->screen.height = ft_atoi(val[2]);
 	adapt_screen_size(c);
@@ -95,16 +95,19 @@ int				get_color(char **items, t_ctx *c)
 	if (!(val[0]) || !(val[1]) || !(val[2]) || val[3] ||\
 		!(ft_isdigit(*val[0])) || !(ft_isdigit(*val[1])) ||
 		!(ft_isdigit(*val[2])))
-		return (2);
+	{
+		ft_freesplit(val);
+		exit_program(c, INVALID_PARAM);
+	}
 	color = convert_color(ft_atoi(val[0]), ft_atoi(val[1]), ft_atoi(val[2]));
 	ft_freesplit(val);
 	if (color == INT_MAX)
-		return (2);
+		exit_program(c, INVALID_PARAM);
 	if ((items[0][0] == 'C') && (c->color.sky == 0))
 		c->color.sky = color;
 	else if ((items[0][0] == 'F') && (c->color.floor == 0))
 		c->color.floor = color;
 	else
-		ft_putstr_fd(COLOR_EXIST, 2);
+		print_warning(COLOR_EXIST);
 	return (0);
 }

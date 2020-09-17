@@ -13,12 +13,16 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "libft.h"
-# include "mlx.h"
 # include <math.h>
 # include <stdio.h>
 # include <X11/Xlib.h>
+# include <errno.h>
+
 # include "mlx_int.h"
+# include "libft.h"
+# include "mlx.h"
+
+# include "cub3d_exit.h"
 
 # define EXPECTED_ARG 8
 # define WALLS "NOSOEAWE"
@@ -43,14 +47,6 @@
 
 # define DESTROY_NOTIFY	33
 # define STRUCTURE_NOTIFY_MASK 1L<<17
-
-# define WRONG_FILE "Error\nFile absent or wrong extension\n"
-# define ERROR_PARSING "Error\nIncorrect map file content\n"
-# define ERROR_WRITING	"Error\nCouldn't save a screenshot\n"
-# define MEMORY_ERROR "Error\nmemory error while initializing mlx or malloc\n"
-# define WRONG_ARG "Warning\nsecond argument can only be \"--save\"\n"
-# define SCREEN_EXIST "Warning\nscreen already exists, ignoring new values\n"
-# define COLOR_EXIST "Warning\ncolor already exists, ignoring new values\n"
 
 # define FILE_EXT "cub"
 # define SCREENSHOT_OPT "--save"
@@ -186,6 +182,7 @@ typedef struct		s_sprt
 t_ctx				*init_ctx(char *filename);
 
 void				init_win(t_ctx *c);
+
 void				init_img(t_ctx *c);
 
 int					loop_hook(t_ctx *c);
@@ -198,13 +195,11 @@ int					key_hook(int key, t_ctx *c);
 
 int					check_file_extension(char *filename);
 
-int					parse_file(char *map_file, t_ctx *c);
+void				parse_file(char *map_file, t_ctx *c);
 
 int					extract_textures(char **items, t_ctx *c);
 
-int					read_map(t_ctx *c);
-
-void				print_error(int error_code);
+void				read_map(t_ctx *c);
 
 void				move_up(t_ctx *c);
 
@@ -215,8 +210,6 @@ void				move_right(t_ctx *c);
 void				move_left(t_ctx *c);
 
 void				put_pxl(t_ima *screen, int x, int y, unsigned int color);
-
-void				exit_program(t_ctx *c, int error_code);
 
 void				raycasting(t_ctx *c);
 
@@ -265,5 +258,7 @@ void				strafe_right(t_ctx *c);
 void				strafe_left(t_ctx *c);
 
 int					is_map(char *line);
+
+void				exit_program(t_ctx *c, t_errid error_code);
 
 #endif

@@ -17,7 +17,7 @@ static t_dxy	*rotate_90_right(t_ctx *c)
 	t_dxy *new;
 
 	if (!(new = ft_calloc(1, sizeof(*new))))
-		exit_program(c, 9);
+		exit_program(c, MEMORY_ERROR);
 	new->x = (c->player.dir.x * 0) +
 		(c->player.dir.y * 1);
 	new->y = (c->player.dir.x * -1) +
@@ -30,7 +30,7 @@ static t_dxy	*rotate_90_left(t_ctx *c)
 	t_dxy *new;
 
 	if (!(new = ft_calloc(1, sizeof(*new))))
-		exit_program(c, 9);
+		exit_program(c, MEMORY_ERROR);
 	new->x = (c->player.dir.x * 0) +
 		(c->player.dir.y * -1);
 	new->y = (c->player.dir.x * 1) +

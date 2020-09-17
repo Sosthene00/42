@@ -66,7 +66,7 @@ t_sprt	*init_sprite(t_ctx *c, t_ima *texture)
 	t_sprt *sprite_data;
 
 	if (!(sprite_data = ft_calloc(1, sizeof((*sprite_data)))))
-		exit_program(c, 9);
+		exit_program(c, MEMORY_ERROR);
 	sprite_data->sprite_x = texture->map_x - c->player.pos.x;
 	sprite_data->sprite_y = texture->map_y - c->player.pos.y;
 	sprite_data->inv_det = 1.0 / (c->player.plane.x * c->player.dir.y -
