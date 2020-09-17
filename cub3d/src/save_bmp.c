@@ -103,10 +103,11 @@ void			save_screenshot(t_ctx *c)
 {
 	int fd;
 
-	c->do_screenshot = 0;
 	if ((fd = open("screenshot.bmp", O_WRONLY | O_CREAT | O_TRUNC,
 			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) < 0)
 		exit_program(c, 3);
+	init_img(c);
+	raycasting(c);
 	get_bitmap_header(&(c->screenshot), &(c->screen));
 	if (write_to_disk(fd, &(c->screenshot), &(c->screen)) !=
 		c->screenshot.filesize)

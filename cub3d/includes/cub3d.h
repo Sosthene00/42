@@ -164,7 +164,6 @@ typedef	struct		s_ctx
 	void			*mlx_ptr;
 	void			*win_ptr;
 	int				fd;
-	int				do_screenshot;
 	int				complete;
 	int				map_width;
 	int				map_height;

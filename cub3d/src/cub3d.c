@@ -25,13 +25,14 @@ int	main(int argc, char **argv)
 	if (argc == 3)
 	{
 		if (!(ft_strncmp(argv[2], SCREENSHOT_OPT, ft_strlen(SCREENSHOT_OPT))))
-			c->do_screenshot = 1;
+			save_screenshot(c);
 		else
 			ft_putstr_fd(WRONG_ARG, 2);
 	}
+	init_win(c);
 	mlx_loop_hook(c->mlx_ptr, loop_hook, c);
-	mlx_hook(c->win_ptr, KEY_PRESS, KEY_PRESS_MASK, &key_press, c);
-	mlx_hook(c->win_ptr, KEY_RELEASE, KEY_RELEASE_MASK, &key_release, c);
-	mlx_hook(c->win_ptr, DESTROY_NOTIFY, STRUCTURE_NOTIFY_MASK, &exit_hook, c);
+	mlx_hook(c->win_ptr, KEY_PRESS, KEY_PRESS_MASK, key_press, c);
+	mlx_hook(c->win_ptr, KEY_RELEASE, KEY_RELEASE_MASK, key_release, c);
+	mlx_hook(c->win_ptr, DESTROY_NOTIFY, STRUCTURE_NOTIFY_MASK, exit_hook, c);
 	mlx_loop(c->mlx_ptr);
 }

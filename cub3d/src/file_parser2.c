@@ -77,13 +77,12 @@ int				get_xy_value(char **val, t_ctx *c)
 		ft_putstr_fd(SCREEN_EXIST, 2);
 		return (0);
 	}
-	if (!(val[1]) || !(val[2]) ||
+	if (!(val[1]) || !(val[2]) || val[3] ||\
 			!(ft_isdigit(*val[1])) || !(ft_isdigit(*val[2])))
 		return (2);
 	c->screen.width = ft_atoi(val[1]);
 	c->screen.height = ft_atoi(val[2]);
 	adapt_screen_size(c);
-	init_win(c);
 	return (0);
 }
 
